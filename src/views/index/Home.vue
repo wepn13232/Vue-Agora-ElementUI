@@ -1,6 +1,73 @@
 <template>
     <div class="home">
-        <div>这里是首页页面</div>
+        <!--banner头部-->
+        <div class="banner">
+            <div class="jumbotron">
+                <h1 class="jum-title">欢迎来到YOLO社区</h1>
+                <p class="jum-content">你可以在这里看到你中意的作品，同时你也可以了解到你中意的平台，认识到各类行业却拥有相同兴趣的人们。</p>
+                <hr class="my-4">
+                <el-button>加入YOLO社区</el-button>
+                <!--二维码-->
+                <div class="qrcode"></div>
+            </div>
+        </div>
+
+        <!--    内容块-->
+        <div class="content">
+            <!--首页推荐-->
+            <div class="indexRecommended">
+                <!--首页推荐-标题-->
+                <div class="rec-title">
+                    <span class="fb">-</span>
+                    首页推荐
+                    <span class="fb">-</span>
+                </div>
+                <!--    首页推荐-内容-->
+                <div class="rec-content">
+                    <div class="container-self">
+                        <el-row :gutter="24">
+                            <el-col :span="6" v-for="(o, index) in 6" :key="o">
+                                <el-card :body-style="{ padding: '0px' }" style="margin-top: 7%">
+                                    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </div>
+                </div>
+            </div>
+
+            <!--文章推荐-->
+            <div class="essayRec container-self">
+                <!--文章推荐-标题-->
+                <div class="essayRec-title">
+                    <span class="fb">-</span>
+                    文章推荐
+                    <span class="fb">-</span>
+                </div>
+                <div class="essayRec-content">
+                    <el-row :gutter="24">
+                        <el-col :span="12"><essay-card></essay-card></el-col>
+                        <el-col :span="12"><essay-card></essay-card></el-col>
+                        <el-col :span="12"><essay-card></essay-card></el-col>
+                        <el-col :span="12"><essay-card></essay-card></el-col>
+                    </el-row>
+                </div>
+            <!--    查看更多按钮-->
+                <div style="width: 100%;text-align: center;margin-top: 2%">
+                    <el-button type="success" plain>查看更多</el-button>
+                </div>
+            </div>
+
+            <!--热门人物-->
+            <div class="toplist-person">
+                <!--热门人物-标题-->
+                <div class="toplist-title">
+                    <span class="fb">-</span>
+                    热门人物
+                    <span class="fb">-</span>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

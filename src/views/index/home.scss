@@ -1,0 +1,108 @@
+.home {
+  background-color: #f4f6f9;
+  //  banner头部
+  .banner {
+    background-image: url("../../assets/img/banner1.jpg");
+    background-size: 100% 135%;
+    background-position: center center;
+    width: 100%;
+    height: 80vh;
+
+    .jumbotron {
+      margin-left: 6%;
+      background-color: rgba(158, 98, 81, 0);
+      color: #ffffff;
+      padding-top: 20vh;
+
+      //  标题
+      .jum-title {
+        font-size: 9vh;
+      }
+
+      //  内容
+      .jum-content {
+        font-size: 2.5vh;
+      }
+
+      //  二维码
+      .qrcode {
+        margin-top: 2vh;
+        width: 9.5vw;
+        height: 10vw;
+        background-image: url("../../assets/img/qrcode.jpg");
+        background-size: 100% 100%;
+      }
+    }
+
+  }
+
+  //  内容块
+  .content {
+
+    //  首页推荐
+    .indexRecommended {
+      margin-top: 5%;
+      //  首页推荐-标题
+      .rec-title {
+        width: 100%;
+        text-align: center;
+        font-size: 4vh;
+        font-weight: 400;
+      }
+
+      //  首页推荐-内容
+      .rec-content {
+        .container-self {
+          width: 85%;
+          margin: 0 auto;
+
+          img {
+            width: 100%;
+            height: 38vh;
+          }
+        }
+      }
+    }
+
+    //  文章推荐
+    .essayRec {
+      margin-top: 5%;
+      //  文章推荐-标题
+      .essayRec-title {
+        width: 100%;
+        text-align: center;
+        font-size: 4vh;
+        font-weight: 400;
+      }
+
+      //  文章推荐-内容
+      .essayRec-content {
+      }
+    }
+
+    //  热门人物
+    .toplist-person {
+      margin-top: 5%;
+      //  -标题
+      .toplist-title {
+        width: 100%;
+        text-align: center;
+        font-size: 4vh;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+
+//---------公共样式区----------//
+
+//浅蓝色
+.fb {
+  color: #60b6ff;
+}
+
+.container-self {
+  width: 85%;
+  margin: 0 auto;
+}
