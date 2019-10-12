@@ -1,0 +1,32 @@
+.person-card {
+  margin-top: 5%;
+  height: 330px;
+  background-color: white;
+  //banner图
+  .banner {
+    width: 100%;
+    height: 130px;
+    background-color: #60b6ff;
+    text-align: center;
+    //  头像logo
+    .logo {
+      padding-top: 105px;
+    }
+  }
+
+  //  人物内容
+  .person-content {
+    text-align: center;
+    //人物名字
+    .person-name {
+      margin-top: 18%;
+    }
+
+    //  人物简介
+    .person-intro {
+      margin-top: 10%;
+    }
+  }
+
+
+}

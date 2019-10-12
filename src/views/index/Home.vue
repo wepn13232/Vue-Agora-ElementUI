@@ -28,7 +28,9 @@
                         <el-row :gutter="24">
                             <el-col :span="6" v-for="(o, index) in 6" :key="o">
                                 <el-card :body-style="{ padding: '0px' }" style="margin-top: 7%">
-                                    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+                                    <img
+                                        src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                        class="image">
                                 </el-card>
                             </el-col>
                         </el-row>
@@ -46,13 +48,21 @@
                 </div>
                 <div class="essayRec-content">
                     <el-row :gutter="24">
-                        <el-col :span="12"><essay-card></essay-card></el-col>
-                        <el-col :span="12"><essay-card></essay-card></el-col>
-                        <el-col :span="12"><essay-card></essay-card></el-col>
-                        <el-col :span="12"><essay-card></essay-card></el-col>
+                        <el-col :span="12">
+                            <essay-card></essay-card>
+                        </el-col>
+                        <el-col :span="12">
+                            <essay-card></essay-card>
+                        </el-col>
+                        <el-col :span="12">
+                            <essay-card></essay-card>
+                        </el-col>
+                        <el-col :span="12">
+                            <essay-card></essay-card>
+                        </el-col>
                     </el-row>
                 </div>
-            <!--    查看更多按钮-->
+                <!--    查看更多按钮-->
                 <div style="width: 100%;text-align: center;margin-top: 2%">
                     <el-button type="success" plain>查看更多</el-button>
                 </div>
@@ -65,6 +75,21 @@
                     <span class="fb">-</span>
                     热门人物
                     <span class="fb">-</span>
+                </div>
+                <!--热门人物展示-->
+                <div class="toplist-content container-self">
+                    <el-row :gutter="20">
+                        <el-col :span="6" v-for="(item,index) in personInfo" :key="index">
+                            <person-card>
+                                <div slot="name">
+                                    <h3>{{item.personName}}</h3>
+                                </div>
+                                <div slot="intro">
+                                    <p>{{item.personIntro}}</p>
+                                </div>
+                            </person-card>
+                        </el-col>
+                    </el-row>
                 </div>
             </div>
         </div>

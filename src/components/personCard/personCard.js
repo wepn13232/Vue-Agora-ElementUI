@@ -1,3 +1,5 @@
+
 export default {
-    name: "personCard"
+    name: "personCard",
+
 }
