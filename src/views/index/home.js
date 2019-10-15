@@ -8,10 +8,7 @@ export default {
     components: {essayCard, personCard},
     data() {
         return {
-            personInfo: {
-
-            }
-
+            personInfo: {}
         }
     },
     methods: {
@@ -24,6 +21,10 @@ export default {
             }).catch(err => {
                 console.log(err)
             })
+        },
+        //    跳转至登录页
+        toLogin() {
+            this.$router.push('/login')
         }
     },
     mounted() {

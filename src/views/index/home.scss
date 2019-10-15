@@ -38,7 +38,7 @@
 
   //  内容块
   .content {
-
+    padding-bottom: 5%;
     //  首页推荐
     .indexRecommended {
       margin-top: 5%;
@@ -92,14 +92,18 @@
       }
     }
   }
+
 }
 
 
 //---------公共样式区----------//
 
-//浅蓝色
 .fb {
   color: #60b6ff;
+}
+
+.fgray {
+  color: #949494;
 }
 
 .container-self {

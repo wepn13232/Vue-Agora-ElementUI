@@ -91,8 +91,13 @@
                         </el-col>
                     </el-row>
                 </div>
+                <!--    查看更多按钮-->
+                <div style="width: 100%;text-align: center;margin-top: 2%">
+                    <el-button type="success" plain>查看更多</el-button>
+                </div>
             </div>
         </div>
+
     </div>
 </template>
 

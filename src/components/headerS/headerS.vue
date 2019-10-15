@@ -28,9 +28,9 @@
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="在此搜索文章" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
-                    <button class="btn btn-outline-secondary my-2 my-sm-0" style="margin-left: 3vw" type="submit">登录</button>
-                    <button class="btn btn-outline-success my-2 my-sm-0" style="margin-left: 1vw" type="submit">注册</button>
                 </form>
+                <a href="/login" class="btn btn-outline-secondary my-2 my-sm-0"  style="margin-left: 3vw">登录</a>
+                <a href="/register" class="btn btn-outline-success my-2 my-sm-0" style="margin-left: 1vw">注册</a>
             </div>
         </nav>
     </div>
