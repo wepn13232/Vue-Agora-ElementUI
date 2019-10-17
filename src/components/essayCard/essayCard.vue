@@ -10,7 +10,10 @@
         </div>
         <!--    内容-->
         <div class="card-content">
-
+          <!--  标题-->
+            <div class="title"><h5><slot name="title"></slot></h5></div>
+            <!--内容简述-->
+            <div class="desc"><slot name="desc"></slot></div>
         </div>
     </div>
 </template>

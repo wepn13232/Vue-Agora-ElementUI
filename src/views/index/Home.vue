@@ -6,7 +6,7 @@
                 <h1 class="jum-title">欢迎来到YOLO社区</h1>
                 <p class="jum-content">你可以在这里看到你中意的作品，同时你也可以了解到你中意的平台，认识到各类行业却拥有相同兴趣的人们。</p>
                 <hr class="my-4">
-                <el-button>加入YOLO社区</el-button>
+                <el-button @click="toReg">加入YOLO社区</el-button>
                 <!--二维码-->
                 <div class="qrcode"></div>
             </div>
@@ -26,10 +26,10 @@
                 <div class="rec-content">
                     <div class="container-self">
                         <el-row :gutter="24">
-                            <el-col :span="6" v-for="(o, index) in 6" :key="o">
+                            <el-col :md="6" :sm="12" v-for="(item, index) in indexPic" :key="index">
                                 <el-card :body-style="{ padding: '0px' }" style="margin-top: 7%">
                                     <img
-                                        src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                        :src="item.picUrl"
                                         class="image">
                                 </el-card>
                             </el-col>
@@ -48,23 +48,19 @@
                 </div>
                 <div class="essayRec-content">
                     <el-row :gutter="24">
-                        <el-col :span="12">
-                            <essay-card></essay-card>
-                        </el-col>
-                        <el-col :span="12">
-                            <essay-card></essay-card>
-                        </el-col>
-                        <el-col :span="12">
-                            <essay-card></essay-card>
-                        </el-col>
-                        <el-col :span="12">
-                            <essay-card></essay-card>
+                        <el-col :md="12" :xs="24" v-for="(item,index) in essayInfo" :key="index">
+                            <a href="/essayInfo">
+                                <essay-card class="e-card">
+                                    <div slot="title">{{item.essay.title}}</div>
+                                    <div slot="desc">{{item.essay.content}}</div>
+                                </essay-card>
+                            </a>
                         </el-col>
                     </el-row>
                 </div>
                 <!--    查看更多按钮-->
                 <div style="width: 100%;text-align: center;margin-top: 2%">
-                    <el-button type="success" plain>查看更多</el-button>
+                    <el-button plain>查看更多</el-button>
                 </div>
             </div>
 
@@ -79,7 +75,7 @@
                 <!--热门人物展示-->
                 <div class="toplist-content container-self">
                     <el-row :gutter="20">
-                        <el-col :span="6" v-for="(item,index) in personInfo" :key="index">
+                        <el-col :md="6" :sm="12" :xs="12" v-for="(item,index) in personInfo" :key="index">
                             <person-card>
                                 <div slot="name">
                                     <h3>{{item.personName}}</h3>
@@ -93,12 +89,13 @@
                 </div>
                 <!--    查看更多按钮-->
                 <div style="width: 100%;text-align: center;margin-top: 2%">
-                    <el-button type="success" plain>查看更多</el-button>
+                    <el-button plain>查看更多</el-button>
                 </div>
             </div>
         </div>
 
     </div>
+
 </template>
 
 <script src="./home.js"></script>

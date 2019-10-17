@@ -5,7 +5,7 @@
             <div class="footer-content">
                 <div class="content-1">
                     <h1>YOLO社区</h1>
-                    <p class="fgray">致力于成为最又去的摄影、文章分享地，聚集各类爱好者，我们共同分享有趣的东西、共同成为有趣的灵魂。</p>
+                    <p class="fgray">致力于成为最有趣的摄影、文章分享地，聚集各类爱好者，我们共同分享有趣的东西、共同成为有趣的灵魂。</p>
                     <el-divider></el-divider>
                     <div class="link">
                         <div class="link-p" style="border-right: 1px rgba(167,167,167,0.61) solid">关于我</div>

@@ -1,12 +1,18 @@
 .e-card {
+  color: #333333;
   margin-top: 3vh;
-  width: 600px;
+  width: 100%;
   height: 21vh;
   background-color: white;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
   //图片
   .img {
-    width: 250px;
+    width: 35%;
     height: 21vh;
+    float: left;
 
     img {
       height: 100%;
@@ -14,4 +20,24 @@
     }
   }
 
+  //  右边内容
+  .card-content {
+    width: 50%;
+    float: left;
+    padding-top: 3vh;
+    padding-left: 2vw;
+    //  内容
+    .desc {
+      float: left;
+      padding-top: 2vh;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      color: rgba(51, 51, 51, 0.87);
+    }
+  }
+
 }
+

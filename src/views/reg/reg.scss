@@ -4,24 +4,33 @@
   display: flex;
   align-items: center;
   background-color: #f4f6f9;
-  .registerCard{
+
+  .registerCard {
     width: 500px;
     margin: 0 auto;
-    height: 500px;
+    //height: 600px;
     background-color: #ffffff;
     padding-top: 2%;
-    .registerLogo{
+
+    .registerLogo {
       text-align: center;
     }
-    .registerFrom{
+
+    .registerFrom {
       margin-top: 3%;
+
+      /deep/ .btn_group {
+        text-align: center;
+        .el-form-item__content {
+          margin-left: 0 !important;
+        }
+      }
     }
   }
 }
 
 
-
 //公共样式
-.input-width{
+.input-width {
   width: 80%;
 }

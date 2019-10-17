@@ -8,10 +8,42 @@ export default {
     components: {essayCard, personCard},
     data() {
         return {
-            personInfo: {}
+            indexPic: {},
+            personInfo: {},
+            essayInfo: {}
         }
     },
     methods: {
+        //获取首页推荐（图片）
+        getIndexPic() {
+            allUrls.getIndexPicRec('post').then(res => {
+                return res.json()
+            }).then(data => {
+                if (+data.status === 200) {
+                    //    请求成功回调
+                    this.indexPic = data.data;
+                } else {
+                    //    请求失败回调
+                    this.$message.error("获取推荐图片失败");
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+        //获取首页文章推荐
+        getIndexEssay() {
+            allUrls.getIndexEssay('post').then(res => {
+                return res.json();
+            }).then(data => {
+                if (+data.status === 200) {
+                    this.essayInfo = data.data
+                } else {
+                    this.$message.error("获取文章数据失败")
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+        },
         //获取人物卡片信息
         getTopListPerson() {
             allUrls.getToplistPerson("post").then(res => {
@@ -22,12 +54,14 @@ export default {
                 console.log(err)
             })
         },
-        //    跳转至登录页
-        toLogin() {
-            this.$router.push('/login')
-        }
+        //    跳转至注册页
+        toReg() {
+            this.$router.push('/register')
+        },
     },
     mounted() {
+        this.getIndexPic();
+        this.getIndexEssay();
         this.getTopListPerson();
     }
 }

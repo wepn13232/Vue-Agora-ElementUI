@@ -59,6 +59,7 @@
           img {
             width: 100%;
             height: 38vh;
+            object-fit: contain;
           }
         }
       }
@@ -77,6 +78,9 @@
 
       //  文章推荐-内容
       .essayRec-content {
+        .e-card:hover{
+          box-shadow: 1px 0.5px 10px rgba(160, 160, 160, 0.44);
+        }
       }
     }
 
