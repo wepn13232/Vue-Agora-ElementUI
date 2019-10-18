@@ -11,39 +11,63 @@
     //  banner
     .cardBanner {
       width: 100%;
-      height: 350px;
-      //banner内内容
-      .bannerContent {
-        height: 350px;
-        width: 80%;
-        margin: 0 auto;
-        background-color: #6ddaff;
-        padding-top: 40px;
-        //发布时间
-        .essay-time {
-          color: #ffffff;
-          width: 100%;
-        }
+      background-image: url("../../assets/img/banner1.jpg");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      //黑色蒙版
+      .black {
+        background-color: rgba(0, 0, 0, 0.31);
+        //banner内内容
+        .bannerContent {
+          width: 80%;
+          margin: 0 auto;
+          padding-top: 40px;
+          //发布时间
+          .essay-time {
+            width: 100%;
+          }
 
-        //  标题 title
-        .essay-title {
-          width: 100%;
-          color: #ffffff;
-          margin-top: 80px;
-        }
+          //  标题 title
+          .essay-title {
+            width: 100%;
+            margin-top: 80px;
+          }
 
-        //  作者
-        .author {
-          width: 100%;
-          color: #ffffff;
-          margin-top: 120px;
+          .essayFooter {
+            margin-top: 120px;
+            padding-bottom: 40px;
+            width: 100%;
+            height: 20px;
+            //  作者
+            .author {
+              float: left;
+            }
+
+            //  浏览量
+            .checkNum {
+              float: right;
+            }
+          }
         }
       }
+
     }
 
     //  内容(cardContent)
     .cardContent {
       width: 100%;
+
+      .essay {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        color: #111111;
+        font-size: 1rem;
+      }
     }
   }
+}
+
+.fw {
+  color: #ffffff;
 }

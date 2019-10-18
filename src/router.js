@@ -31,5 +31,7 @@ export default new Router({
       name:'essayInfo',
       component:essayInfo
     }
-  ]
+  ],
 })
+
+

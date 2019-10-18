@@ -48,13 +48,11 @@
                 </div>
                 <div class="essayRec-content">
                     <el-row :gutter="24">
-                        <el-col :md="12" :xs="24" v-for="(item,index) in essayInfo" :key="index">
-                            <a href="/essayInfo">
-                                <essay-card class="e-card">
+                        <el-col :md="12" :xs="24" v-for="(item,index) in essayInfo" :key="index" style="cursor: pointer" >
+                                <essay-card class="e-card" @click.native="toEssay(item)">
                                     <div slot="title">{{item.essay.title}}</div>
                                     <div slot="desc">{{item.essay.content}}</div>
                                 </essay-card>
-                            </a>
                         </el-col>
                     </el-row>
                 </div>

@@ -54,9 +54,13 @@ export default {
                 console.log(err)
             })
         },
-        //    跳转至注册页
+        // 跳转至注册页
         toReg() {
             this.$router.push('/register')
+        },
+        // 跳转至文章内容页
+        toEssay(item){
+            this.$router.push({path:'/essayInfo',query:{item:JSON.stringify(item)}})
         },
     },
     mounted() {
