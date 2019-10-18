@@ -13,7 +13,8 @@ export default {
             if (this.form.username == '' || this.form.password == '') {
                 this.$message.error('账号或密码不能为空！')
             } else {
-                this.$message.success("登录")
+               sessionStorage.setItem('username',this.form.username)
+                    this.$router.go(-1)
             }
         },
         //正则替换空格
