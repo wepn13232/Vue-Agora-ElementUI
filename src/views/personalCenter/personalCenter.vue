@@ -6,7 +6,7 @@
             <div class="avatar">
                 <el-avatar :size="80"
                            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-                <h5>林启元</h5>
+                <h5>{{userInfo.username}}</h5>
             </div>
         </div>
 

@@ -15,7 +15,7 @@ export default {
                 this.$message.error('账号或密码不能为空！')
             } else {
                 sessionStorage.setItem('username', this.form.username)
-                this.reload();
+                // this.reload();
                 this.$router.go(-1)
             }
         },
