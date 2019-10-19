@@ -1,7 +1,7 @@
 <template>
     <div id="app" class="app">
         <el-backtop target=".app"></el-backtop>
-        <header-s></header-s>
+        <header-s v-if="hasUser"></header-s>
         <router-view/>
         <footer-s></footer-s>
     </div>
@@ -14,6 +14,25 @@
     export default {
         name: "App",
         components: {headerS, footerS},
+        data() {
+            return {
+                username: '',
+                hasUser: true
+            }
+        },
+        provide() {
+            return {
+                reload: this.reload
+            }
+        },
+        methods: {
+            reload() {
+                this.hasUser = false;
+                this.$nextTick(() => {
+                    this.hasUser = true;
+                })
+            }
+        },
     }
 </script>
 
