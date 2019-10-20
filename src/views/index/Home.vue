@@ -15,7 +15,7 @@
         <!--    内容块-->
         <div class="content">
             <!--首页推荐-->
-            <div class="indexRecommended">
+            <div class="indexRecommended" v-loading="loading1" element-loading-text="内容加载中...">
                 <!--首页推荐-标题-->
                 <div class="rec-title">
                     <span class="fb">-</span>

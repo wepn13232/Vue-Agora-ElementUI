@@ -22,7 +22,6 @@
   //  个人信息具体内容
   .info {
     width: 100%;
-    height: 500px;
 
     //个人简述
     .infoSum {
@@ -55,8 +54,14 @@
 .bt-line{
   border-bottom: rgba(84, 84, 84, 0.56) 1px solid;
 }
+.mb2{
+  margin-bottom: 2vh;
+}
 .pb2{
   padding-bottom: 2vh;
+}
+.pb3{
+  padding-bottom: 3vh;
 }
 .pt3{
   padding-top: 3vh;

@@ -11,7 +11,7 @@
         </div>
 
         <!--个人具体信息-->
-        <div class="info">
+        <div class="info pb3">
             <div class="container">
                 <!--个人信息简述-->
                 <div class="infoSum">
@@ -62,7 +62,7 @@
 
                     </el-row>
                     <br/>
-                    <el-button>编辑</el-button>
+                    <el-button class="mb2">编辑</el-button>
                 </div>
             </div>
         </div>
