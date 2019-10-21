@@ -13,11 +13,12 @@
     width: 30%;
     height: 21vh;
     float: left;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
 
-    img {
-      height: 100%;
-      width: 100%;
-    }
   }
 
   //  右边内容
@@ -27,13 +28,14 @@
     padding-top: 3vh;
     padding-left: 2vw;
     //标题
-    .title{
+    .title {
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
+
     //  内容
     .desc {
       float: left;

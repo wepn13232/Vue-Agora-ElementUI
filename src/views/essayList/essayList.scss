@@ -1,18 +1,46 @@
-.essayList{
+.essayList {
   background-color: #f4f6f9;
   padding-bottom: 3vh;
-  /deep/.recDivider{
+
+  /deep/ .recDivider {
     margin: 0;
     padding: 24px;
     font-size: 1.6rem;
     font-weight: 400;
   }
+
+  .e-list-card {
+    .slot-pic {
+      overflow: hidden;
+
+      img {
+        transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+      }
+    }
+  }
+
+  .e-list-card:hover {
+    box-shadow: 1px 0.5px 10px rgba(201, 201, 201, 0.38);
+
+    .slot-pic {
+      img {
+        transform: scale(1.1);
+        -o-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+      }
+    }
+  }
 }
 
-.pb2{
+.pb2 {
   padding-bottom: 2vh;
 }
-.pt2{
+
+.pt2 {
   padding-top: 2vh;
 }
 

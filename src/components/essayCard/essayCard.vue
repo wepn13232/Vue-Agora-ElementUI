@@ -4,9 +4,7 @@
         <!--图片-->
         <div class="img">
             <!--图片插槽-->
-            <slot name="card-pic">
-                <img src="../../assets/img/banner1.jpg" alt="essay-pic">
-            </slot>
+            <slot name="card-pic" ></slot>
         </div>
         <!--    内容-->
         <div class="card-content">

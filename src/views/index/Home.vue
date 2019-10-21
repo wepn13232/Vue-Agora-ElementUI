@@ -50,6 +50,9 @@
                     <el-row :gutter="24">
                         <el-col :md="12" :xs="24" v-for="(item,index) in essayInfo.slice(0,4)" :key="index" style="cursor: pointer;margin-top: 3vh" >
                                 <essay-card class="e-card" @click.native="toEssay(item)">
+                                        <div slot="card-pic" class="slot-pic">
+                                            <img src="../../assets/img/banner1.jpg" alt="essay-pic">
+                                        </div>
                                     <div slot="title">{{item.essay.title}}</div>
                                     <div slot="desc">{{item.essay.content}}</div>
                                 </essay-card>
@@ -100,4 +103,10 @@
 
 <style lang="scss" scoped>
     @import "home";
+</style>
+
+<style lang="scss">
+    .slot-pic{
+        height: 100%;
+    }
 </style>
