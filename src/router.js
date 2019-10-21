@@ -5,6 +5,7 @@ import login from './views/login/login.vue'
 import reg from '@/views/reg/reg.vue'
 import essayInfo from "@/views/essayInfo/essayInfo.vue";
 import personalCenter from "@/views/personalCenter/personalCenter.vue";
+import essayList from "@/views/essayList/essayList.vue";
 
 Vue.use(Router)
 
@@ -15,22 +16,34 @@ const router = new Router({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
+            meta:{
+                title:'主页'
+            }
         },
         {
             path: '/login',
             name: 'login',
-            component: login
+            component: login,
+            meta:{
+                title:'登录页面'
+            }
         },
         {
             path: '/register',
             name: 'register',
-            component: reg
+            component: reg,
+            meta:{
+                title:'注册页面'
+            }
         },
         {
             path: '/essayInfo',
             name: 'essayInfo',
-            component: essayInfo
+            component: essayInfo,
+            meta:{
+                title:'文章内容'
+            }
         },
         {
             path: '/personalCenter',
@@ -39,6 +52,14 @@ const router = new Router({
             meta: {
                 title: '个人中心',
                 requireAuth: true
+            }
+        },
+        {
+            path: '/essayList',
+            name: 'essayList',
+            component: essayList,
+            meta: {
+                title: '文章列表',
             }
         }
     ],

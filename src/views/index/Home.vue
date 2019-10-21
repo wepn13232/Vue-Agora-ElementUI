@@ -26,7 +26,7 @@
                 <div class="rec-content">
                     <div class="container-self">
                         <el-row :gutter="24">
-                            <el-col :md="6" :sm="12" v-for="(item, index) in indexPic" :key="index">
+                            <el-col :md="6" :sm="12" v-for="(item, index) in indexPic.slice(0,12)" :key="index">
                                 <el-card :body-style="{ padding: '0px' }" style="margin-top: 7%">
                                     <img
                                         :src="item.picUrl"
@@ -48,7 +48,7 @@
                 </div>
                 <div class="essayRec-content">
                     <el-row :gutter="24">
-                        <el-col :md="12" :xs="24" v-for="(item,index) in essayInfo" :key="index" style="cursor: pointer" >
+                        <el-col :md="12" :xs="24" v-for="(item,index) in essayInfo.slice(0,4)" :key="index" style="cursor: pointer;margin-top: 3vh" >
                                 <essay-card class="e-card" @click.native="toEssay(item)">
                                     <div slot="title">{{item.essay.title}}</div>
                                     <div slot="desc">{{item.essay.content}}</div>
@@ -58,7 +58,7 @@
                 </div>
                 <!--    查看更多按钮-->
                 <div style="width: 100%;text-align: center;margin-top: 2%">
-                    <el-button plain>查看更多</el-button>
+                    <el-button plain @click="toMoreEssay">查看更多</el-button>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
                 <!--热门人物展示-->
                 <div class="toplist-content container-self">
                     <el-row :gutter="20">
-                        <el-col :md="6" :sm="12" :xs="12" v-for="(item,index) in personInfo" :key="index">
+                        <el-col :md="6" :sm="12" :xs="12" v-for="(item,index) in personInfo.slice(0,4)" :key="index">
                             <person-card>
                                 <div slot="name">
                                     <h3>{{item.personName}}</h3>

@@ -65,6 +65,10 @@ export default {
         toEssay(item) {
             this.$router.push({path: '/essayInfo', query: {item: JSON.stringify(item)}})
         },
+        //跳转至“更多文章”
+        toMoreEssay(){
+            this.$router.push('/essayList')
+        },
     },
     mounted() {
         this.getIndexPic();
