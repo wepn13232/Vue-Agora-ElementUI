@@ -8,6 +8,13 @@
     font-size: 1.6rem;
     font-weight: 400;
   }
+  .essayBefore{
+    .moreLists{
+      width: 100%;
+      text-align: center;
+    }
+  }
+
 
   .e-list-card {
     .slot-pic {
@@ -42,5 +49,9 @@
 
 .pt2 {
   padding-top: 2vh;
+}
+
+.cp{
+  cursor: pointer;
 }
 

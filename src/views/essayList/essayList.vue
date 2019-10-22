@@ -18,14 +18,21 @@
         <!--  往期文章-->
         <div class="essayBefore">
             <Divider class="recDivider">往期文章</Divider>
-            <div class="container pb2 pt2" v-for="lists in 6" style="cursor:pointer">
-                <essay-card class="e-list-card" @click.native="toEssay()">
-                  <div slot="card-pic" class="slot-pic">
-                    <img src="../../assets/img/banner1.jpg" alt="essay-pic">
-                  </div>
-                    <div slot="title">标题</div>
-                    <div slot="desc">内容</div>
-                </essay-card>
+            <ul>
+                <li v-for="(lists,index) in 6" :key="index" v-if="index < listsNum" >
+                    <div class="container pb2 pt2" style="cursor:pointer">
+                        <essay-card class="e-list-card" @click.native="toEssay()">
+                            <div slot="card-pic" class="slot-pic">
+                                <img src="../../assets/img/banner1.jpg" alt="essay-pic">
+                            </div>
+                            <div slot="title">标题</div>
+                            <div slot="desc">内容</div>
+                        </essay-card>
+                    </div>
+                </li>
+            </ul>
+            <div class="moreLists">
+                <span @click="loadMore" class="cp">点击加载更多</span>
             </div>
         </div>
     </div>
