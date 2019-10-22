@@ -103,7 +103,7 @@ export default {
                 if (valid) {
                     this.$message.success('注册成功')
                 } else {
-                    this.$message.error('注册失败');
+                    // this.$message.error('注册失败');
                     return false;
                 }
             })

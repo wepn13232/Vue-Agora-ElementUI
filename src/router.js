@@ -6,6 +6,11 @@ import reg from '@/views/reg/reg.vue'
 import essayInfo from "@/views/essayInfo/essayInfo.vue";
 import personalCenter from "@/views/personalCenter/personalCenter.vue";
 import essayList from "@/views/essayList/essayList.vue";
+import * as toTop from '@/utils/toTop'
+import liveNum from "@/views/liveNum/liveNum.vue";
+import page1 from "@/views/liveNum/otherPage/page1"
+import page2 from "@/views/liveNum/otherPage/page2"
+import page3 from "@/views/liveNum/otherPage/page3"
 
 Vue.use(Router)
 
@@ -61,11 +66,51 @@ const router = new Router({
             meta: {
                 title: '文章列表',
             }
+        },
+        {
+            path: '/liveNum',
+            name: 'liveNum',
+            component: liveNum,
+            meta: {
+                title: '直播间编码申请',
+                requireAuth: true
+            },
+            children:[
+                {
+                    path: 'page1',
+                    name: 'page1',
+                    component: page1,
+                    meta: {
+                        title: '直播间编码申请',
+                        requireAuth: true
+                    },
+                },
+                {
+                    path: 'page2',
+                    name: 'page2',
+                    component: page2,
+                    meta: {
+                        title: '直播间编码申请',
+                        requireAuth: true
+                    },
+                },
+                {
+                    path: 'page3',
+                    name: 'page3',
+                    component: page3,
+                    meta: {
+                        title: '直播间编码申请',
+                        requireAuth: true
+                    },
+                }
+            ]
         }
     ],
-})
+});
+
 //拦截器
 router.beforeEach((to, from, next) => {
+    toTop.toTop()
     //路由中写了requireAuth是需要登录验证的路由
     if (to.matched.some(record => record.meta.requireAuth)) {
         let username = sessionStorage.getItem('username')
@@ -74,7 +119,6 @@ router.beforeEach((to, from, next) => {
             next({path: '/login'})
         } else {
             next()
-            window.reload()
         }
     } else {
         next()

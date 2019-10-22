@@ -5,6 +5,7 @@ import * as allUrls from '../../utils/allUrls.js'
 
 export default {
     name: 'home',
+    inject:['reload'],
     components: {essayCard, personCard},
     data() {
         return {
@@ -71,6 +72,7 @@ export default {
         },
     },
     mounted() {
+        this.reload();
         this.getIndexPic();
         this.getIndexEssay();
         this.getTopListPerson();

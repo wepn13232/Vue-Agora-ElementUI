@@ -1,6 +1,5 @@
 <template>
     <div id="app" class="app">
-        <el-backtop target=".app"></el-backtop>
         <header-s v-if="hasUser"></header-s>
         <router-view/>
         <footer-s></footer-s>
@@ -33,12 +32,11 @@
                 })
             }
         },
+        mounted(){
+        }
     }
 </script>
 
 <style lang="scss" scoped>
-    .app {
-        height: 100vh;
-        overflow-y: scroll;
-    }
+
 </style>

@@ -26,11 +26,11 @@
                     </el-form-item>
                     <el-form-item label="地区" prop="address">
                         <el-cascader
-                            v-model="form.addressessayInfo"
+                            v-model="form.address"
                             :options="options"
                             @change="handleChange"></el-cascader>
                     </el-form-item>
-                    <el-form-item label="直播间号码" prop="roomNum">
+                    <el-form-item label="直播编号" prop="roomNum">
                         <el-input v-model="form.roomNum" class="input-width"
                                   disabled placeholder="默认无，可在个人中心申请"></el-input>
                     </el-form-item>
