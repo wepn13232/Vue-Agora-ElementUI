@@ -19,7 +19,7 @@
             goNext() {
                 //传值给父组件=》至步骤条
                 this.$emit('getStepActive', 1);
-                this.$router.push('page2')
+                this.$router.push('page2');
             },
             back() {
                 // this.$emit('getStepActive', 0);
