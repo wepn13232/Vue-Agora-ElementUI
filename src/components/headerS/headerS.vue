@@ -33,8 +33,8 @@
                 </form>
                 <!--未登录-->
                 <div v-if="!userInfo.username">
-                    <a href="/login" class="btn btn-outline-secondary my-2 my-sm-0" style="margin-left: 3vw">登录</a>
-                    <a href="/register" class="btn btn-outline-success my-2 my-sm-0" style="margin-left: 1vw">注册</a>
+                    <a href="/#/login" class="btn btn-outline-secondary my-2 my-sm-0" style="margin-left: 3vw">登录</a>
+                    <a href="/#/register" class="btn btn-outline-success my-2 my-sm-0" style="margin-left: 1vw">注册</a>
                 </div>
                 <div v-else>
                     <el-dropdown @command="handleCommand" style="cursor:pointer;">
