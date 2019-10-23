@@ -19,7 +19,7 @@
         <div class="essayBefore">
             <Divider class="recDivider">往期文章</Divider>
             <ul>
-                <li v-for="(lists,index) in 6" :key="index" v-if="index < listsNum" >
+                <li v-for="(lists,index) in test" :key="index" v-if="index < listsNum" >
                     <div class="container pb2 pt2" style="cursor:pointer">
                         <essay-card class="e-list-card" @click.native="toEssay()">
                             <div slot="card-pic" class="slot-pic">
@@ -32,7 +32,7 @@
                 </li>
             </ul>
             <div class="moreLists">
-                <span @click="loadMore" class="cp">点击加载更多</span>
+                <span @click="loadMore" class="cp">{{showMoreTitle}}</span>
             </div>
         </div>
     </div>

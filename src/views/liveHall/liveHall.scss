@@ -1,0 +1,22 @@
+.liveHall {
+  background-color: #f4f6f9;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+
+  .liveTitle {
+    padding-bottom: 5vh;
+  }
+  .liveAvatar{
+    text-align: center;
+    padding-bottom: 5vh;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+  }
+  .checkMore{
+    width: 100%;
+    text-align: center;
+    span{
+      cursor: pointer;
+    }
+  }
+}

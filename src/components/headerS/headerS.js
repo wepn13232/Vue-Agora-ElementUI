@@ -21,7 +21,15 @@ export default {
             if (command == 'a') {
                 this.$router.push('/personalCenter')
             }
-        }
+        },
+    //    地点推荐
+        toLocationRec(){
+            this.$router.push('/essayList')
+        },
+        //品牌推荐
+        toBrandRec(){
+            this.$router.push('/essayList')
+        },
     },
     computed: {
         username() {

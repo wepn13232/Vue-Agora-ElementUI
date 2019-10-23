@@ -14,7 +14,7 @@
                         <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">直播大厅</a>
+                        <a class="nav-link" href="/#/liveHall">直播大厅</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -22,8 +22,8 @@
                             推荐
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">地点推荐</a>
-                            <a class="dropdown-item" href="#">品牌推荐</a>
+                            <a class="dropdown-item" @click="toLocationRec">地点推荐</a>
+                            <a class="dropdown-item" @click="toBrandRec">品牌推荐</a>
                         </div>
                     </li>
                 </ul>

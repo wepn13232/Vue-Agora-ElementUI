@@ -11,6 +11,8 @@ import liveNum from "@/views/liveNum/liveNum.vue";
 import page1 from "@/views/liveNum/otherPage/page1"
 import page2 from "@/views/liveNum/otherPage/page2"
 import page3 from "@/views/liveNum/otherPage/page3"
+import liveHall from "@/views/liveHall/liveHall.vue";
+import liveRoom from "@/views/liveRoom/liveRoom.vue";
 
 Vue.use(Router)
 
@@ -104,6 +106,23 @@ const router = new Router({
                     },
                 }
             ]
+        },
+        {
+            path: '/liveHall',
+            name: 'liveHall',
+            component: liveHall,
+            meta: {
+                title: '直播大厅',
+            },
+        },
+        {
+            path: '/liveRoom',
+            name: 'liveRoom',
+            component: liveRoom,
+            meta: {
+                title: '直播间',
+                requireAuth: true
+            },
         }
     ],
 });

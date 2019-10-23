@@ -49,7 +49,7 @@
                         <!--直播间号码-->
                         <el-col :md="12" :sm="12" :xs="24">
                             <div class=" bt-line pb2 pt3">
-                                <span class="spanTitle">直播编号：</span>{{userInfo.liveNumber || '暂无'}}
+                                <span class="spanTitle">授权码：</span>{{userInfo.liveNumber || '暂无'}}
                                 <el-button @click="toGetLiveNum" style="margin-left: 1vw" v-if="!userInfo.liveNumber && userInfo.liveNumber !== '*******'">
                                     申请
                                 </el-button>
