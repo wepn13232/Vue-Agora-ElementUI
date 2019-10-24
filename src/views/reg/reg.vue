@@ -8,7 +8,7 @@
             <div class="registerFrom">
                 <el-form  :rules="rules" :model="form" ref="regForm" label-width="100px">
                     <el-form-item label="用户名" prop="username">
-                        <el-input v-model="form.username" class="input-width" clearable></el-input>
+                        <el-input v-model="form.username" class="input-width" clearable placeholder="只限英文和数字"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
                         <el-input type="password" v-model="form.password" class="input-width"

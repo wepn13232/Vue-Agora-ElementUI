@@ -1,7 +1,8 @@
 <template>
     <div class="content">
         <div class="from">
-
+            <span class="fr ml3">注意：请务必填写正确，否则将无法创建直播间哦</span>
+            <div class="clearFix"></div>
             <el-form label-position="right" ref="form" :rules="rules" :model="form" label-width="80px">
                 <el-form-item label="APPID" prop="appid" class="labelWidth">
                     <el-input v-model="form.appid" class="input-width"></el-input>
@@ -33,11 +34,11 @@
         methods: {
             goNext(form) {
                 this.$refs[form].validate((valid) => {
-                    if(valid){
-                        sessionStorage.setItem('liveNum',this.form.appid);
+                    if (valid) {
+                        sessionStorage.setItem('liveNum', this.form.appid);
                         this.$message.success("授权成功");
                         this.$router.push('/personalCenter');
-                    }else{
+                    } else {
                         return false;
                     }
                 })
@@ -69,5 +70,17 @@
             width: 80%;
             margin: 0 auto;
         }
+    }
+
+    .fl {
+        float: left;
+    }
+
+    .fr {
+        color: orangered;
+    }
+
+    .clearFix {
+        clear: both;
     }
 </style>

@@ -3,10 +3,22 @@ export default {
     inject: ['reload'],
     data() {
         return {
+            dialogVisible: false,
+            //用户信息
             userInfo: {
                 username: "",
                 liveNumber: '',
                 isUserSelf: false
+            },
+            //直播间信息
+            roomForm: {
+                channelName: '',
+                username: '',
+                channelSum:''
+            },
+            //直播间信息表单填写规则
+            rules: {
+                channelName: [{required: true, message: "请填写直播间标题", trigger: 'blur'}],
             }
         }
     },
@@ -26,12 +38,32 @@ export default {
         isUser() {
             let _username = sessionStorage.getItem('username');
             this.userInfo.isUserSelf = this.userInfo.username === _username;
-                if (!this.userInfo.isUserSelf) {
-                    this.$set(this.userInfo,'liveNumber','*******')
-                }
+            if (!this.userInfo.isUserSelf) {
+                this.$set(this.userInfo, 'liveNumber', '*******')
+            }
         },
-        createLive(){
-            this.$router.push({path:'/liveRoom',query:{userType:'host'}})
+        createLive() {
+            this.dialogVisible = true;
+            this.roomForm.username = this.userInfo.username;
+        },
+        //创建直播间
+        toCreateLiveRoom(roomForm) {
+            this.$refs[roomForm].validate(valid => {
+                if (valid) {
+                    sessionStorage.setItem('roomTitle',this.roomForm.channelName);
+                    this.$router.push({path: '/liveRoom', query: {userType: 'host'}})
+                } else {
+                    return false;
+                }
+            })
+        },
+        handleClose(done) {
+            this.$confirm('放弃创建吗？')
+                .then(_ => {
+                    done();
+                })
+                .catch(_ => {
+                });
         }
     },
     mounted() {

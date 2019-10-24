@@ -14,7 +14,7 @@ export default {
             rules: {
                 username: [
                     {required: true, message: '请输入用户名', trigger: 'blur'},
-                    {min: 2, max: 5, message: '名字长度在2~5位', trigger: 'blur'}
+                    {min: 4, max: 10, message: '名字长度在4~10位', trigger: 'blur'}
                 ],
                 password: [
                     {required: true, message: '请输入密码', trigger: 'blur'},
@@ -107,6 +107,16 @@ export default {
                     return false;
                 }
             })
+        }
+    },
+    watch: {
+        username() {
+            this.form.username = this.form.username.replace(/[\W]/g, '');
+        }
+    },
+    computed: {
+        username() {
+            return this.form.username
         }
     }
 }

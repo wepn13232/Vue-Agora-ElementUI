@@ -1,4 +1,5 @@
 import AgoraRTC from 'agora-rtc-sdk'
+import fa from "element-ui/src/locale/lang/fa";
 
 //设置直播参数
 var rtc = {
@@ -21,15 +22,25 @@ export default {
     name: "liveRoom",
     data() {
         return {
+            screenLoading: true,
             userInfo: {
                 username: '',
-                userType:''
+                userType: '',
+                liveNumber: ''
+            },
+            //房间信息
+            roomInfo:{
+                title:'',
+                sum:'',
+                author:''
             }
         }
     },
     methods: {
         getUserInfo() {
-            this.userInfo.username = sessionStorage.getItem('username')
+            this.userInfo.username = sessionStorage.getItem('username');
+            this.userInfo.liveNumber = sessionStorage.getItem('liveNum');
+            this.roomInfo.title = sessionStorage.getItem('roomTitle');
         },
         //============主播创建直播客户端=============
         createHostLive() {
@@ -56,6 +67,7 @@ export default {
                     rtc.localStream.init(function () {
                         rtc.localStream.play('localStream');
                         console.log("初始化本地流成功！");
+                        _this.screenLoading = false;
                         //发布
                         rtc.client.publish(rtc.localStream, function (err) {
                             _this.$message.error("发布本地流失败！");
@@ -71,12 +83,12 @@ export default {
                     console.log(err)
                 })
             }, (err) => {
-                this.$message.error(err);
+                this.$message.error("直播间初始化失败，请检查授权码是否正确");
                 console.error(err);
             });
         },
         //===========观众加入直播间=============
-        creatAudLive(){
+        creatAudLive() {
             let _this = this;
             //直播互动，建议模式为live,若为通信则为rtc
             rtc.client = AgoraRTC.createClient({mode: "live", codec: "h264"});
@@ -86,7 +98,7 @@ export default {
                 //设置角色=>"host"为主播,"audience"为观众
                 rtc.client.setClientRole("audience");
                 //加入频道
-                rtc.client.join(option.token ? option.token : null, option.channel,  _this.userInfo.username, function (uid) {
+                rtc.client.join(option.token ? option.token : null, option.channel, _this.userInfo.username, function (uid) {
                     _this.$message.success("加入频道成功，欢迎您，" + uid);
                     rtc.params.uid = uid;
                     //监听远程流
@@ -143,14 +155,19 @@ export default {
             let _userType = this.$route.query.userType;
             if (_userType == 'host') {
                 this.userInfo.userType = 'host';
-                // 主播创建直播间
-                this.createHostLive()
+                if (!this.userInfo.liveNumber) {
+                    this.$message.warning("你暂未申请直播授权码，还不可以直播哦");
+                    this.$router.push('/personalCenter');
+                    return false;
+                } else {
+                    // 主播创建直播间
+                    this.createHostLive()
+                }
             } else {
                 this.userInfo.userType = 'audience';
                 //    观众方式加入直播间
                 this.creatAudLive()
             }
-            console.log("用户类型为"+this.userInfo.userType)
         }
     },
     beforeDestroy() {

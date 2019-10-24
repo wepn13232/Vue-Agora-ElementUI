@@ -121,9 +121,8 @@ const router = new Router({
             component: liveRoom,
             meta: {
                 title: '直播间',
-                requireAuth: true
             },
-        }
+        },
     ],
 });
 
