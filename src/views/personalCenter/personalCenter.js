@@ -29,6 +29,9 @@ export default {
                 if (!this.userInfo.isUserSelf) {
                     this.$set(this.userInfo,'liveNumber','*******')
                 }
+        },
+        createLive(){
+            this.$router.push({path:'/liveRoom',query:{userType:'host'}})
         }
     },
     mounted() {

@@ -17,12 +17,7 @@ export default {
             }
         },
         toLive() {
-            let liveNumber = sessionStorage.getItem('liveNum');
-            if (!liveNumber) {
-                this.$message.warning("请先去个人中心申请授权码才可以进入直播间哦~")
-            } else {
-                this.$router.push('/liveRoom')
-            }
+            this.$router.push({path: '/liveRoom', query: {userType: 'audience'}})
         }
     }
 }

@@ -50,9 +50,10 @@
                         <el-col :md="12" :sm="12" :xs="24">
                             <div class=" bt-line pb2 pt3">
                                 <span class="spanTitle">授权码：</span>{{userInfo.liveNumber || '暂无'}}
-                                <el-button @click="toGetLiveNum" style="margin-left: 1vw" v-if="!userInfo.liveNumber && userInfo.liveNumber !== '*******'">
+                                <el-button @click="toGetLiveNum" class="ml1" v-if="!userInfo.liveNumber && userInfo.liveNumber !== '*******'">
                                     申请
                                 </el-button>
+                                <el-button @click="createLive" v-else-if="userInfo.liveNumber && userInfo.liveNumber !== '*******'" class="ml1">创建直播</el-button>
                             </div>
                         </el-col>
 

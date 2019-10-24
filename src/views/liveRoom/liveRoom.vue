@@ -17,7 +17,12 @@
          <!--直播内容-->
          <div class="content">
              <!--直播屏幕-->
-             <div class="liveScreen" id="localStream">
+             <!--主播-->
+             <div class="liveScreen" id="localStream" v-if="userInfo.userType=='host'">
+
+             </div>
+             <!--观众屏幕-->
+             <div class="liveScreen" id="localStream2" v-else>
 
              </div>
          </div>
