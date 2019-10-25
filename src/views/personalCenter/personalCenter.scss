@@ -46,6 +46,17 @@
       width: 100%;
       margin-top: 10vh;
       font-size: 1.1rem;
+      .blog{
+        cursor: pointer;
+        color: #60b6ff;
+        transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+      }
+      .blog:hover{
+        color: #5381ff;
+      }
     }
   }
 

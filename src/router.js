@@ -13,6 +13,7 @@ import page2 from "@/views/liveNum/otherPage/page2"
 import page3 from "@/views/liveNum/otherPage/page3"
 import liveHall from "@/views/liveHall/liveHall.vue";
 import liveRoom from "@/views/liveRoom/liveRoom.vue";
+import blog from "@/views/blog/blog.vue";
 
 Vue.use(Router)
 
@@ -121,6 +122,14 @@ const router = new Router({
             component: liveRoom,
             meta: {
                 title: '直播间',
+            },
+        },
+        {
+            path: '/blog',
+            name: 'blog',
+            component: blog,
+            meta: {
+                title: '博客',
             },
         },
     ],

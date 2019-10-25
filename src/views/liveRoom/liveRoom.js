@@ -1,5 +1,6 @@
 import AgoraRTC from 'agora-rtc-sdk'
 import fa from "element-ui/src/locale/lang/fa";
+import roomTabs from "@/components/roomTabs/roomTabs.vue";
 
 //设置直播参数
 var rtc = {
@@ -20,19 +21,21 @@ var option = {
 
 export default {
     name: "liveRoom",
+    components: {roomTabs},
     data() {
         return {
             screenLoading: true,
             userInfo: {
                 username: '',
                 userType: '',
-                liveNumber: ''
+                liveNumber: '',
+                userSum: '你知道的'
             },
             //房间信息
-            roomInfo:{
-                title:'',
-                sum:'',
-                author:''
+            roomInfo: {
+                channelName: '',
+                channelSum: '',
+                username: ''
             }
         }
     },
@@ -40,7 +43,8 @@ export default {
         getUserInfo() {
             this.userInfo.username = sessionStorage.getItem('username');
             this.userInfo.liveNumber = sessionStorage.getItem('liveNum');
-            this.roomInfo.title = sessionStorage.getItem('roomTitle');
+            this.roomInfo.channelName = sessionStorage.getItem('channelName');
+            this.roomInfo.channelSum = sessionStorage.getItem('channelSum');
         },
         //============主播创建直播客户端=============
         createHostLive() {
@@ -87,7 +91,7 @@ export default {
                 console.error(err);
             });
         },
-        //===========观众加入直播间=============
+        //============观众加入直播间=================
         creatAudLive() {
             let _this = this;
             //直播互动，建议模式为live,若为通信则为rtc
@@ -111,7 +115,6 @@ export default {
                                 _this.$message.error("监听远程流失败" + err)
                             })
                         }
-                        _this.$message.info("远程流加入" + uid)
                     });
                     //监听远程订阅流
                     rtc.client.on("stream-subscribed", function (evt) {
@@ -122,7 +125,6 @@ export default {
                         // addView(id);
                         // Play the remote stream.
                         remoteStream.play('localStream2');
-                        _this.$message.info('stream-subscribed remote-uid: ', id);
                     })
                 }, function (err) {
                     _this.$message.error("加入频道失败" + err);
@@ -150,6 +152,25 @@ export default {
                 console.log("离开频道失败" + err);
             })
         },
+        //下播
+        cutLive() {
+            let _this = this;
+            rtc.client.leave(function () {
+                rtc.localStream.stop();
+                rtc.localStream.close();
+                while (rtc.remoteStreams.length > 0) {
+                    var stream = rtc.remoteStreams.shift();
+                    var id = stream.getId();
+                    stream.stop();
+                    removeView(id);
+                }
+                console.log("离开频道成功");
+                _this.$message.info('下播成功~');
+                _this.$router.push('/personalCenter')
+            }, function (err) {
+                console.log("离开频道失败" + err);
+            })
+        },
         //获取用户类型，判断开播设置
         getUserType() {
             let _userType = this.$route.query.userType;
@@ -160,14 +181,24 @@ export default {
                     this.$router.push('/personalCenter');
                     return false;
                 } else {
-                    // 主播创建直播间
-                    this.createHostLive()
+                    let channelTitle = sessionStorage.getItem('channelName');
+                    if (!channelTitle) {
+                        this.$message.warning("你还没填写直播间信息，请填写再开播哦");
+                        this.$router.push('/personalCenter')
+                    } else {
+                        // 主播创建直播间
+                        this.createHostLive()
+                    }
                 }
             } else {
                 this.userInfo.userType = 'audience';
                 //    观众方式加入直播间
                 this.creatAudLive()
             }
+        },
+        //点击头像进入个人信息中心
+        toPersonCenter(){
+            this.$router.push({path:'/personalCenter',query:{username:this.userInfo.username}})
         }
     },
     beforeDestroy() {

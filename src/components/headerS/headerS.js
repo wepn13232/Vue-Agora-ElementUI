@@ -19,7 +19,7 @@ export default {
                 },500)
             }
             if (command == 'a') {
-                this.$router.push('/personalCenter')
+                this.$router.push({path:'/personalCenter',query:{username:this.userInfo.username}})
             }
         },
     //    地点推荐

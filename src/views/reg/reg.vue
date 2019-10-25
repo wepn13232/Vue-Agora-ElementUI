@@ -6,9 +6,10 @@
             </div>
             <!--注册表单-->
             <div class="registerFrom">
-                <el-form  :rules="rules" :model="form" ref="regForm" label-width="100px">
+                <el-form :rules="rules" :model="form" ref="regForm" label-width="100px">
                     <el-form-item label="用户名" prop="username">
-                        <el-input v-model="form.username" class="input-width" clearable placeholder="只限英文和数字"></el-input>
+                        <el-input v-model="form.username" class="input-width" clearable
+                                  placeholder="只限英文和数字"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
                         <el-input type="password" v-model="form.password" class="input-width"
@@ -30,14 +31,14 @@
                             :options="options"
                             @change="handleChange"></el-cascader>
                     </el-form-item>
-                    <el-form-item label="直播编号" prop="roomNum">
+                    <el-form-item label="直播授权码" prop="roomNum">
                         <el-input v-model="form.roomNum" class="input-width"
                                   disabled placeholder="默认无，可在个人中心申请"></el-input>
                     </el-form-item>
 
                     <el-form-item class="btn_group">
-                            <el-button type="success" @click="doReg('regForm')">注册</el-button>
-                            <el-button @click="toHome">返回</el-button>
+                        <el-button type="success" @click="doReg('regForm')">注册</el-button>
+                        <el-button @click="toHome">返回</el-button>
                     </el-form-item>
                 </el-form>
             </div>

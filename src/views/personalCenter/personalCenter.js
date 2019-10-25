@@ -14,17 +14,19 @@ export default {
             roomForm: {
                 channelName: '',
                 username: '',
-                channelSum:''
+                channelSum: ''
             },
             //直播间信息表单填写规则
             rules: {
-                channelName: [{required: true, message: "请填写直播间标题", trigger: 'blur'}],
+                channelName: [
+                    {required: true, message: "请填写直播间标题", trigger: 'blur'},
+                    {min: 1, max: 18, message: "标题长度只能在1~18位", trigger: 'blur'}],
             }
         }
     },
     methods: {
         getUserInfo() {
-            this.userInfo.username = sessionStorage.getItem('username')
+            this.userInfo.username = this.$route.query.username;
         },
         //    跳转至直播间编码申请
         toGetLiveNum() {
@@ -42,6 +44,7 @@ export default {
                 this.$set(this.userInfo, 'liveNumber', '*******')
             }
         },
+        //点击创建直播间按钮
         createLive() {
             this.dialogVisible = true;
             this.roomForm.username = this.userInfo.username;
@@ -50,7 +53,10 @@ export default {
         toCreateLiveRoom(roomForm) {
             this.$refs[roomForm].validate(valid => {
                 if (valid) {
-                    sessionStorage.setItem('roomTitle',this.roomForm.channelName);
+                    //替换空格
+                    this.roomForm.channelSum = this.roomForm.channelSum.replace(/\n/g, '<br/>')
+                    sessionStorage.setItem('channelName', this.roomForm.channelName);
+                    sessionStorage.setItem('channelSum', this.roomForm.channelSum);
                     this.$router.push({path: '/liveRoom', query: {userType: 'host'}})
                 } else {
                     return false;
@@ -64,6 +70,10 @@ export default {
                 })
                 .catch(_ => {
                 });
+        },
+        //点击博客跳转
+        toBlog() {
+            this.$router.push({path: '/blog', query: {username: this.userInfo.username}})
         }
     },
     mounted() {

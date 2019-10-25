@@ -1,0 +1,27 @@
+.blog {
+  background-color: #f4f6f9;
+  //banner头部
+  .banner {
+    width: 100%;
+    background-color: #60b6ff;
+    height: 350px;
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      width: 100%;
+      text-align: center;
+      color: #ffffff;
+
+      h5 {
+        font-weight: 400;
+      }
+    }
+  }
+
+  //内容部分
+  .content {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
+}

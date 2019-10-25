@@ -57,10 +57,10 @@
                             </div>
                         </el-col>
 
-                        <!--博客地址-->
+                        <!--空间地址-->
                         <el-col :md="12" :sm="12" :xs="24">
                             <div class=" bt-line pb2 pt3">
-                                <span class="spanTitle">博客地址：</span><a href="#">www.pornhub.com</a>
+                                <span class="spanTitle">空间地址：</span><a class="blog" @click="toBlog">{{userInfo.username}}的空间</a>
                             </div>
                         </el-col>
 
