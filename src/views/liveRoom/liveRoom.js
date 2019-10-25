@@ -166,7 +166,7 @@ export default {
                 }
                 console.log("离开频道成功");
                 _this.$message.info('下播成功~');
-                _this.$router.push('/personalCenter')
+                _this.$router.push({path:'/personalCenter',query:{username:_this.userInfo.username}})
             }, function (err) {
                 console.log("离开频道失败" + err);
             })
