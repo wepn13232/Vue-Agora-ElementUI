@@ -13,7 +13,7 @@ var rtc = {
 };
 //设置个人参数
 var option = {
-    appID: "ec7820719525489e80fa257f7b4c1062",
+    appID: "",
     channel: "TextChannelName",
     uid: null,
     token: null

@@ -1,13 +1,20 @@
+import * as allUrls from '@/utils/allUrls'
+
 export default {
     name: "personalCenter",
     inject: ['reload'],
     data() {
         return {
+            userLoading: true,
             dialogVisible: false,
             //用户信息
             userInfo: {
                 username: "",
                 liveNumber: '',
+                email: '',
+                sex: '',
+                address: '',
+                userSum: '',
                 isUserSelf: false
             },
             //直播间信息
@@ -26,15 +33,32 @@ export default {
     },
     methods: {
         getUserInfo() {
-            this.userInfo.username = this.$route.query.username;
+            let _username = this.$route.query.username;
+            let _this = this;
+            //    调用查询用户信息
+            allUrls.allUserInfo('post', _username).then(res => {
+                return res.json();
+            }).then(data => {
+                if (+data.status === 200) {
+                    for (let i = 0; i < data.data.length; i++) {
+                        if (_username === data.data[i].username) {
+                            _this.userInfo.username = data.data[i].username;
+                            _this.userInfo.email = data.data[i].email;
+                            _this.userInfo.sex = data.data[i].sex;
+                            _this.userInfo.address = data.data[i].address;
+                            _this.userInfo.liveNumber = data.data[i].appid;
+                            _this.userInfo.userSum = data.data[i].userSum;
+                            _this.userLoading = false;
+                        }
+                    }
+                } else {
+                    this.$message.error("用户信息查询失败");
+                }
+            })
         },
         //    跳转至直播间编码申请
         toGetLiveNum() {
             this.$router.push('/liveNum/page1')
-        },
-        //    获取直播编号
-        getLiveNum() {
-            this.userInfo.liveNumber = sessionStorage.getItem('liveNum')
         },
         //    判断是否本人用户
         isUser() {
@@ -76,8 +100,9 @@ export default {
             this.$router.push({path: '/blog', query: {username: this.userInfo.username}})
         }
     },
+    filters:{
+    },
     mounted() {
-        this.getLiveNum();
         this.getUserInfo();
         this.isUser();
         this.reload()

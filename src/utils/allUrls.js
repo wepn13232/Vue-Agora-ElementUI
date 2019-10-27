@@ -1,6 +1,6 @@
 import qs from 'qs'
 
-// let header = {'Content-Type': 'application/x-www-form-urlencoded'}
+let header2 = {'Content-Type': 'application/x-www-form-urlencoded'}
 let header = {'Content-Type': 'application/json'}
 let baseUrl = 'https://www.fastmock.site/mock/329c8f16f62093ecfde33a5de5013930/yolo'
 
@@ -20,4 +20,10 @@ export function getIndexPicRec(methods, data) {
 export function getIndexEssay(methods, data) {
     return fetch(baseUrl + '/api/getIndexEssay',
         {method: methods, headers: header, body: qs.stringify(data)})
+}
+
+//用户接口
+export function allUserInfo(methods,data) {
+    return fetch(baseUrl + '/api/userInfo',
+        {method: methods, headers: header2, body: qs.stringify(data)})
 }
