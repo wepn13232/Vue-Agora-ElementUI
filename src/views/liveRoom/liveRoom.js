@@ -1,6 +1,7 @@
 import AgoraRTC from 'agora-rtc-sdk'
 import fa from "element-ui/src/locale/lang/fa";
 import roomTabs from "@/components/roomTabs/roomTabs.vue";
+import * as allUrls from '@/utils/allUrls'
 
 //设置直播参数
 var rtc = {
@@ -30,7 +31,7 @@ export default {
                 username: '',
                 userType: '',
                 liveNumber: '',
-                userSum: '你知道的'
+                userSum: ''
             },
             //房间信息
             roomInfo: {
@@ -42,8 +43,24 @@ export default {
     },
     methods: {
         getUserInfo() {
+            //正常情况是从直播信息表里面拿到用户名（或者从url中）
             this.userInfo.username = sessionStorage.getItem('username');
             this.userInfo.liveNumber = sessionStorage.getItem('liveNum');
+            let _this = this;
+            //拿到用户信息名之后，调用用户信息表接口，拿取用户信息（个人简介）
+            this.$nextTick(() => {
+                allUrls.allUserInfo('post', _this.userInfo.username).then(res => {
+                    return res.json();
+                }).then(data => {
+                    if (+data.status === 200) {
+                        for (let i = 0; i < data.data.length; i++) {
+                            if (data.data[i].username === _this.userInfo.username) {
+                                _this.userInfo.userSum = data.data[i].userSum;
+                            }
+                        }
+                    }
+                })
+            });
             this.roomInfo.channelName = sessionStorage.getItem('channelName');
             this.roomInfo.channelSum = sessionStorage.getItem('channelSum');
         },
@@ -167,7 +184,7 @@ export default {
                 }
                 console.log("离开频道成功");
                 _this.$message.info('下播成功~');
-                _this.$router.push({path:'/personalCenter',query:{username:_this.userInfo.username}})
+                _this.$router.push({path: '/personalCenter', query: {username: _this.userInfo.username}})
             }, function (err) {
                 console.log("离开频道失败" + err);
             })
@@ -198,8 +215,8 @@ export default {
             }
         },
         //点击头像进入个人信息中心
-        toPersonCenter(){
-            this.$router.push({path:'/personalCenter',query:{username:this.userInfo.username}})
+        toPersonCenter() {
+            this.$router.push({path: '/personalCenter', query: {username: this.userInfo.username}})
         }
     },
     beforeDestroy() {
