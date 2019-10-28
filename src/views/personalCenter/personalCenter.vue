@@ -1,5 +1,5 @@
 <template>
-    <div class="personalCenter" v-loading="userLoading" element-loading-text="用户查询中...">
+    <div class="personalCenter" v-loading="userLoading" :element-loading-text="loadingText">
         <!--banner图-->
         <div class="banner">
             <!--个人头像-->

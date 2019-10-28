@@ -7,6 +7,7 @@ export default {
         return {
             userLoading: true,
             dialogVisible: false,
+            loadingText: '用户查询中...',
             //用户信息
             userInfo: {
                 username: "",
@@ -49,6 +50,10 @@ export default {
                             _this.userInfo.liveNumber = data.data[i].appid;
                             _this.userInfo.userSum = data.data[i].userSum;
                             _this.userLoading = false;
+                        } else {
+                            setTimeout(() => {
+                                this.loadingText = '可能没有这个用户哦，建议重新查询~';
+                            }, 3000)
                         }
                     }
                 } else {
@@ -108,8 +113,8 @@ export default {
         // this.isUser();
         this.reload()
     },
-    watch:{
-        $route(){
+    watch: {
+        $route() {
             this.reloadView()
         }
     }
