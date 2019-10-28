@@ -2,7 +2,7 @@ import * as allUrls from '@/utils/allUrls'
 
 export default {
     name: "personalCenter",
-    inject: ['reload'],
+    inject: ['reload', 'reloadView'],
     data() {
         return {
             userLoading: true,
@@ -54,6 +54,8 @@ export default {
                 } else {
                     this.$message.error("用户信息查询失败");
                 }
+            }).then(() => {
+                this.isUser();
             })
         },
         //    跳转至直播间编码申请
@@ -100,11 +102,15 @@ export default {
             this.$router.push({path: '/blog', query: {username: this.userInfo.username}})
         }
     },
-    filters:{
-    },
+    filters: {},
     mounted() {
         this.getUserInfo();
-        this.isUser();
+        // this.isUser();
         this.reload()
+    },
+    watch:{
+        $route(){
+            this.reloadView()
+        }
     }
 }

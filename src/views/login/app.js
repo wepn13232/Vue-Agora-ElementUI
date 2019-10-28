@@ -32,7 +32,7 @@ export default {
                                 sessionStorage.setItem('email', data.data[i].email);
                                 sessionStorage.setItem('sex', data.data[i].sex);
                                 sessionStorage.setItem('address', data.data[i].address);
-                                sessionStorage.setItem('appid', data.data[i].appid);
+                                sessionStorage.setItem('liveNum', data.data[i].appid);
                                 sessionStorage.setItem('userSum', data.data[i].userSum);
                                 this.$router.push('/')
                                 break;

@@ -11,9 +11,9 @@ var rtc = {
     remoteStreams: [],
     params: {}
 };
-//设置个人参数
+//设置个人参数(默认)
 var option = {
-    appID: "",
+    appID: "5bf98cad14aa426291e22343db475295",
     channel: "TextChannelName",
     uid: null,
     token: null
@@ -25,6 +25,7 @@ export default {
     data() {
         return {
             screenLoading: true,
+            //主播信息
             userInfo: {
                 username: '',
                 userType: '',
@@ -52,7 +53,7 @@ export default {
             //直播互动，建议模式为live,若为通信则为rtc
             rtc.client = AgoraRTC.createClient({mode: "live", codec: "h264"});
             //初始化
-            rtc.client.init(option.appID, function () {
+            rtc.client.init(this.userInfo.liveNumber, function () {
                 console.log("客户端初始化完成");
                 //设置角色=>"host"为主播,"audience"为观众
                 rtc.client.setClientRole("host");
@@ -178,13 +179,13 @@ export default {
                 this.userInfo.userType = 'host';
                 if (!this.userInfo.liveNumber) {
                     this.$message.warning("你暂未申请直播授权码，还不可以直播哦");
-                    this.$router.push('/personalCenter');
+                    this.$router.go(-1);
                     return false;
                 } else {
                     let channelTitle = sessionStorage.getItem('channelName');
                     if (!channelTitle) {
                         this.$message.warning("你还没填写直播间信息，请填写再开播哦");
-                        this.$router.push('/personalCenter')
+                        this.$router.go(-1)
                     } else {
                         // 主播创建直播间
                         this.createHostLive()

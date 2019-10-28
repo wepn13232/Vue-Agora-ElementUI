@@ -1,7 +1,7 @@
 <template>
     <div id="app" class="app">
         <header-s v-if="hasUser"></header-s>
-        <router-view/>
+        <router-view v-if="reloadV"/>
         <footer-s></footer-s>
     </div>
 </template>
@@ -16,12 +16,14 @@
         data() {
             return {
                 username: '',
-                hasUser: true
+                hasUser: true,
+                reloadV: true,
             }
         },
         provide() {
             return {
-                reload: this.reload
+                reload: this.reload,
+                reloadView:this.reloadView
             }
         },
         methods: {
@@ -30,9 +32,15 @@
                 this.$nextTick(() => {
                     this.hasUser = true;
                 })
+            },
+            reloadView() {
+                this.reloadV = false;
+                this.$nextTick(() => {
+                    this.reloadV = true;
+                })
             }
         },
-        mounted(){
+        mounted() {
         }
     }
 </script>
