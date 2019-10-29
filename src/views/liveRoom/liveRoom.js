@@ -14,7 +14,7 @@ var rtc = {
 };
 //设置个人参数(默认)
 var option = {
-    appID: "5bf98cad14aa426291e22343db475295",
+    appID: "ec7820719525489e80fa257f7b4c1062",
     channel: "TextChannelName",
     uid: null,
     token: null
@@ -120,7 +120,7 @@ export default {
                 //设置角色=>"host"为主播,"audience"为观众
                 rtc.client.setClientRole("audience");
                 //加入频道
-                rtc.client.join(option.token ? option.token : null, option.channel, _this.userInfo.username, function (uid) {
+                rtc.client.join(option.token ? option.token : null, option.channel, option.uid ? _this.userInfo.username : null, function (uid) {
                     _this.$message.success("加入频道成功，欢迎您，" + uid);
                     rtc.params.uid = uid;
                     //监听远程流
