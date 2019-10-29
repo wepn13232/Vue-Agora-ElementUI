@@ -1,0 +1,89 @@
+.editPage{
+  background-color: #f4f6f9;
+  //banner头部
+  .banner {
+    width: 100%;
+    background-color: #60b6ff;
+    height: 350px;
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      width: 100%;
+      text-align: center;
+      color: #ffffff;
+
+      h5 {
+        font-weight: 400;
+      }
+    }
+  }
+
+  //  个人信息具体内容
+  .info {
+    width: 100%;
+
+    //个人简述
+    .infoSum {
+      width: 100%;
+      padding-top: 10vh;
+
+      .infoSum-title {
+        width: 100%;
+        font-size: 1.6rem;
+        font-weight: 600;
+        padding-bottom: 1vh;
+        border-bottom: rgba(84, 84, 84, 0.56) 1px solid;
+      }
+
+      .infoSum-content {
+        padding-top: 3vh;
+      }
+    }
+
+    //  其余详细信息
+    .infoContent {
+      width: 100%;
+      margin-top: 10vh;
+      font-size: 1.1rem;
+      .blog{
+        cursor: pointer;
+        color: #60b6ff;
+        transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+      }
+      .blog:hover{
+        color: #5381ff;
+      }
+    }
+  }
+}
+
+//块下划线
+ .bt-line{
+   border-bottom: rgba(84, 84, 84, 0.56) 1px solid;
+ }
+.mb2{
+  margin-bottom: 2vh;
+}
+.pb2{
+  padding-bottom: 2vh;
+}
+.pb3{
+  padding-bottom: 3vh;
+}
+.pt3{
+  padding-top: 3vh;
+}
+.spanTitle{
+  font-weight: 600;
+}
+.ml1{
+  margin-left: 1vw;
+}
+.inputWidth{
+  width: 70%;
+}
+

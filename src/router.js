@@ -14,6 +14,7 @@ import page3 from "@/views/liveNum/otherPage/page3"
 import liveHall from "@/views/liveHall/liveHall.vue";
 import liveRoom from "@/views/liveRoom/liveRoom.vue";
 import blog from "@/views/blog/blog.vue";
+import editPage from "@/views/personalCenter/editPage/editPage.vue";
 
 Vue.use(Router)
 
@@ -130,6 +131,15 @@ const router = new Router({
             component: blog,
             meta: {
                 title: '博客',
+            },
+        },
+        {
+            path: '/editPage',
+            name: 'editPage',
+            component: editPage,
+            meta: {
+                title: '个人信息编辑',
+                requireAuth: true
             },
         },
     ],

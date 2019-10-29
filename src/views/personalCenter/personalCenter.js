@@ -105,9 +105,14 @@ export default {
         //点击博客跳转
         toBlog() {
             this.$router.push({path: '/blog', query: {username: this.userInfo.username}})
+        },
+        //点击跳转个人信息编辑
+        toEdit(){
+         this.$router.push({path:'/editPage',query:{username:this.userInfo.username}})
         }
     },
     filters: {
+        //地区转译
         transAddress(val) {
             switch (val) {
                 case 'kaifaqu':
@@ -134,6 +139,7 @@ export default {
                     return '地区暂未录入';
             }
         },
+        //性别转译
         transSex(val) {
             switch (val) {
                 case 'male':
