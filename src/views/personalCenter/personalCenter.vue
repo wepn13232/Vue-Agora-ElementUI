@@ -28,7 +28,7 @@
                         <!--地区-->
                         <el-col :md="12" :sm="12" :xs="24">
                             <div class=" bt-line pb2">
-                                <span class="spanTitle">地区：</span>{{userInfo.address}}
+                                <span class="spanTitle">地区：</span>{{userInfo.address | transAddress}}
                             </div>
                         </el-col>
 
@@ -42,7 +42,7 @@
                         <!--性别-->
                         <el-col :md="12" :sm="12" :xs="24">
                             <div class=" bt-line pb2 pt3">
-                                <span class="spanTitle">性别：</span>{{userInfo.sex}}
+                                <span class="spanTitle">性别：</span>{{userInfo.sex | transSex}}
                             </div>
                         </el-col>
 

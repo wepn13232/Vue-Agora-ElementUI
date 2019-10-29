@@ -107,7 +107,44 @@ export default {
             this.$router.push({path: '/blog', query: {username: this.userInfo.username}})
         }
     },
-    filters: {},
+    filters: {
+        transAddress(val) {
+            switch (val) {
+                case 'kaifaqu':
+                    return '湛江 / 开发区';
+                case 'haizhu':
+                    return '广州 / 海珠区';
+                case 'tianhe':
+                    return '广州 / 天河区';
+                case 'yuexiu':
+                    return '广州 / 越秀区';
+                case 'baiyun':
+                    return '广州 / 白云区';
+                case 'panyu':
+                    return '广州 / 番禺区';
+                case 'conghua':
+                    return '广州 / 从化区';
+                case 'zengcheng':
+                    return '广州 / 增城区';
+                case 'xiashan':
+                    return '湛江 / 霞山区';
+                case 'chikan':
+                    return '湛江 / 赤坎区';
+                default:
+                    return '地区暂未录入';
+            }
+        },
+        transSex(val) {
+            switch (val) {
+                case 'male':
+                    return '男';
+                case 'female':
+                    return '女';
+                default :
+                    return '暂未录入性别';
+            }
+        }
+    },
     mounted() {
         this.getUserInfo();
         // this.isUser();
