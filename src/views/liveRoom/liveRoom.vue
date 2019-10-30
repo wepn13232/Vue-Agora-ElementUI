@@ -25,12 +25,27 @@
                 <div class="liveScreen" id="localStream" v-if="userInfo.userType=='host'"
                      v-loading="screenLoading"
                      element-loading-text="直播间创建中...">
-
                 </div>
                 <!--观众屏幕-->
                 <div class="liveScreen" id="localStream2" v-else>
 
                 </div>
+                <!--聊天框-->
+                <div class="chat">
+                    <!--聊天屏幕-->
+                    <div class="chatScreen">
+                        <ul v-for="(item,index) in chatScreenLive" :key="index">
+                            <li>{{item}}</li>
+                        </ul>
+                    </div>
+                    <!--聊天输入框-->
+                    <div class="chatInput">
+                        <el-input placeholder="开始聊天吧~" v-model="chatInfo" class="input-with-select">
+                            <el-button slot="append" @click="sendMsg">发送</el-button>
+                        </el-input>
+                    </div>
+                </div>
+                <div class="clearFix"></div>
             </div>
             <!--直播简介-->
             <div class="liveInfo">

@@ -1,4 +1,5 @@
 import AgoraRTC from 'agora-rtc-sdk'
+import AgoraRTM from 'agora-rtm-sdk'
 import fa from "element-ui/src/locale/lang/fa";
 import roomTabs from "@/components/roomTabs/roomTabs.vue";
 import * as allUrls from '@/utils/allUrls'
@@ -18,13 +19,21 @@ var option = {
     channel: "TextChannelName",
     uid: null,
     token: null
+};
+//聊天室配置
+var rtm = {
+    client: null,
+    channel: null,
 }
+
 
 export default {
     name: "liveRoom",
     components: {roomTabs},
     data() {
         return {
+            chatInfo: '',
+            chatScreenLive: [],
             screenLoading: true,
             //主播信息
             userInfo: {
@@ -74,8 +83,8 @@ export default {
                 console.log("客户端初始化完成");
                 //设置角色=>"host"为主播,"audience"为观众
                 rtc.client.setClientRole("host");
-                //加入频道
-                rtc.client.join(option.token ? option.token : null, option.channel, _this.userInfo.username, function (uid) {
+                //=======加入频道=======
+                rtc.client.join(null, option.channel, _this.userInfo.username, function (uid) {
                     _this.$message.success("创建成功，欢迎您，" + uid);
                     rtc.params.uid = uid;
                     //角色为主播，发布本地流
@@ -120,7 +129,7 @@ export default {
                 //设置角色=>"host"为主播,"audience"为观众
                 rtc.client.setClientRole("audience");
                 //加入频道
-                rtc.client.join(option.token ? option.token : null, option.channel, option.uid ? _this.userInfo.username : null, function (uid) {
+                rtc.client.join(null, option.channel, option.uid ? _this.userInfo.username : null, function (uid) {
                     _this.$message.success("加入频道成功，欢迎您，" + uid);
                     rtc.params.uid = uid;
                     //监听远程流
@@ -205,14 +214,57 @@ export default {
                         this.$router.go(-1)
                     } else {
                         // 主播创建直播间
-                        this.createHostLive()
+                        this.createHostLive();
+                        this.loginInChat();
+
                     }
                 }
             } else {
                 this.userInfo.userType = 'audience';
                 //    观众方式加入直播间
-                this.creatAudLive()
+                this.creatAudLive();
+                this.loginInChat()
+
             }
+        },
+        //登录聊天频道
+        loginInChat() {
+            rtm.client = AgoraRTM.createInstance(option.appID);
+            //监听状态
+            rtm.client.on('ConnectionStateChanged', (newState, reason) => {
+                console.log('on connection state changed to ' + newState + ' reason: ' + reason);
+            });
+            //登录聊天频道
+            rtm.client.login({token: null, uid: this.userInfo.username}).then(() => {
+                rtm.channel = rtm.client.createChannel(option.appID);
+                rtm.channel.join().then(() => {
+                    /* 加入频道成功的处理逻辑 */
+                    this.$message.success("成功加入聊天室");
+                    //监听聊天室
+                    rtm.channel.on('ChannelMessage', ({text}, senderId) => { // text 为收到的频道消息文本，senderId 为发送方的 User ID
+                        /* 收到频道消息的处理逻辑 */
+                        console.log("接收到远程发送的消息");
+                        this.chatScreenLive.push(senderId + '：' + text);
+                    });
+                }).catch(error => {
+                    /* 加入频道失败的处理逻辑 */
+                    this.$message.error("加入聊天室失败")
+                });
+
+            }).catch(err => {
+                console.log('登录至聊天室失败', err);
+            });
+        },
+        //发送聊天信息
+        sendMsg() {
+            rtm.channel.sendMessage({text: this.chatInfo}).then(() => {
+                /* 频道消息发送成功的处理逻辑 */
+                console.log("===========发送消息======" + this.chatInfo);
+                this.chatInfo = '';
+            }).catch(error => {
+                /* 频道消息发送失败的处理逻辑 */
+                console.log("发送消息失败" + error)
+            });
         },
         //点击头像进入个人信息中心
         toPersonCenter() {
