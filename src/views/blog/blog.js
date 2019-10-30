@@ -1,5 +1,6 @@
 export default {
     name: "blog",
+    inject: ['reloadView'],
     data() {
         return {
             username: '',
@@ -17,10 +18,15 @@ export default {
     },
     methods: {
         getUsername() {
-            this.username = sessionStorage.getItem('username');
+            this.username = this.$route.query.username;
         }
     },
     mounted() {
         this.getUsername()
+    },
+    watch: {
+        $route() {
+            this.reloadView();
+        }
     }
 }

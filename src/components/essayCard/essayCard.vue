@@ -13,6 +13,8 @@
             <!--内容简述-->
             <div class="desc"><slot name="desc"></slot></div>
         </div>
+        <!--作者-->
+        <div class="author"><slot name="author"></slot></div>
     </div>
 </template>
 

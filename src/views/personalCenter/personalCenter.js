@@ -53,7 +53,7 @@ export default {
                         } else {
                             setTimeout(() => {
                                 this.loadingText = '可能没有这个用户哦，建议重新查询~';
-                            }, 3000)
+                            }, 4000)
                         }
                     }
                 } else {

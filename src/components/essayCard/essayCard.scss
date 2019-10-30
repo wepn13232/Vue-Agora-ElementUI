@@ -13,11 +13,12 @@
     width: 30%;
     height: 21vh;
     float: left;
-      img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-      }
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
 
   }
 
@@ -47,7 +48,20 @@
       -webkit-box-orient: vertical;
       color: rgba(51, 51, 51, 0.87);
     }
+
+
   }
 
+  //  作者
+  .author {
+    float: left;
+    padding-top: 100px;
+    width: 15%;
+    div{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
 

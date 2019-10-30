@@ -22,8 +22,13 @@
 
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="在此搜索文章" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                    <el-input placeholder="请输入内容" v-model="searchInfo" class="input-with-select">
+                        <el-select v-model="selectType" slot="prepend" placeholder="请选择">
+                            <el-option label="用户" value="username"></el-option>
+                            <el-option label="文章" value="essayname"></el-option>
+                        </el-select>
+                        <el-button slot="append" icon="el-icon-search" @click="toSearch"></el-button>
+                    </el-input>
                 </form>
                 <!--未登录-->
                 <div v-if="!userInfo.username">
@@ -54,4 +59,12 @@
 
 <style scoped lang="scss">
     @import "headerS";
+</style>
+<style>
+    .el-select .el-input {
+        width: 100px;
+    }
+    .input-with-select .el-input-group__prepend {
+        background-color: #fff;
+    }
 </style>

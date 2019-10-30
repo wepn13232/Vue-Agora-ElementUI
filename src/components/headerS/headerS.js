@@ -3,6 +3,8 @@ export default {
     data() {
         return {
             activeIndex: '1',
+            searchInfo: '',
+            selectType: 'username',
             userInfo: {
                 username: ''
             }
@@ -14,21 +16,25 @@ export default {
                 this.userInfo.username = '';
                 sessionStorage.clear();
                 this.$message.success('注销成功！');
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.$router.push('/')
-                },500)
+                }, 500)
             }
             if (command == 'a') {
-                this.$router.push({path:'/personalCenter',query:{username:this.userInfo.username}})
+                this.$router.push({path: '/personalCenter', query: {username: this.userInfo.username}})
             }
         },
-    //    地点推荐
-        toLocationRec(){
+        //文章推荐
+        toLocationRec() {
             this.$router.push('/essayList')
         },
-        //品牌推荐
-        toBrandRec(){
-            this.$router.push('/essayList')
+        //搜索
+        toSearch() {
+            if (this.selectType == 'username') {
+                this.$router.push({path: '/personalCenter', query: {username: this.searchInfo}})
+            } else {
+                this.$message.info("搜索的是文章");
+            }
         },
     },
     computed: {

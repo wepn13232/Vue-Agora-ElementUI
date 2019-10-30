@@ -11,6 +11,7 @@
                       </div>
                         <div slot="title">标题</div>
                         <div slot="desc">内容</div>
+                        <div slot="author">作者：XXXXXXXXXXXXXX</div>
                     </essay-card>
                 </div>
             </div>
@@ -27,6 +28,7 @@
                             </div>
                             <div slot="title">标题</div>
                             <div slot="desc">内容</div>
+                            <div slot="author">作者：XXX</div>
                         </essay-card>
                     </div>
                 </li>
