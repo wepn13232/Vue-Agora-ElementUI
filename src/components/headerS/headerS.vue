@@ -62,7 +62,7 @@
 </style>
 <style>
     .el-select .el-input {
-        width: 100px;
+        width: 80px;
     }
     .input-with-select .el-input-group__prepend {
         background-color: #fff;
