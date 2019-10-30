@@ -34,8 +34,8 @@
                 <div class="chat">
                     <!--聊天屏幕-->
                     <div class="chatScreen">
-                        <ul v-for="(item,index) in chatScreenLive" :key="index">
-                            <li>{{item}}</li>
+                        <ul v-for="(item,i) in chatScreenLive" :key="i">
+                            <li ref="chatli">{{item}}</li>
                         </ul>
                     </div>
                     <!--聊天输入框-->

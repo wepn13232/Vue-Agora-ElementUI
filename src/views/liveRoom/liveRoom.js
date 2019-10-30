@@ -85,7 +85,7 @@ export default {
                 rtc.client.setClientRole("host");
                 //=======加入频道=======
                 rtc.client.join(null, option.channel, _this.userInfo.username, function (uid) {
-                    _this.$message.success("创建成功，欢迎您，" + uid);
+                    _this.$message.success("创建成功，欢迎您，" + _this.userInfo.username);
                     rtc.params.uid = uid;
                     //角色为主播，发布本地流
                     rtc.localStream = AgoraRTC.createStream({
@@ -130,7 +130,7 @@ export default {
                 rtc.client.setClientRole("audience");
                 //加入频道
                 rtc.client.join(null, option.channel, option.uid ? _this.userInfo.username : null, function (uid) {
-                    _this.$message.success("加入频道成功，欢迎您，" + uid);
+                    _this.$message.success("加入频道成功，欢迎您，" + _this.userInfo.username);
                     rtc.params.uid = uid;
                     //监听远程流
                     rtc.client.on("stream-added", function (evt) {
@@ -259,12 +259,12 @@ export default {
         sendMsg() {
             rtm.channel.sendMessage({text: this.chatInfo}).then(() => {
                 /* 频道消息发送成功的处理逻辑 */
-                console.log("===========发送消息======" + this.chatInfo);
                 this.chatInfo = '';
             }).catch(error => {
                 /* 频道消息发送失败的处理逻辑 */
                 console.log("发送消息失败" + error)
             });
+            this.chatScreenLive.push(this.userInfo.username + '：' + this.chatInfo);
         },
         //点击头像进入个人信息中心
         toPersonCenter() {
@@ -277,5 +277,20 @@ export default {
     mounted() {
         this.getUserInfo();
         this.getUserType();
+    },
+    watch: {
+        //对自己发送的聊天内容作重点
+        chatScreenLive() {
+            this.$nextTick(() => {
+                let user = this.userInfo.username;
+                for (let i = 0; i < this.chatScreenLive.length; i++) {
+                    let check = this.chatScreenLive[i].indexOf(user)
+                    if (check === 0) {
+                        this.$refs.chatli[i].className = 'rainbowFont';
+                    }
+                }
+            })
+
+        }
     }
 }
