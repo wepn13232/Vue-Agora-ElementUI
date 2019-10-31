@@ -15,6 +15,8 @@ import liveHall from "@/views/liveHall/liveHall.vue";
 import liveRoom from "@/views/liveRoom/liveRoom.vue";
 import blog from "@/views/blog/blog.vue";
 import editPage from "@/views/personalCenter/editPage/editPage.vue";
+import adminApp from "@/views/admin/App.vue";
+import adminIndex from "@/views/admin/index/index.vue";
 
 Vue.use(Router)
 
@@ -26,32 +28,32 @@ const router = new Router({
             path: '/',
             name: 'home',
             component: Home,
-            meta:{
-                title:'主页'
+            meta: {
+                title: '主页'
             }
         },
         {
             path: '/login',
             name: 'login',
             component: login,
-            meta:{
-                title:'登录页面'
+            meta: {
+                title: '登录页面'
             }
         },
         {
             path: '/register',
             name: 'register',
             component: reg,
-            meta:{
-                title:'注册页面'
+            meta: {
+                title: '注册页面'
             }
         },
         {
             path: '/essayInfo',
             name: 'essayInfo',
             component: essayInfo,
-            meta:{
-                title:'文章内容'
+            meta: {
+                title: '文章内容'
             }
         },
         {
@@ -79,7 +81,7 @@ const router = new Router({
                 title: '直播间编码申请',
                 requireAuth: true
             },
-            children:[
+            children: [
                 {
                     path: 'page1',
                     name: 'page1',
@@ -142,6 +144,26 @@ const router = new Router({
                 requireAuth: true
             },
         },
+        {
+            path: '/admin',
+            name: 'app',
+            component: adminApp,
+            meta: {
+                title: '管理员页面',
+                requireAdminAuth: true
+            },
+            children: [
+                {
+                    path: 'index',
+                    name: 'index',
+                    component: adminIndex,
+                    meta: {
+                        title: '管理员首页',
+                        requireAdminAuth: true
+                    },
+                }
+            ]
+        },
     ],
 });
 
@@ -158,8 +180,20 @@ router.beforeEach((to, from, next) => {
             next()
         }
     } else {
-        next()
+        //验证管理员路由
+        if (to.matched.some(record => record.meta.requireAdminAuth)) {
+            let username = sessionStorage.getItem('username');
+            //未登录，身份证为空
+            if (username !== 'admin') {
+                next({path:'/'})
+            } else {
+                next()
+            }
+        } else {
+            next()
+        }
     }
+
 });
 export default router
 

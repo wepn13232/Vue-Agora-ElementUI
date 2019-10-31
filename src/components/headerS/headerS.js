@@ -28,6 +28,10 @@ export default {
         toLocationRec() {
             this.$router.push('/essayList')
         },
+        //管理员页面
+        toAdminIndex() {
+            this.$router.push('/admin/index')
+        },
         //搜索
         toSearch() {
             if (this.selectType == 'username') {

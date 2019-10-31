@@ -11,6 +11,7 @@
     "agora-rtc-sdk": "^2.9.0",
     "agora-rtm-sdk": "^1.1.0",
     "core-js": "^2.6.5",
+    "echarts": "^4.4.0",
     "element-ui": "^2.12.0",
     "qs": "^6.9.0",
     "register-service-worker": "^1.6.2",

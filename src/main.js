@@ -11,6 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 //iView-ui
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
+import echarts from 'echarts'
+//Eharts
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);

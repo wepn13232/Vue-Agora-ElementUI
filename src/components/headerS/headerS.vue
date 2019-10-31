@@ -19,6 +19,9 @@
                     <li class="nav-item">
                         <a class="nav-link" @click="toLocationRec">文章推荐</a>
                     </li>
+                    <li class="nav-item" v-if="userInfo.username == 'admin'">
+                        <a class="nav-link" @click="toAdminIndex">管理员页</a>
+                    </li>
 
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -64,6 +67,7 @@
     .el-select .el-input {
         width: 80px;
     }
+
     .input-with-select .el-input-group__prepend {
         background-color: #fff;
     }
