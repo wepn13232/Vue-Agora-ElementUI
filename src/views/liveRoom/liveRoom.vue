@@ -33,15 +33,18 @@
                 <!--聊天框-->
                 <div class="chat">
                     <!--聊天屏幕-->
-                    <div class="chatScreen">
+                    <div class="chatScreen" ref="chatScreen">
                         <ul v-for="(item,i) in chatScreenLive" :key="i">
                             <li ref="chatli">{{item}}</li>
                         </ul>
                     </div>
                     <!--聊天输入框-->
                     <div class="chatInput">
-                        <el-input placeholder="开始聊天吧~" v-model="chatInfo" class="input-with-select">
+                        <el-input v-if="userInfo.username" placeholder="开始聊天吧~" maxlength="25" show-word-limit
+                                  @keyup.enter.native="sendMsg" v-model="chatInfo" class="input-with-select" :disabled="sendInterval">
                             <el-button slot="append" @click="sendMsg">发送</el-button>
+                        </el-input>
+                        <el-input v-else placeholder="请先登录噢~" class="input-with-select" disabled>
                         </el-input>
                     </div>
                 </div>

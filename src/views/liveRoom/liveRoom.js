@@ -35,7 +35,8 @@ export default {
             chatInfo: '',
             chatScreenLive: [],
             screenLoading: true,
-            //主播信息
+            sendInterval: false,
+            //个人信息
             userInfo: {
                 username: '',
                 userType: '',
@@ -257,14 +258,26 @@ export default {
         },
         //发送聊天信息
         sendMsg() {
-            rtm.channel.sendMessage({text: this.chatInfo}).then(() => {
-                /* 频道消息发送成功的处理逻辑 */
-                this.chatInfo = '';
-            }).catch(error => {
-                /* 频道消息发送失败的处理逻辑 */
-                console.log("发送消息失败" + error)
-            });
-            this.chatScreenLive.push(this.userInfo.username + '：' + this.chatInfo);
+            if (this.chatInfo == '') {
+                this.$message.warning("不可发送空消息哦~");
+                return false;
+            } else {
+                rtm.channel.sendMessage({text: this.chatInfo}).then(() => {
+                    /* 频道消息发送成功的处理逻辑 */
+                    this.chatInfo = '';
+                    //限制发送间隔时间
+                    this.sendInterval = true;
+                    this.$nextTick(() => {
+                        setTimeout(() => {
+                            this.sendInterval = false;
+                        }, 1000)
+                    })
+                }).catch(error => {
+                    /* 频道消息发送失败的处理逻辑 */
+                    console.log("发送消息失败" + error)
+                });
+                this.chatScreenLive.push(this.userInfo.username + '：' + this.chatInfo);
+            }
         },
         //点击头像进入个人信息中心
         toPersonCenter() {
@@ -289,6 +302,8 @@ export default {
                         this.$refs.chatli[i].className = 'rainbowFont';
                     }
                 }
+                //使元素滚动至最底部
+                this.$refs.chatScreen.scrollTop = this.$refs.chatScreen.scrollHeight
             })
 
         }
