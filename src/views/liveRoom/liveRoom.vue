@@ -1,6 +1,6 @@
 <template>
     <div class="liveRoom">
-        <div class="container">
+        <div class="container-self">
             <!--房间头部-->
             <div class="roomHearder">
                 <!--用户头像-->
