@@ -270,8 +270,9 @@ export default {
                     this.$nextTick(() => {
                         setTimeout(() => {
                             this.sendInterval = false;
-                        }, 1000)
-                    })
+                        }, 1000);
+                    });
+
                 }).catch(error => {
                     /* 频道消息发送失败的处理逻辑 */
                     console.log("发送消息失败" + error)
@@ -305,7 +306,12 @@ export default {
                 //使元素滚动至最底部
                 this.$refs.chatScreen.scrollTop = this.$refs.chatScreen.scrollHeight
             })
-
+        },
+        //发送间隔后，聚焦输入框
+        sendInterval(){
+            this.$nextTick(()=>{
+                this.$refs.input.$el.querySelector("input").focus()
+            })
         }
-    }
+    },
 }

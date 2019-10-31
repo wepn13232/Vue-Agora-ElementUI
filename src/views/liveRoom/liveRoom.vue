@@ -41,7 +41,7 @@
                     <!--聊天输入框-->
                     <div class="chatInput">
                         <el-input v-if="userInfo.username" placeholder="开始聊天吧~" maxlength="25" show-word-limit
-                                  @keyup.enter.native="sendMsg" v-model="chatInfo" class="input-with-select" :disabled="sendInterval">
+                                  @keyup.enter.native="sendMsg" v-model="chatInfo" class="input-with-select" ref="input" :disabled="sendInterval">
                             <el-button slot="append" @click="sendMsg">发送</el-button>
                         </el-input>
                         <el-input v-else placeholder="请先登录噢~" class="input-with-select" disabled>
