@@ -25,7 +25,7 @@
 
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <el-input placeholder="请输入内容" v-model="searchInfo" class="input-with-select">
+                    <el-input placeholder="请输入内容" @keyup.enter.native="toSearch" v-model="searchInfo" class="input-with-select">
                         <el-select v-model="selectType" slot="prepend" placeholder="请选择">
                             <el-option label="用户" value="username"></el-option>
                             <el-option label="文章" value="essayname"></el-option>

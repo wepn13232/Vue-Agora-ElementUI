@@ -10,6 +10,12 @@
                     <div class="block" id="chart2"></div>
                 </el-col>
             </el-row>
+            <!--地区人数统计-->
+            <el-row>
+                <el-col>
+                    <div class="addressSum" id="chart3"></div>
+                </el-col>
+            </el-row>
         </div>
     </div>
 </template>
