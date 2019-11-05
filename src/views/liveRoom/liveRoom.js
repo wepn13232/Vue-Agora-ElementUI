@@ -297,7 +297,6 @@ export default {
         addDisplay() {
                 let a = document.getElementsByClassName('barrageLi');
                 for (let i = 0; i < a.length-1; i++) {
-                    console.log(a[i])
                     a[i].classList.add("addDisplay")
                 }
         },
@@ -341,7 +340,6 @@ export default {
             this.$nextTick(() => {
                 let a = document.getElementsByClassName('barrageLi');
                 for (let i = 0; i < a.length; a++) {
-                    console.log(a[a.length - 1])
                     a[a.length - 1].classList.add("barrageAnimate")
                 }
             });

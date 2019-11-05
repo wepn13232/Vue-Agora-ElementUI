@@ -22,26 +22,30 @@
             <div class="content">
                 <!--直播屏幕-->
                 <!--主播-->
-                <div class="liveScreen" id="localStream" v-if="userInfo.userType=='host'"
-                     v-loading="screenLoading"
-                     element-loading-text="直播间创建中...">
+                <div class="screenContent" v-if="userInfo.userType=='host'">
                     <!--弹幕-->
                     <div class="barrage">
                         <ul v-for="(item,index) in barrage" :key="index">
                             <li class="barrageLi" ref="barrageInfo">{{item}}</li>
                         </ul>
+                    </div>
+                    <div class="liveScreen" id="localStream"
+                         v-loading="screenLoading"
+                         element-loading-text="直播间创建中...">
                     </div>
                 </div>
                 <!--观众屏幕-->
-                <div class="liveScreen" id="localStream2" v-else>
+                <div class="screenContent" v-else>
                     <!--弹幕-->
                     <div class="barrage">
                         <ul v-for="(item,index) in barrage" :key="index">
                             <li class="barrageLi" ref="barrageInfo">{{item}}</li>
                         </ul>
                     </div>
-                </div>
+                    <div class="liveScreen" id="localStream2">
 
+                    </div>
+                </div>
                 <!--聊天框-->
                 <div class="chat">
                     <!--聊天屏幕-->
