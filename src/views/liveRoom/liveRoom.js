@@ -32,10 +32,16 @@ export default {
     components: {roomTabs},
     data() {
         return {
+            //发送的消息框内容
             chatInfo: '',
+            //聊天内容总览
             chatScreenLive: [],
             screenLoading: true,
             sendInterval: false,
+            //循环清弹幕
+            displayInertval:'',
+            //弹幕
+            barrage: [],
             //个人信息
             userInfo: {
                 username: '',
@@ -52,6 +58,7 @@ export default {
         }
     },
     methods: {
+        //获取用户信息
         getUserInfo() {
             //正常情况是从直播信息表里面拿到用户名（或者从url中）
             this.userInfo.username = sessionStorage.getItem('username');
@@ -246,6 +253,7 @@ export default {
                         /* 收到频道消息的处理逻辑 */
                         console.log("接收到远程发送的消息");
                         this.chatScreenLive.push(senderId + '：' + text);
+                        this.barrage.push(text);
                     });
                 }).catch(error => {
                     /* 加入频道失败的处理逻辑 */
@@ -278,23 +286,38 @@ export default {
                     console.log("发送消息失败" + error)
                 });
                 this.chatScreenLive.push(this.userInfo.username + '：' + this.chatInfo);
+                this.barrage.push(this.chatInfo);
             }
         },
         //点击头像进入个人信息中心
         toPersonCenter() {
             this.$router.push({path: '/personalCenter', query: {username: this.userInfo.username}})
-        }
+        },
+        //定时给弹幕去掉占位
+        addDisplay() {
+                let a = document.getElementsByClassName('barrageLi');
+                for (let i = 0; i < a.length-1; i++) {
+                    console.log(a[i])
+                    a[i].classList.add("addDisplay")
+                }
+        },
+
     },
     beforeDestroy() {
-        this.leaveLive()
+        this.leaveLive();
+        clearInterval(this.displayInertval)
     },
     mounted() {
         this.getUserInfo();
         this.getUserType();
+        this.displayInertval = setInterval(()=>{
+            this.addDisplay();
+        },30000)
     },
     watch: {
         //对自己发送的聊天内容作重点
         chatScreenLive() {
+            //显示至聊天屏幕上
             this.$nextTick(() => {
                 let user = this.userInfo.username;
                 for (let i = 0; i < this.chatScreenLive.length; i++) {
@@ -305,13 +328,23 @@ export default {
                 }
                 //使元素滚动至最底部
                 this.$refs.chatScreen.scrollTop = this.$refs.chatScreen.scrollHeight
-            })
+            });
         },
         //发送间隔后，聚焦输入框
-        sendInterval(){
-            this.$nextTick(()=>{
+        sendInterval() {
+            this.$nextTick(() => {
                 this.$refs.input.$el.querySelector("input").focus()
             })
+        },
+        //弹幕发送监听
+        barrage() {
+            this.$nextTick(() => {
+                let a = document.getElementsByClassName('barrageLi');
+                for (let i = 0; i < a.length; a++) {
+                    console.log(a[a.length - 1])
+                    a[a.length - 1].classList.add("barrageAnimate")
+                }
+            });
         }
     },
 }

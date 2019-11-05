@@ -215,7 +215,6 @@ export default {
         changeData() {
             for (let i in this.addressData) {
                 let address = this.addressData[i].address;
-                console.log("传过来的地址是" + address)
                 switch (address) {
                     case 'tianhe':
                         this.addressData[i].address = '广州 / 天河区';

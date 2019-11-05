@@ -34,7 +34,22 @@
         width: 79.5%;
         height: 80vh;
         background-color: #2c2c2c;
+        overflow: hidden;
+        //弹幕
+        .barrage {
+          overflow: hidden;
+          font-size: 1.5rem;
+          color: #ffffff;
+
+          li {
+            height: 5vh;
+            margin-left: 70vw;
+            list-style: none;
+            overflow: hidden;
+          }
+        }
       }
+
 
       //  聊天框
       .chat {
@@ -96,5 +111,23 @@
   100% {
     background-position: -100% 0;
   }
+}
+
+@keyframes barrageRoll {
+  0% {
+
+  }
+  100% {
+    margin-left: -20vw;
+  }
+}
+
+//  弹幕动画
+.barrageAnimate {
+  -webkit-animation: barrageRoll 8s linear forwards;
+}
+//取消占位
+.addDisplay{
+  display: none;
 }
 
