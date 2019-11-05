@@ -39,7 +39,9 @@ export default {
             screenLoading: true,
             sendInterval: false,
             //循环清弹幕
-            displayInertval:'',
+            displayInertval: '',
+            //循环清除聊天池
+            clearChatInfo: '',
             //弹幕
             barrage: [],
             //个人信息
@@ -138,7 +140,11 @@ export default {
                 rtc.client.setClientRole("audience");
                 //加入频道
                 rtc.client.join(null, option.channel, option.uid ? _this.userInfo.username : null, function (uid) {
-                    _this.$message.success("加入频道成功，欢迎您，" + _this.userInfo.username);
+                    if (!_this.userInfo.username) {
+                        _this.$message.success("加入频道成功，欢迎您，" + uid);
+                    } else {
+                        _this.$message.success("加入频道成功，欢迎您，" + _this.userInfo.username);
+                    }
                     rtc.params.uid = uid;
                     //监听远程流
                     rtc.client.on("stream-added", function (evt) {
@@ -295,23 +301,31 @@ export default {
         },
         //定时给弹幕去掉占位
         addDisplay() {
-                let a = document.getElementsByClassName('barrageLi');
-                for (let i = 0; i < a.length-1; i++) {
-                    a[i].classList.add("addDisplay")
-                }
+            let a = document.getElementsByClassName('barrageLi');
+            for (let i = 0; i < a.length - 1; i++) {
+                a[i].classList.add("addDisplay")
+            }
+        },
+        //定时清除聊天池
+        clearChatinfo() {
+            this.chatScreenLive.clean();
         },
 
     },
     beforeDestroy() {
         this.leaveLive();
-        clearInterval(this.displayInertval)
+        clearInterval(this.displayInertval);
+        clearInterval(this.clearChatInfo);
     },
     mounted() {
         this.getUserInfo();
         this.getUserType();
-        this.displayInertval = setInterval(()=>{
+        this.displayInertval = setInterval(() => {
             this.addDisplay();
-        },30000)
+        }, 10000);
+        this.clearChatInfo = setInterval(() => {
+            this.clearChatinfo();
+        }, 300000)
     },
     watch: {
         //对自己发送的聊天内容作重点
