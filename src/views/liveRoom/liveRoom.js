@@ -129,7 +129,7 @@ export default {
             });
         },
         //============观众加入直播间=================
-        creatAudLive() {
+        createAudLive() {
             let _this = this;
             //直播互动，建议模式为live,若为通信则为rtc
             rtc.client = AgoraRTC.createClient({mode: "live", codec: "h264"});
@@ -236,7 +236,7 @@ export default {
             } else {
                 this.userInfo.userType = 'audience';
                 //    观众方式加入直播间
-                this.creatAudLive();
+                this.createAudLive();
                 this.loginInChat()
 
             }
