@@ -17,6 +17,7 @@ import blog from "@/views/blog/blog.vue";
 import editPage from "@/views/personalCenter/editPage/editPage.vue";
 import adminApp from "@/views/admin/App.vue";
 import adminIndex from "@/views/admin/index/index.vue";
+import essayManage from "@/views/admin/essayManage/essayManage.vue";
 
 Vue.use(Router)
 
@@ -159,6 +160,15 @@ const router = new Router({
                     component: adminIndex,
                     meta: {
                         title: '管理员首页',
+                        requireAdminAuth: true
+                    },
+                },
+                {
+                    path: 'essayManage',
+                    name: 'essayManage',
+                    component: essayManage,
+                    meta: {
+                        title: '管理员文章管理',
                         requireAdminAuth: true
                     },
                 }

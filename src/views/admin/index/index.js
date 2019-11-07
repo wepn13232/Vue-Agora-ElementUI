@@ -2,6 +2,7 @@ export default {
     name: "index",
     data() {
         return {
+            defaultActive: '1',
             addressData: [
                 {
                     address: 'tianhe',
@@ -254,6 +255,7 @@ export default {
         },
     },
     mounted() {
+        this.$emit('getDefaultActive', this.defaultActive)
         this.changeData();
         this.changeType();
         this.charts1();

@@ -3,7 +3,7 @@
         <el-container>
             <!--导航栏-->
             <el-aside>
-                <admin-nav></admin-nav>
+                <admin-nav v-if="reloadNav"></admin-nav>
             </el-aside>
             <el-main class="p0m0">
                 <router-view/>
@@ -17,12 +17,28 @@
 
     export default {
         name: "App",
-        components: {adminNav}
+        components: {adminNav},
+        provide() {
+            return {reloadNav: this.reloadAdminNav}
+        },
+        data() {
+            return {
+                reloadNav: true
+            }
+        },
+        methods: {
+            reloadAdminNav() {
+                this.reloadNav = false;
+                this.$nextTick(() => {
+                    this.reloadNav = true;
+                })
+            }
+        }
     }
 </script>
 
 <style scoped lang="scss">
-    .p0m0{
+    .p0m0 {
         padding: 0;
         margin: 0;
     }
