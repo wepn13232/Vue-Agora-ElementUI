@@ -4,8 +4,6 @@
         <el-menu
             :default-active="defaultActive || '1'"
             class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
             background-color="#545c64"
             text-color="#fff"
             active-text-color="#ffd04b">
@@ -36,12 +34,6 @@
             }
         },
         methods: {
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            },
             toAdminIndex() {
                 sessionStorage.setItem('defaultActive', '1');
                 this.reloadNav();
@@ -57,7 +49,7 @@
             toLiveManage() {
                 sessionStorage.setItem('defaultActive', '3');
                 this.reloadNav();
-                this.$router.push('/admin/essayManage');
+                this.$router.push('/admin/liveManage');
             },
         },
         mounted() {

@@ -15,7 +15,11 @@ export default {
         toEssay() {
             this.$router.push('/essayInfo')
         },
-    //    加载更多
+        //新建文章
+        toAddEssay(){
+            this.$router.push('/addEssay')
+        },
+        // 加载更多
         loadMore(){
           this.listsNum+=3
             if(this.listsNum >= this.test){

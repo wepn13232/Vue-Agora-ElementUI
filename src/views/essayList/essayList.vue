@@ -14,6 +14,8 @@
                         <div slot="author">作者：XXXXXXXXXXXXXX</div>
                     </essay-card>
                 </div>
+            <!--    添加文章按钮-->
+                <el-button type="primary" class="fr" @click="toAddEssay">新建文章</el-button>
             </div>
         </div>
         <!--  往期文章-->

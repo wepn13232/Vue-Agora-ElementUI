@@ -18,6 +18,8 @@ import editPage from "@/views/personalCenter/editPage/editPage.vue";
 import adminApp from "@/views/admin/App.vue";
 import adminIndex from "@/views/admin/index/index.vue";
 import essayManage from "@/views/admin/essayManage/essayManage.vue";
+import liveManage from "@/views/admin/liveManage/liveManage.vue";
+import createEssay from "@/views/createEssay/createEssay.vue";
 
 Vue.use(Router)
 
@@ -137,6 +139,15 @@ const router = new Router({
             },
         },
         {
+            path: '/addEssay',
+            name: 'addEssay',
+            component: createEssay,
+            meta: {
+                title: '个人信息编辑',
+                requireAuth: true
+            },
+        },
+        {
             path: '/editPage',
             name: 'editPage',
             component: editPage,
@@ -147,7 +158,7 @@ const router = new Router({
         },
         {
             path: '/admin',
-            name: 'app',
+            name: 'admin',
             component: adminApp,
             meta: {
                 title: '管理员页面',
@@ -169,6 +180,15 @@ const router = new Router({
                     component: essayManage,
                     meta: {
                         title: '管理员文章管理',
+                        requireAdminAuth: true
+                    },
+                },
+                {
+                    path: 'liveManage',
+                    name: 'liveManage',
+                    component: liveManage,
+                    meta: {
+                        title: '管理员直播管理',
                         requireAdminAuth: true
                     },
                 }
