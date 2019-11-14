@@ -18,7 +18,8 @@
     "view-design": "^4.0.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "wangeditor": "^2.1.23"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.12.0",

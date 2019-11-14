@@ -3,7 +3,10 @@
         <!--  推荐文章-->
         <div class="recEssay">
             <Divider class="recDivider">推荐文章</Divider>
+            <!--    添加文章按钮-->
             <div class="container">
+                <el-button type="primary" class="fr" @click="toAddEssay">发表文章</el-button>
+                <div class="clearFix"></div>
                 <div v-for="lists in 3" class="pb2 pt2 " style="cursor: pointer">
                     <essay-card class="e-list-card" @click.native="toEssay()">
                       <div slot="card-pic" class="slot-pic">
@@ -14,8 +17,6 @@
                         <div slot="author">作者：XXXXXXXXXXXXXX</div>
                     </essay-card>
                 </div>
-            <!--    添加文章按钮-->
-                <el-button type="primary" class="fr" @click="toAddEssay">新建文章</el-button>
             </div>
         </div>
         <!--  往期文章-->

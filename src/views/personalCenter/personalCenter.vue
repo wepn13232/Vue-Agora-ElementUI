@@ -76,7 +76,7 @@
             title="直播间创建"
             :visible.sync="dialogVisible"
             width="50%"
-            :before-close="handleClose">
+            >
             <div class="createLiveInfo">
                 <h6>请填写房间信息</h6>
                 <div class="liveRoomInfo">

@@ -1,0 +1,18 @@
+.createEssay {
+  background-color: #f4f6f9;
+  .containerSelf {
+    width: 85%;
+    margin: 0 auto;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+
+    .editorForm {
+      .btn-group {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 5vh;
+      }
+    }
+  }
+}

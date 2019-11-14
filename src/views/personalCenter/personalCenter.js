@@ -94,14 +94,6 @@ export default {
                 }
             })
         },
-        handleClose(done) {
-            this.$confirm('放弃创建吗？')
-                .then(_ => {
-                    done();
-                })
-                .catch(_ => {
-                });
-        },
         //点击博客跳转
         toBlog() {
             this.$router.push({path: '/blog', query: {username: this.userInfo.username}})
