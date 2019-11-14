@@ -10,7 +10,7 @@ export default {
     data() {
         return {
             indexPic: {},
-            personInfo: {},
+            personInfo: [],
             essayInfo: {},
             loading1: false
         }
@@ -50,13 +50,17 @@ export default {
         },
         //获取人物卡片信息
         getTopListPerson() {
-            allUrls.getToplistPerson("post").then(res => {
-                return res.json()
+            allUrls.allUserInfo("post").then(res => {
+                return res.json();
             }).then(data => {
-                this.personInfo = data.personInfo
+                this.personInfo = data.data;
             }).catch(err => {
-                console.log(err)
+                console.log(err);
             })
+        },
+        //点击推荐人物
+        toPersonalCenter(val){
+            this.$router.push({path:'/personalCenter',query:{username:val}})
         },
         // 跳转至注册页
         toReg() {

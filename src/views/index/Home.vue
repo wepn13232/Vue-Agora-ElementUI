@@ -48,14 +48,15 @@
                 </div>
                 <div class="essayRec-content">
                     <el-row :gutter="24">
-                        <el-col :md="12" :xs="24" v-for="(item,index) in essayInfo" :key="index" style="cursor: pointer;margin-top: 3vh" >
-                                <essay-card class="e-card" @click.native="toEssay(item)">
-                                        <div slot="card-pic" class="slot-pic">
-                                            <img src="../../assets/img/banner1.jpg" alt="essay-pic">
-                                        </div>
-                                    <div slot="title">{{item.essay.title}}</div>
-                                    <div slot="desc">{{item.essay.content}}</div>
-                                </essay-card>
+                        <el-col :md="12" :xs="24" v-for="(item,index) in essayInfo" :key="index"
+                                style="cursor: pointer;margin-top: 3vh">
+                            <essay-card class="e-card" @click.native="toEssay(item)">
+                                <div slot="card-pic" class="slot-pic">
+                                    <img src="../../assets/img/banner1.jpg" alt="essay-pic">
+                                </div>
+                                <div slot="title">{{item.essay.title}}</div>
+                                <div slot="desc">{{item.essay.content}}</div>
+                            </essay-card>
                         </el-col>
                     </el-row>
                 </div>
@@ -76,13 +77,14 @@
                 <!--热门人物展示-->
                 <div class="toplist-content container-self">
                     <el-row :gutter="20">
-                        <el-col :md="6" :sm="12" :xs="12" v-for="(item,index) in personInfo" :key="index">
-                            <person-card>
+                        <el-col :md="6" :sm="12" :xs="12" v-for="(item,index) in personInfo" v-if="index < 4"
+                                :key="index" class="personalCard">
+                            <person-card class="cardCom" @click.native="toPersonalCenter(item.username)">
                                 <div slot="name">
-                                    <h3>{{item.personName}}</h3>
+                                    <h3>{{item.name}}</h3>
                                 </div>
                                 <div slot="intro">
-                                    <p>{{item.personIntro}}</p>
+                                    <p>{{item.userSum}}</p>
                                 </div>
                             </person-card>
                         </el-col>
@@ -102,7 +104,7 @@
 </style>
 
 <style lang="scss">
-    .slot-pic{
+    .slot-pic {
         height: 100%;
     }
 </style>

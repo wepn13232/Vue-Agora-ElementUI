@@ -81,7 +81,7 @@
 
       //  文章推荐-内容
       .essayRec-content {
-        .e-card:hover{
+        .e-card:hover {
           box-shadow: 1px 0.5px 10px rgba(160, 160, 160, 0.44);
         }
       }
@@ -96,6 +96,19 @@
         text-align: center;
         font-size: 4vh;
         font-weight: 400;
+      }
+
+      .toplist-content {
+        .cardCom {
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          -webkit-transition: all 0.2s ease-in-out;
+          -o-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+        }
+        .personalCard:hover .cardCom{
+          box-shadow:1px 2px 15px rgba(218, 218, 218, 0.57);
+        }
       }
     }
   }
