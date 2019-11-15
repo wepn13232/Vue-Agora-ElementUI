@@ -29,6 +29,7 @@ export default {
                         for (let i = 0; i < data.data.length; i++) {
                             if (userData.username === data.data[i].username && userData.password === data.data[i].password) {
                                 sessionStorage.setItem('username', data.data[i].username);
+                                sessionStorage.setItem('name', data.data[i].name);
                                 sessionStorage.setItem('email', data.data[i].email);
                                 sessionStorage.setItem('sex', data.data[i].sex);
                                 sessionStorage.setItem('address', data.data[i].address);

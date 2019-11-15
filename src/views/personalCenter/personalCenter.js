@@ -9,15 +9,8 @@ export default {
             dialogVisible: false,
             loadingText: '用户查询中...',
             //用户信息
-            userInfo: {
-                username: "",
-                liveNumber: '',
-                email: '',
-                sex: '',
-                address: '',
-                userSum: '',
-                isUserSelf: false
-            },
+            userInfo: {},
+            isUserSelf: false,
             //直播间信息
             roomForm: {
                 channelName: '',
@@ -43,12 +36,7 @@ export default {
                 if (+data.status === 200) {
                     for (let i = 0; i < data.data.length; i++) {
                         if (_username === data.data[i].username) {
-                            _this.userInfo.username = data.data[i].username;
-                            _this.userInfo.email = data.data[i].email;
-                            _this.userInfo.sex = data.data[i].sex;
-                            _this.userInfo.address = data.data[i].address;
-                            _this.userInfo.liveNumber = data.data[i].appid;
-                            _this.userInfo.userSum = data.data[i].userSum;
+                            this.userInfo = data.data[i];
                             _this.userLoading = false;
                         } else {
                             setTimeout(() => {
@@ -70,9 +58,9 @@ export default {
         //    判断是否本人用户
         isUser() {
             let _username = sessionStorage.getItem('username');
-            this.userInfo.isUserSelf = this.userInfo.username === _username;
-            if (!this.userInfo.isUserSelf) {
-                this.$set(this.userInfo, 'liveNumber', '*******')
+            this.isUserSelf = this.userInfo.username === _username;
+            if (!this.isUserSelf) {
+                this.$set(this.userInfo, 'appid', '*******')
             }
         },
         //点击创建直播间按钮
@@ -99,8 +87,8 @@ export default {
             this.$router.push({path: '/blog', query: {username: this.userInfo.username}})
         },
         //点击跳转个人信息编辑
-        toEdit(){
-         this.$router.push({path:'/editPage',query:{username:this.userInfo.username}})
+        toEdit() {
+            this.$router.push({path: '/editPage', query: {username: this.userInfo.username}})
         }
     },
     filters: {

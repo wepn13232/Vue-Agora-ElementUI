@@ -6,7 +6,8 @@ export default {
             searchInfo: '',
             selectType: 'username',
             userInfo: {
-                username: ''
+                username: '',
+                name:''
             }
         }
     },
@@ -43,7 +44,8 @@ export default {
     },
     computed: {
         username() {
-            this.userInfo.username = sessionStorage.getItem('username')
+            this.userInfo.username = sessionStorage.getItem('username');
+            this.userInfo.name = sessionStorage.getItem('name');
         }
     },
     watch: {
