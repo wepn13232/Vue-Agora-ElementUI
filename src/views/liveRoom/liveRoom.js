@@ -97,7 +97,7 @@ export default {
                 rtc.client.setClientRole("host");
                 //=======加入频道=======
                 rtc.client.join(null, option.channel, _this.userInfo.username, function (uid) {
-                    _this.$message.success("创建成功，欢迎您，" + _this.userInfo.username);
+                    _this.$message.success("创建成功，欢迎您，" + _this.userInfo.name);
                     rtc.params.uid = uid;
                     //角色为主播，发布本地流
                     rtc.localStream = AgoraRTC.createStream({
@@ -145,7 +145,7 @@ export default {
                     if (!_this.userInfo.username) {
                         _this.$message.success("加入频道成功，欢迎您，" + uid);
                     } else {
-                        _this.$message.success("加入频道成功，欢迎您，" + _this.userInfo.username);
+                        _this.$message.success("加入频道成功，欢迎您，" + _this.userInfo.name);
                     }
                     rtc.params.uid = uid;
                     //监听远程流
