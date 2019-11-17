@@ -21,10 +21,6 @@
                             <div class="author">
                                 <span class="fw">作者：林启元</span>
                             </div>
-                            <!--浏览量-->
-                            <div class="checkNum">
-                                <span class="fw">7777  浏览</span>
-                            </div>
                         </div>
 
                     </div>

@@ -49,7 +49,8 @@ export default {
                 username: '',
                 userType: '',
                 liveNumber: '',
-                userSum: ''
+                userSum: '',
+                name:''
             },
             //房间信息
             roomInfo: {
@@ -64,6 +65,7 @@ export default {
         getUserInfo() {
             //正常情况是从直播信息表里面拿到用户名（或者从url中）
             this.userInfo.username = sessionStorage.getItem('username');
+            this.userInfo.name = sessionStorage.getItem('name');
             this.userInfo.liveNumber = sessionStorage.getItem('liveNum');
             let _this = this;
             //拿到用户信息名之后，调用用户信息表接口，拿取用户信息（个人简介）
@@ -207,7 +209,7 @@ export default {
                 }
                 console.log("离开频道成功");
                 _this.$message.info('下播成功~');
-                _this.$router.push({path: '/personalCenter', query: {username: _this.userInfo.username}})
+                _this.$router.push({path: '/personalCenter', query: {username: _this.userInfo.name}})
             }, function (err) {
                 console.log("离开频道失败" + err);
             })

@@ -35,7 +35,7 @@ export default {
             }).then(data => {
                 if (+data.status === 200) {
                     for (let i = 0; i < data.data.length; i++) {
-                        if (_username === data.data[i].username) {
+                        if (_username === data.data[i].name) {
                             this.userInfo = data.data[i];
                             _this.userLoading = false;
                         } else {

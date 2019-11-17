@@ -22,7 +22,7 @@ export default {
                 }, 500)
             }
             if (command == 'a') {
-                this.$router.push({path: '/personalCenter', query: {username: this.userInfo.username}})
+                this.$router.push({path: '/personalCenter', query: {username: this.userInfo.name}})
             }
         },
         //文章推荐
