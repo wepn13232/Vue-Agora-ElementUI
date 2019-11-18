@@ -66,7 +66,7 @@ export default {
         //点击创建直播间按钮
         createLive() {
             this.dialogVisible = true;
-            this.roomForm.username = this.userInfo.username;
+            this.roomForm.name = this.userInfo.name;
         },
         //创建直播间
         toCreateLiveRoom(roomForm) {

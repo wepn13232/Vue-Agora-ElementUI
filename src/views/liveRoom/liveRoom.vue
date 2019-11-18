@@ -11,7 +11,7 @@
                 <!--房间标题-->
                 <div class="roomTitle">
                     <h4 class="room-title">{{roomInfo.channelName}}</h4>
-                    <span class="room-user">作者：{{userInfo.username}}</span>
+                    <span class="room-user">主播：{{userInfo.name}}</span>
                     <el-button v-if="userInfo.userType=='host'" type="danger" @click="cutLive" size="small"
                                class="float-right">下播
                     </el-button>

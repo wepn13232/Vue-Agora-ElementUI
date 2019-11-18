@@ -81,8 +81,8 @@
                 <h6>请填写房间信息</h6>
                 <div class="liveRoomInfo">
                     <el-form label-position="right" ref="roomForm" :rules="rules" :model="roomForm" label-width="100px">
-                        <el-form-item label="作者" prop="username">
-                            <el-input v-model="roomForm.username" disabled></el-input>
+                        <el-form-item label="主播" prop="username">
+                            <el-input v-model="roomForm.name" disabled></el-input>
                         </el-form-item>
                         <el-form-item label="直播间标题" prop="channelName">
                             <el-input v-model="roomForm.channelName"></el-input>

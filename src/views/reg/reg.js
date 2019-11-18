@@ -5,6 +5,7 @@ export default {
             form: {
                 username: '',
                 password: '',
+                name:'',
                 email: '',
                 sex: '',
                 address: '',
@@ -19,6 +20,10 @@ export default {
                 password: [
                     {required: true, message: '请输入密码', trigger: 'blur'},
                     {min: 6, max: 11, message: '密码长度在6~11位', trigger: 'blur'}
+                ],
+                name: [
+                    {required: true, message: '请输入昵称', trigger: 'blur'},
+                    {min: 2, max: 8, message: '昵称长度在2~8位', trigger: 'blur'}
                 ],
                 email: [
                     {required: true, message: '请输入邮箱号', trigger: 'blur'},

@@ -15,6 +15,10 @@
                         <el-input type="password" v-model="form.password" class="input-width"
                                   clearable></el-input>
                     </el-form-item>
+                    <el-form-item label="昵称" prop="name">
+                        <el-input type="text" v-model="form.name" class="input-width"
+                                  clearable></el-input>
+                    </el-form-item>
                     <el-form-item label="邮箱" prop="email">
                         <el-input type="email" v-model="form.email" class="input-width"
                                   clearable></el-input>
