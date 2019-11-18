@@ -256,5 +256,5 @@ export default {
         this.changeData();
         this.changeType();
         this.charts1();
-    }
+    },
 }

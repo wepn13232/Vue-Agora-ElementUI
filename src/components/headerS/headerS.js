@@ -25,13 +25,17 @@ export default {
                 this.$router.push({path: '/personalCenter', query: {username: this.userInfo.name}})
             }
         },
+        //首页
+        toHome(){
+          this.$router.push('/')
+        },
         //文章推荐
         toLocationRec() {
             this.$router.push('/essayList')
         },
         //管理员页面
         toAdminIndex() {
-            this.$router.push('/admin/index')
+            this.$router.push('/admin/index');
         },
         //搜索
         toSearch() {

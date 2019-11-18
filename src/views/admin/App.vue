@@ -15,6 +15,7 @@
 <script>
     import adminNav from "@/components/adminNav/adminNav";
 
+
     export default {
         name: "App",
         components: {adminNav},
@@ -32,7 +33,10 @@
                 this.$nextTick(() => {
                     this.reloadNav = true;
                 })
-            }
+            },
+        },
+        destroyed() {
+            sessionStorage.setItem('defaultActive', '1');
         }
     }
 </script>
