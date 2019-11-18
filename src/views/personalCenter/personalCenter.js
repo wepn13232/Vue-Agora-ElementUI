@@ -84,7 +84,7 @@ export default {
         },
         //点击博客跳转
         toBlog() {
-            this.$router.push({path: '/blog', query: {username: this.userInfo.username}})
+            this.$router.push({path: '/blog', query: {name: this.userInfo.name}})
         },
         //点击跳转个人信息编辑
         toEdit() {

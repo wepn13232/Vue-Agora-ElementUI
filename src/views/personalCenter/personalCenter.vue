@@ -60,7 +60,7 @@
                         <!--空间地址-->
                         <el-col :md="12" :sm="12" :xs="24">
                             <div class=" bt-line pb2 pt3">
-                                <span class="spanTitle">空间地址：</span><a class="blog" @click="toBlog">{{userInfo.username}}的空间</a>
+                                <span class="spanTitle">空间地址：</span><a class="blog" @click="toBlog">{{userInfo.name}}的空间</a>
                             </div>
                         </el-col>
 

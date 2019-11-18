@@ -18,7 +18,7 @@ export default {
     },
     methods: {
         getUsername() {
-            this.username = this.$route.query.username;
+            this.username = this.$route.query.name;
         }
     },
     mounted() {
