@@ -20,12 +20,12 @@
                     width="80">
                 </el-table-column>
                 <el-table-column
-                    prop="name"
+                    prop="title"
                     label="文章名"
                     width="550">
                 </el-table-column>
                 <el-table-column
-                    prop="username"
+                    prop="user"
                     label="发表用户"
                     width="180">
                 </el-table-column>
