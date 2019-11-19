@@ -13,7 +13,8 @@ export default {
             listsNum: 3,
             test: 8,
             showMoreTitle: '点击加载更多',
-            recEssayInfo: []
+            recEssayInfo: [],
+            essayInfo: []
         }
     },
     methods: {
@@ -36,14 +37,16 @@ export default {
         randomEssay(a, b) {
             return Math.random() > .5 ? -1 : 1;
         },
-        //获取文章信息（默认全部）
+        //获取文章信息(推荐、往期)
         getEssay() {
             allUrls.getIndexEssay('post').then(res => {
                 return res.json();
             }).then(data => {
                 if (+data.status === 200) {
-                    //打乱顺序
-                    this.recEssayInfo = data.data.sort(this.randomEssay)
+                    //往期文章
+                    this.essayInfo = data.data;
+                    //打乱顺序(推荐文章)
+                    this.recEssayInfo = data.data.sort(this.randomEssay);
                 } else {
                     this.$message.error("获取文章信息错误！");
                 }
@@ -52,7 +55,6 @@ export default {
                 console.log(err);
             })
         },
-
     },
     mounted() {
         this.essayName = this.$route.query.essayName;
