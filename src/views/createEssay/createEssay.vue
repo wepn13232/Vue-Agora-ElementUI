@@ -3,6 +3,9 @@
         <div class="containerSelf">
             <div class="editorForm">
                 <el-form label-position="top" :model="formData">
+                    <el-form-item label="文章封面图">
+                        <el-input v-model="formData.picUrl" placeholder="http://"></el-input>
+                    </el-form-item>
                     <el-form-item label="文章标题">
                         <el-input v-model="formData.title"></el-input>
                     </el-form-item>

@@ -9,6 +9,7 @@ export default {
     inject: ['reloadView'],
     data() {
         return {
+            loadingEssay: true,
             essayName: '',
             listsNum: 3,
             test: 8,
@@ -47,6 +48,7 @@ export default {
                     this.essayInfo = data.data;
                     //打乱顺序(推荐文章)
                     this.recEssayInfo = data.data.sort(this.randomEssay);
+                    this.loadingEssay = false;
                 } else {
                     this.$message.error("获取文章信息错误！");
                 }

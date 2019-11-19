@@ -3,14 +3,14 @@
         <!--文章卡片-->
         <div class="essayCard">
             <!--文章banner-->
-            <div class="cardBanner">
+            <div class="cardBanner" :style="{backgroundImage:'url('+essayInfo.url+')'}">
                 <!--黑色蒙版-->
                 <div class="black">
                     <!--banner内内容-->
                     <div class="bannerContent">
                         <!--发布时间-->
                         <div class="essay-time">
-                            <span class="fw">2019.10.17</span>
+                            <span class="fw">{{essayInfo.date}}</span>
                         </div>
                         <!--标题-->
                         <div class="essay-title">

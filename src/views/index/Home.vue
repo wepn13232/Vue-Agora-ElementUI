@@ -52,10 +52,10 @@
                                 style="cursor: pointer;margin-top: 3vh">
                             <essay-card class="e-card" @click.native="toEssay(item.id)">
                                 <div slot="card-pic" class="slot-pic">
-                                    <img src="../../assets/img/banner1.jpg" alt="essay-pic">
+                                    <img :src="item.url" alt="essay-pic">
                                 </div>
                                 <div slot="title">{{item.title}}</div>
-                                <div slot="desc">{{item.content}}</div>
+                                <div slot="desc" v-html="item.content"></div>
                             </essay-card>
                         </el-col>
                     </el-row>

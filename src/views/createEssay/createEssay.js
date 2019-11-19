@@ -6,7 +6,8 @@ export default {
       return{
           formData:{
               phone:'',
-              title:''
+              title:'',
+              picUrl:''
           }
       }
     },
