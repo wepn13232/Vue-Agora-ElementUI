@@ -14,12 +14,12 @@
                         </div>
                         <!--标题-->
                         <div class="essay-title">
-                            <h3 class="fw">{{essayInfo.essay.title}}</h3>
+                            <h3 class="fw">{{essayInfo.title}}</h3>
                         </div>
                         <div class="essayFooter">
                             <!--作者-->
                             <div class="author">
-                                <span class="fw">作者：林启元</span>
+                                <span class="fw">作者：{{essayInfo.user}}</span>
                             </div>
                         </div>
 
@@ -28,9 +28,7 @@
             </div>
             <!--文章内容-->
             <div class="cardContent">
-                <div class="essay container">
-                    {{essayInfo.essay.content}}
-                </div>
+                <div class="essay container" v-html="essayInfo.content"></div>
             </div>
         </div>
     </div>

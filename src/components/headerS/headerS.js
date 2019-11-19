@@ -42,7 +42,7 @@ export default {
             if (this.selectType == 'username') {
                 this.$router.push({path: '/personalCenter', query: {username: this.searchInfo}})
             } else {
-                this.$message.info("搜索的是文章");
+                this.$router.push({path:'/essayList',query:{essayName:this.searchInfo}})
             }
         },
     },

@@ -59,16 +59,16 @@ export default {
             })
         },
         //点击推荐人物
-        toPersonalCenter(val){
-            this.$router.push({path:'/personalCenter',query:{username:val}})
+        toPersonalCenter(val) {
+            this.$router.push({path: '/personalCenter', query: {username: val}})
         },
         // 跳转至注册页
         toReg() {
             this.$router.push('/register')
         },
         // 跳转至文章内容页
-        toEssay(item) {
-            this.$router.push({path: '/essayInfo', query: {item: JSON.stringify(item)}})
+        toEssay(val) {
+            this.$router.push({path: '/essayInfo', query: {id: val}})
         },
         //跳转至“更多文章”
         toMoreEssay() {

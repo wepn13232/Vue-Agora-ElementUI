@@ -48,14 +48,14 @@
                 </div>
                 <div class="essayRec-content">
                     <el-row :gutter="24">
-                        <el-col :md="12" :xs="24" v-for="(item,index) in essayInfo" :key="index"
+                        <el-col :md="12" :xs="24" v-for="(item,index) in essayInfo" :key="index" v-if="index < 4"
                                 style="cursor: pointer;margin-top: 3vh">
-                            <essay-card class="e-card" @click.native="toEssay(item)">
+                            <essay-card class="e-card" @click.native="toEssay(item.id)">
                                 <div slot="card-pic" class="slot-pic">
                                     <img src="../../assets/img/banner1.jpg" alt="essay-pic">
                                 </div>
-                                <div slot="title">{{item.essay.title}}</div>
-                                <div slot="desc">{{item.essay.content}}</div>
+                                <div slot="title">{{item.title}}</div>
+                                <div slot="desc">{{item.content}}</div>
                             </essay-card>
                         </el-col>
                     </el-row>
