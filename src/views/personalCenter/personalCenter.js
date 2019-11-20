@@ -49,6 +49,9 @@ export default {
                 }
             }).then(() => {
                 this.isUser();
+            }).catch(err => {
+                this.$message.error(err);
+                console.log(err);
             })
         },
         //    跳转至直播间编码申请
@@ -62,6 +65,7 @@ export default {
             if (!this.isUserSelf) {
                 this.$set(this.userInfo, 'appid', '*******')
             }
+            console.log(this.isUserSelf)
         },
         //点击创建直播间按钮
         createLive() {
@@ -133,7 +137,6 @@ export default {
     },
     mounted() {
         this.getUserInfo();
-        // this.isUser();
         this.reload()
     },
     watch: {

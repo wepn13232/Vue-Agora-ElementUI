@@ -11,7 +11,17 @@ export default {
     },
     methods: {
         deleteRow(val) {
-            console.log(val.id)
+            console.log(val.id);
+            this.$confirm('是否删除该文章？','提示',{
+                type:'warning',
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                center:true
+            }).then(()=>{
+                this.$message.success("删除成功!");
+            }).catch(()=>{
+
+            })
         },
         getEssayData() {
             allUrls.getIndexEssay('post').then(res => {

@@ -6,7 +6,7 @@
             <div class="avatar">
                 <el-avatar :size="80"
                            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-                <h5>{{userInfo.username}}</h5>
+                <h5>{{userInfo.name}}</h5>
             </div>
         </div>
         <!--个人具体信息-->
@@ -54,7 +54,7 @@
                         <el-col :md="12" :sm="12" :xs="24">
                             <div class=" bt-line pb2 pt3">
                                 <span class="spanTitle">授权码：</span>
-                                <el-input class="inputWidth" v-model="userInfo.liveNumber"></el-input>
+                                <el-input class="inputWidth" v-model="userInfo.appid"></el-input>
                             </div>
                         </el-col>
 

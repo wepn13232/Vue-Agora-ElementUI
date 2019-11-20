@@ -66,7 +66,7 @@
 
                     </el-row>
                     <br/>
-                    <el-button class="mb2" v-show="userInfo.isUserSelf" @click="toEdit">编辑</el-button>
+                    <el-button class="mb2" v-show="isUserSelf" @click="toEdit">编辑</el-button>
                 </div>
             </div>
         </div>

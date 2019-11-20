@@ -6,14 +6,7 @@ export default {
     data() {
         return {
             //用户信息
-            userInfo: {
-                username: "",
-                liveNumber: '',
-                email: '',
-                sex: '',
-                address: '',
-                userSum: '',
-            },
+            userInfo: {},
             //    次级选择器
             options: [
                 {
@@ -132,12 +125,7 @@ export default {
                 if (+data.status === 200) {
                     for (let i = 0; i < data.data.length; i++) {
                         if (_username === data.data[i].username) {
-                            _this.userInfo.username = data.data[i].username;
-                            _this.userInfo.email = data.data[i].email;
-                            _this.userInfo.sex = data.data[i].sex;
-                            _this.userInfo.address = data.data[i].address;
-                            _this.userInfo.liveNumber = data.data[i].appid;
-                            _this.userInfo.userSum = data.data[i].userSum;
+                            _this.userInfo = data.data[i];
                             _this.userLoading = false;
                         } else {
                             setTimeout(() => {
@@ -152,7 +140,7 @@ export default {
         },
         //返回上一页
         goBack() {
-            this.$router.push({path: '/personalCenter', query: {username: this.userInfo.username}})
+            this.$router.push({path: '/personalCenter', query: {username: this.userInfo.name}})
         },
         //确认修改
         confirmEdit() {
