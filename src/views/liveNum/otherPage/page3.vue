@@ -37,7 +37,7 @@
                     if (valid) {
                         sessionStorage.setItem('liveNum', this.form.appid);
                         this.$message.success("授权成功");
-                        this.$router.push({path:'/personalCenter',query:{username:sessionStorage.getItem('username')}});
+                        this.$router.push({path:'/personalCenter',query:{username:sessionStorage.getItem('name')}});
                     } else {
                         return false;
                     }

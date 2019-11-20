@@ -1,7 +1,7 @@
 <template>
     <div class="essayManage">
         <div class="searchEssay">
-            <el-input placeholder="请输入内容" v-model="input">
+            <el-input placeholder="请输入文章标题" v-model="input">
                 <el-button slot="append">搜索</el-button>
             </el-input>
         </div>

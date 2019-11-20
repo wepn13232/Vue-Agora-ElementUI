@@ -21,3 +21,10 @@ export function allUserInfo(methods,data) {
     return fetch(baseUrl + '/api/userInfo',
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
+
+//获取主播信息接口
+export function getHostInfo(methods,data) {
+    return fetch(baseUrl + '/api/hostInfo',
+        {method: methods, headers: header, body: qs.stringify(data)})
+}
+

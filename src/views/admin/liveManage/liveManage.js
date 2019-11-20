@@ -1,51 +1,36 @@
+import * as allUrls from '../../../utils/allUrls.js'
+
 export default {
     name: "liveManage",
     data() {
         return {
             input: '',
             loadLiveForm: true,
-            tableData: [
-                {
-                    id: '1',
-                    username: 'admin',
-                    Appid: 'ec7820719525489e80fa257f7b4c1062',
-                },
-                {
-                    id: '2',
-                    username: 'admin',
-                    Appid: 'ec7820719525489e80fa257f7b4c1062',
-                },
-                {
-                    id: '3',
-                    username: 'admin',
-                    Appid: 'ec7820719525489e80fa257f7b4c1062',
-                },
-                {
-                    id: '4',
-                    username: 'admin',
-                    Appid: 'ec7820719525489e80fa257f7b4c1062',
-                },
-                {
-                    id: '5',
-                    username: 'admin',
-                    Appid: 'ec7820719525489e80fa257f7b4c1062',
-                },
-                {
-                    id: '6',
-                    username: 'admin',
-                    Appid: 'ec7820719525489e80fa257f7b4c1062',
-                },
-            ]
+            tableData: []
         }
     },
-    methods:{
-        deleteRow(val){
+    methods: {
+        deleteRow(val) {
             console.log(val.id)
+        },
+        //获取主播信息
+        getHostInfo() {
+            allUrls.getHostInfo('post').then(res => {
+                return res.json();
+            }).then(data => {
+                if (+data.status === 200) {
+                    this.tableData = data.data;
+                    this.loadLiveForm = false;
+                } else {
+                    this.$message.error("获取主播信息失败");
+                }
+            }).catch(err => {
+                this.$message.error(err);
+                console.log(err);
+            })
         }
     },
-    mounted(){
-        setTimeout(()=>{
-            this.loadLiveForm = false;
-        },2000)
+    mounted() {
+        this.getHostInfo();
     },
 }

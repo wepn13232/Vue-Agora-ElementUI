@@ -18,7 +18,7 @@ export default {
             let reValue = sessionStorage.getItem('liveNum')
             if (reValue) {
                 this.$message.warning('你已经有直播编码了，请勿重复申请');
-                this.$router.go(-1);
+                this.$router.push({path: '/personalCenter', query: {username: sessionStorage.getItem('name')}});
             }
         }
     },

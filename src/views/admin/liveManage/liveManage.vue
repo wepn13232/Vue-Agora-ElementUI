@@ -1,7 +1,7 @@
 <template>
     <div class="liveManage">
         <div class="searchLive">
-            <el-input placeholder="请输入内容" v-model="input">
+            <el-input placeholder="请输入用户名查询" v-model="input">
                 <el-button slot="append">搜索</el-button>
             </el-input>
         </div>
@@ -25,7 +25,7 @@
                     width="180">
                 </el-table-column>
                 <el-table-column
-                    prop="Appid"
+                    prop="appid"
                     label="Appid"
                     width="350">
                 </el-table-column>
