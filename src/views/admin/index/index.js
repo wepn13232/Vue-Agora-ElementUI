@@ -1,3 +1,5 @@
+import * as allUrls from '../../../utils/allUrls.js'
+
 export default {
     name: "index",
     data() {
@@ -38,7 +40,8 @@ export default {
                 },
             ],
             anotherData: [],
-            anotherNum: []
+            anotherNum: [],
+            essayData:[]
         }
     },
     methods: {
@@ -60,7 +63,7 @@ export default {
                 legend: {
                     orient: 'vertical',
                     left: 'left',
-                    data: ['旅游类', '攻略类', '地点推荐类', '品牌分享类']
+                    data: ['旅游类', '攻略类', '地点推荐类', '摄影类']
                 },
                 series: [
                     {
@@ -72,7 +75,7 @@ export default {
                             {value: 335, name: '旅游类'},
                             {value: 310, name: '攻略类'},
                             {value: 234, name: '地点推荐类'},
-                            {value: 135, name: '品牌分享类'},
+                            {value: 135, name: '摄影类'},
                         ],
                         itemStyle: {
                             emphasis: {

@@ -21,8 +21,8 @@ export default {
                     value: 'didian',
                     label: '地点分享类'
                 }, {
-                    value: 'pinpai',
-                    label: '品牌分享类'
+                    value: 'sheying',
+                    label: '摄影分享类'
                 }],
             rules: {
                 pic: [{required: true, message: "请填写封面图片地址", trigger: 'blur'}],
