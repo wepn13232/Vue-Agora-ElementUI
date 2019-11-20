@@ -49,15 +49,15 @@
             <div class="essayBefore">
                 <Divider class="recDivider">搜索文章</Divider>
                 <ul>
-                    <li v-for="(lists,index) in test" :key="index" v-if="index < listsNum" >
+                    <li v-for="(lists,index) in essayInfo" :key="index" v-if="index < listsNum" >
                         <div class="container pb2 pt2" style="cursor:pointer">
                             <essay-card class="e-list-card" @click.native="toEssay()">
                                 <div slot="card-pic" class="slot-pic">
                                     <img :src="lists.url" alt="essay-pic">
                                 </div>
-                                <div slot="title">标题</div>
+                                <div slot="title">{{lists.title}}</div>
                                 <div slot="desc" v-html="lists.content"></div>
-                                <div slot="author">作者：XXX</div>
+                                <div slot="author">作者：{{lists.user}}</div>
                             </essay-card>
                         </div>
                     </li>
