@@ -50,7 +50,7 @@ export default {
                 userType: '',
                 liveNumber: '',
                 userSum: '',
-                name:''
+                name: ''
             },
             //房间信息
             roomInfo: {
@@ -356,7 +356,13 @@ export default {
             this.$nextTick(() => {
                 let a = document.getElementsByClassName('barrageLi');
                 for (let i = 0; i < a.length; a++) {
-                    a[a.length - 1].classList.add("barrageAnimate")
+                    let c = a[a.length - 1].innerHTML;   //获取发送弹幕的内容长度
+                    console.log(c.length);
+                    a[a.length - 1].classList.add("barrageAnimate");
+                    //若弹幕过长，增加显示的秒数
+                    if (c.length > 5) {
+                        a[a.length - 1].style.animationDuration = 9 + (c.length - 5) * 0.3 + "s";
+                    }
                 }
             });
         }

@@ -137,7 +137,10 @@
 
 //  弹幕动画
 .barrageAnimate {
-  -webkit-animation: barrageRoll 8s linear forwards;
+  -webkit-animation: barrageRoll 9s linear forwards;
+  animation: barrageRoll 9s linear forwards;
+  -o-animation: barrageRoll 9s linear forwards;
+  -moz-animation: barrageRoll 9s linear forwards;
 }
 
 //取消占位
