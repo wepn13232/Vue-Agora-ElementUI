@@ -5,7 +5,10 @@ export default {
     data() {
         return {
             essayId: '',
-            essayInfo: {}
+            essayInfo: {},
+            value: '',  //打分文章推荐星级
+            isRateValue: 4,  //文章等级分数
+            dialogVisible: false,
         }
     },
     methods: {
@@ -25,11 +28,19 @@ export default {
                 this.$message.error(err);
                 console.log(err)
             })
-        }
+        },
+        //长时间浏览提示打分
+        openDialog() {
+            this.dialogVisible = true;
+        },
     },
     mounted() {
         this.essayId = this.$route.query.id;
         this.getEssayInfo(this.essayId);
-        this.$toTop.toTop()
+        this.$toTop.toTop();
+        //浏览一分钟后提示打分
+        setTimeout(() => {
+            this.openDialog()
+        }, 60000);
     }
 }

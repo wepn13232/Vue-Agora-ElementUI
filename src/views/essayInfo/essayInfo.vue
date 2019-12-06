@@ -21,6 +21,14 @@
                             <div class="author">
                                 <span class="fw">作者：{{essayInfo.user}}</span>
                             </div>
+                            <!--星级显示-->
+                            <el-rate
+                                v-model="isRateValue"
+                                disabled
+                                show-score
+                                text-color="#ff9900"
+                                score-template="{value}">
+                            </el-rate>
                         </div>
 
                     </div>
@@ -31,6 +39,30 @@
                 <div class="essay container" v-html="essayInfo.content"></div>
             </div>
         </div>
+
+        <!--    提示打分对话框-->
+        <el-dialog
+            center
+            title="提示"
+            :visible.sync="dialogVisible"
+            width="30%">
+            <!--推荐星级-->
+            <div class="star">
+                <el-rate
+                    v-model="value"
+                    text-color="#ff9900"
+                    show-score
+                    score-template="{value}">
+                </el-rate>
+                <span>(喜欢这篇文章的话 请给作者打分喔！)</span>
+            </div>
+            <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+        </el-dialog>
+
+
     </div>
 </template>
 
