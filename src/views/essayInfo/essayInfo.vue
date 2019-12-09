@@ -54,7 +54,7 @@
                     show-score
                     score-template="{value}">
                 </el-rate>
-                <span>(喜欢这篇文章的话 请给作者打分喔！)</span>
+                <p class="dialogText">(喜欢这篇文章的话 请给作者打分喔！)</p>
             </div>
             <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
