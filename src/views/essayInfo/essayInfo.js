@@ -7,11 +7,33 @@ export default {
             essayId: '',
             essayInfo: {},
             value: '',  //打分文章推荐星级
-            isRateValue: 4,  //文章等级分数
+            isRateValue: 0,  //文章等级分数
             dialogVisible: false,
         }
     },
     methods: {
+        //获取用户评分等级
+        getUserScore(val) {
+            allUrls.getScore('post', {}).then(res => {
+                return res.json();
+            }).then(data => {
+                if (+data.status === 200) {
+                    let res = data.data.filter((res) => {
+                        return res.user == val;
+                    });
+                    //获取有多少个评分
+                    let scoreLength = res[0].score.length;
+                    let sum = 0;
+                    for (let i in res[0].score) {
+                        sum = sum + (+res[0].score[i]);
+                    }
+                    this.isRateValue = sum / scoreLength;
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        },
+        //获取文章信息
         getEssayInfo(val) {
             allUrls.getIndexEssay('post', val).then(res => {
                 return res.json();
@@ -24,9 +46,9 @@ export default {
                 } else {
                     this.$message.error("获取文章信息失败");
                 }
-            }).catch(err => {
-                this.$message.error(err);
-                console.log(err)
+            }).then(() => {
+                //获取用户评分
+                this.getUserScore(this.essayInfo.user);
             })
         },
         //长时间浏览提示打分

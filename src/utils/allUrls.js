@@ -28,3 +28,9 @@ export function getHostInfo(methods,data) {
         {method: methods, headers: header, body: qs.stringify(data)})
 }
 
+//获取评分接口
+export function getScore(methods,data) {
+    return fetch(baseUrl + '/api/getScore',
+        {method: methods, headers: header, body: qs.stringify(data)})
+}
+

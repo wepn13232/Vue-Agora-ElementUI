@@ -16,7 +16,7 @@
                             </div>
                             <div slot="title">{{lists.title}}</div>
                             <div slot="desc" v-html="lists.content"></div>
-                            <div slot="author">作者：{{lists.user}}</div>
+                            <div slot="author">作者：{{lists.username}}</div>
                         </essay-card>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                                 </div>
                                 <div slot="title">{{lists.title}}</div>
                                 <div slot="desc" v-html="lists.content"></div>
-                                <div slot="author">作者：{{lists.user}}</div>
+                                <div slot="author">作者：{{lists.username}}</div>
                             </essay-card>
                         </div>
                     </li>
@@ -57,7 +57,7 @@
                                 </div>
                                 <div slot="title">{{lists.title}}</div>
                                 <div slot="desc" v-html="lists.content"></div>
-                                <div slot="author">作者：{{lists.user}}</div>
+                                <div slot="author">作者：{{lists.username}}</div>
                             </essay-card>
                         </div>
                     </li>
