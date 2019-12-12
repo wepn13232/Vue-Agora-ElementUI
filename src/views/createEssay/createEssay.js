@@ -37,6 +37,7 @@ export default {
         submitForm(val) {
             this.$refs[val].validate((valid) => {
                 if (valid) {
+                    //TODO 发布文章的时候还要获取本地时间，插入数据库（2019-XX-XX），执行空间动态添加接口（总共两个接口）
                     this.$message.success("发表成功！");
                 } else {
                     this.$message.error("请务必填写必填项!");

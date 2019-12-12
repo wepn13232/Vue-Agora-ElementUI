@@ -35,6 +35,7 @@
             goNext(form) {
                 this.$refs[form].validate((valid) => {
                     if (valid) {
+                        //TODO 执行插入APPID，添加空间动态
                         sessionStorage.setItem('liveNum', this.form.appid);
                         this.$message.success("授权成功");
                         this.$router.push({path:'/personalCenter',query:{username:sessionStorage.getItem('name')}});

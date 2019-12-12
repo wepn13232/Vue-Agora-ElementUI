@@ -6,7 +6,7 @@ export default {
         return {
             essayId: '',
             essayInfo: {},
-            value: '',  //打分文章推荐星级
+            value: 0,  //打分文章推荐星级
             isRateValue: 0,  //文章等级分数
             dialogVisible: false,
         }
@@ -54,6 +54,15 @@ export default {
         //长时间浏览提示打分
         openDialog() {
             this.dialogVisible = true;
+        },
+        //确认打分
+        confirmScore() {
+            if (this.value !== 0) {
+                this.$message.info(`打分为${this.value}`);
+                this.dialogVisible = false;
+            } else {
+                this.$message.error("不可以打0分喔");
+            }
         },
     },
     mounted() {

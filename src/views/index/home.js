@@ -16,7 +16,7 @@ export default {
         }
     },
     methods: {
-        //获取首页推荐（图片）
+        //获取首页推荐（图片）、
         getIndexPic() {
             this.loading1 = true
             allUrls.getIndexPicRec('post').then(res => {

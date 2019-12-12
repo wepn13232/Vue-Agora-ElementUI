@@ -26,12 +26,11 @@
                 <div class="rec-content">
                     <div class="container-self">
                         <el-row :gutter="24">
-                            <el-col :md="6" :sm="12" v-for="(item, index) in indexPic" :key="index">
-                                <el-card :body-style="{ padding: '0px' }" style="margin-top: 7%">
-                                    <img
+                            <el-col :md="6" :sm="12" v-for="(item, index) in indexPic" :key="index" style="margin-top: 2%">
+                                    <el-image
+                                        style="height: 200px"
                                         :src="item.picUrl"
-                                        class="image">
-                                </el-card>
+                                        fit="cover" lazy></el-image>
                             </el-col>
                         </el-row>
                     </div>

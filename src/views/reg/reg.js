@@ -102,10 +102,12 @@ export default {
         handleChange(val) {
             console.log(this.form.address[0])
         },
+        //TODO 在执行注册之前，异步执行检测是否用户名重复，必须保证用户名唯一
         //点击注册
         doReg(regForm) {
             this.$refs[regForm].validate((valid) => {
                 if (valid) {
+                    //TODO 注册执行两个接口--添加用户信息--添加空间动态（要获取注册时间）
                     this.$message.success('注册成功')
                 } else {
                     // this.$message.error('注册失败');

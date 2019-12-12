@@ -45,6 +45,7 @@ export default {
         }
     },
     methods: {
+        //TODO 获取文章类型占比，获取账号男女比例占比，获取地区占比
         charts1() {
             //初始化实例
             let chart1 = this.$echarts.init(document.getElementById('chart1'));
