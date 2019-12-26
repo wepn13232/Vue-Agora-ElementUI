@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import * as toTop from '@/utils/toTop'
+import VueCookies from 'vue-cookies'
 
 //Element-ui
 import ElementUI from 'element-ui';
@@ -18,6 +19,7 @@ Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(ViewUI);
+Vue.use(VueCookies);
 Vue.prototype.$toTop = toTop
 
 

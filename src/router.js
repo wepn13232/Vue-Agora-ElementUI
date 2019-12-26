@@ -21,7 +21,8 @@ import essayManage from "@/views/admin/essayManage/essayManage.vue";
 import liveManage from "@/views/admin/liveManage/liveManage.vue";
 import createEssay from "@/views/createEssay/createEssay.vue";
 
-Vue.use(Router)
+Vue.use(Router);
+
 
 const router = new Router({
     mode: 'hash',
@@ -197,8 +198,14 @@ const router = new Router({
     ],
 });
 
+
 //拦截器
 router.beforeEach((to, from, next) => {
+    //路由遍历的时候监控cookies是否还在
+    let cookies = window.$cookies.get('userInfoCookies');
+    if (!cookies){
+        sessionStorage.clear();
+    }
     toTop.toTop()
     //路由中写了requireAuth是需要登录验证的路由
     if (to.matched.some(record => record.meta.requireAuth)) {

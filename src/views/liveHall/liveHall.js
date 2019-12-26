@@ -8,6 +8,7 @@ export default {
             showMoreTitle: '点击加载更多'
         }
     },
+    inject:['reload'],
     methods: {
         //点击查看更多，一次性加6个
         morePerson() {
@@ -19,5 +20,8 @@ export default {
         toLive() {
             this.$router.push({path: '/liveRoom', query: {userType: 'audience'}})
         }
+    },
+    mounted(){
+        this.reload();
     }
 }

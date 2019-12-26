@@ -15,6 +15,7 @@ export default {
         handleCommand(command) {
             if (command == 'b') {
                 this.userInfo.username = '';
+                this.$cookies.remove('userInfoCookies');
                 sessionStorage.clear();
                 this.$message.success('注销成功！');
                 setTimeout(() => {
@@ -48,6 +49,7 @@ export default {
     },
     computed: {
         username() {
+            //TODO localStorge应存对象，然后自拿字段
             this.userInfo.username = sessionStorage.getItem('username');
             this.userInfo.name = sessionStorage.getItem('name');
         }

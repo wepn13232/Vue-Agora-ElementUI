@@ -6,7 +6,7 @@ import da from "element-ui/src/locale/lang/da";
 export default {
     name: "essayList",
     components: {essayCard},
-    inject: ['reloadView'],
+    inject: ['reloadView','reload'],
     data() {
         return {
             loadingEssay: true,
@@ -59,6 +59,7 @@ export default {
         },
     },
     mounted() {
+        this.reload();
         this.essayName = this.$route.query.essayName;
         this.getEssay();
     },

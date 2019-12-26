@@ -35,6 +35,8 @@ export default {
                                 sessionStorage.setItem('address', data.data[i].address);
                                 sessionStorage.setItem('liveNum', data.data[i].appid);
                                 sessionStorage.setItem('userSum', data.data[i].userSum);
+                                //保存至cookies-userInfo,先设置10分钟过期
+                                this.$cookies.set('userInfoCookies',data.data[i],60*10);
                                 this.$router.push('/')
                                 break;
                             } else {
