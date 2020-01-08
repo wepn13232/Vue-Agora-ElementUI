@@ -17,6 +17,9 @@
                         <a class="nav-link" href="/#/liveHall">直播大厅</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" @click="toPicShow">照片墙</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" @click="toLocationRec">文章推荐</a>
                     </li>
                     <li class="nav-item" v-if="userInfo.username == 'admin'">

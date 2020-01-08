@@ -20,6 +20,7 @@ import adminIndex from "@/views/admin/index/index.vue";
 import essayManage from "@/views/admin/essayManage/essayManage.vue";
 import liveManage from "@/views/admin/liveManage/liveManage.vue";
 import createEssay from "@/views/createEssay/createEssay.vue";
+import picShow from "./views/picShow/picShow.vue";
 
 Vue.use(Router);
 
@@ -58,6 +59,14 @@ const router = new Router({
             component: essayInfo,
             meta: {
                 title: '文章内容'
+            }
+        },
+        {
+            path: '/picShow',
+            name: 'picShow',
+            component: picShow,
+            meta: {
+                title: '照片墙'
             }
         },
         {

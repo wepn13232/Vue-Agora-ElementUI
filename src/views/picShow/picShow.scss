@@ -1,0 +1,35 @@
+.picShow {
+  background-color: #f4f6f9;
+
+  .container {
+    width: 85%;
+    margin: 0 auto;
+
+    .v-waterfall-content {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .v-waterfall-item {
+      position: absolute;
+    }
+
+    .v-waterfall-item img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .grid {
+      padding-top: 20px;
+
+      .grid-item {
+        width: 260px;
+        margin-bottom: 20px;
+
+      }
+    }
+
+
+  }
+}

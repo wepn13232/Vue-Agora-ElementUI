@@ -7,7 +7,7 @@ export default {
             selectType: 'username',
             userInfo: {
                 username: '',
-                name:''
+                name: ''
             }
         }
     },
@@ -27,8 +27,8 @@ export default {
             }
         },
         //首页
-        toHome(){
-          this.$router.push('/')
+        toHome() {
+            this.$router.push('/')
         },
         //文章推荐
         toLocationRec() {
@@ -38,12 +38,16 @@ export default {
         toAdminIndex() {
             this.$router.push('/admin/index');
         },
+        //照片墙展示
+        toPicShow() {
+            this.$router.push('/picShow');
+        },
         //搜索
         toSearch() {
             if (this.selectType == 'username') {
                 this.$router.push({path: '/personalCenter', query: {username: this.searchInfo}})
             } else {
-                this.$router.push({path:'/essayList',query:{essayName:this.searchInfo}})
+                this.$router.push({path: '/essayList', query: {essayName: this.searchInfo}})
             }
         },
     },
