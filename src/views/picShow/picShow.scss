@@ -5,28 +5,25 @@
     width: 85%;
     margin: 0 auto;
 
-    .v-waterfall-content {
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    .v-waterfall-item {
-      position: absolute;
-    }
-
-    .v-waterfall-item img {
-      width: 100%;
-      height: 100%;
-    }
-
     .grid {
       padding-top: 20px;
+      transition: all ease-in-out 0.3s;
+      -moz-transition: all ease-in-out 0.3s;
+      -o-transition: all ease-in-out 0.3s;
 
       .grid-item {
+        cursor: pointer;
         width: 260px;
         margin-bottom: 20px;
+        transition: all ease-in-out 0.3s;
+        -moz-transition: all ease-in-out 0.3s;
+        -o-transition: all ease-in-out 0.3s;
+      }
 
+      .grid-item:hover {
+        transform: scale(1.03);
+        -o-transform: scale(1.03);
+        -moz-transform: scale(1.03);
       }
     }
 

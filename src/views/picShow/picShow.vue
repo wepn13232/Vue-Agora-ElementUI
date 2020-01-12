@@ -2,7 +2,7 @@
     <div class="picShow">
         <div class="container">
             <!--瀑布流-->
-            <div class="grid" data-masonry='{ "itemSelector": ".grid-item","gutter":22}'>
+            <div class="grid">
                 <div class="grid-item" v-for="(item,index) in cardList" :key="index">
                     <!--瀑布流卡片-->
                     <card-pic :cardSrc="item.src" :cardUser="item.user" :cardContent="item.content"></card-pic>
