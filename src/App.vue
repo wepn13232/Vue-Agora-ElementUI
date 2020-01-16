@@ -19,13 +19,13 @@
                 username: '',
                 hasUser: true,
                 reloadV: true,
-                userInfo:[],
+                userInfo: [],
             }
         },
         provide() {
             return {
                 reload: this.reload,
-                reloadView:this.reloadView
+                reloadView: this.reloadView
             }
         },
         methods: {
@@ -41,19 +41,19 @@
                     this.reloadV = true;
                 })
             },
-            getUserInfoCookies(){
-              this.userInfo  = this.$cookies.get('userInfoCookies');
-              if (this.userInfo){
-                  sessionStorage.setItem('username', this.userInfo.username);
-                  sessionStorage.setItem('name', this.userInfo.name);
-                  sessionStorage.setItem('email', this.userInfo.email);
-                  sessionStorage.setItem('sex', this.userInfo.sex);
-                  sessionStorage.setItem('address', this.userInfo.address);
-                  sessionStorage.setItem('liveNum', this.userInfo.appid);
-                  sessionStorage.setItem('userSum', this.userInfo.userSum);
-              }else{
-                  sessionStorage.clear();
-              }
+            getUserInfoCookies() {
+                this.userInfo = this.$cookies.get('userInfoCookies');
+                if (this.userInfo) {
+                    sessionStorage.setItem('username', this.userInfo.username);
+                    sessionStorage.setItem('name', this.userInfo.name);
+                    sessionStorage.setItem('email', this.userInfo.email);
+                    sessionStorage.setItem('sex', this.userInfo.sex);
+                    sessionStorage.setItem('address', this.userInfo.address);
+                    sessionStorage.setItem('liveNum', this.userInfo.appid);
+                    sessionStorage.setItem('userSum', this.userInfo.userSum);
+                } else {
+                    sessionStorage.clear();
+                }
             },
         },
         mounted() {

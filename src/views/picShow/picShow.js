@@ -1,5 +1,9 @@
 import cardPic from "../../components/cardPic/cardPic";
 
+window.addEventListener('scroll', () => {
+    let top = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
+    console.log(top);
+})
 
 export default {
     name: "picShow",
@@ -47,23 +51,60 @@ export default {
                     content: '我真的不知道为啥我手贱要自己加这个功能，我人都傻了真的.wdnmd，我能说什么？我说了，一秒交了，有什么好说的',
                     src: 'https://th.wallhaven.cc/small/lm/lmg21p.jpg'
                 },
-            ]
+            ],
+            interval: '', //检测图片加载循环
+            loading: true,
+            loadMoreText: '<　加载更多　>',
+            defaultLoadPic: 4, //默认加载图片数
+            reloadMoreFresh: true,
         }
     },
     methods: {
-        //TODO 可以先判断img标签的高度是否>0 在执行瀑布流
+        getHeight() {
+            let isLoad = false;
+            if (!isLoad) {
+                this.interval = setInterval(() => {
+                    let img = document.getElementsByClassName('el-image');
+                    for (let i in img) {
+                        if (img[i].offsetHeight <= 0) {
+                            isLoad = false;
+                            return false;
+                        } else {
+                            isLoad = true;
+                        }
+                    }
+                    if (isLoad) {
+                        console.log('全部加载完');
+                        clearInterval(this.interval);
+                        this.resizeGrid();
+                        this.loading = false;
+                    }
+                }, 500)
+            }
+        },
         resizeGrid() {
             $('.grid').masonry({
                 gutter: 22,
-                resize: true,
                 itemSelector: '.grid-item'
             });
+        },
+        loadMorePic() {
+            this.loading = true;
+            this.defaultLoadPic += 4;
+            this.reloadMoreFresh = false;
+            this.$nextTick(() => {
+                this.reloadMoreFresh = true;
+                this.getHeight();
+                //TODO 浏览轨迹
+                let h = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset;
+                h = 100;
+            });
+            if (this.defaultLoadPic == this.cardList.length) {
+                this.loadMoreText = '<　没有更多了哦～　>';
+            }
         }
     },
     mounted() {
-        //为了先让图片加载完成
-        setTimeout(() => {
-            this.resizeGrid();
-        }, 300)
+        this.getHeight();
     },
 }

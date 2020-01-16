@@ -7,17 +7,17 @@
 
     .grid {
       padding-top: 20px;
-      transition: all ease-in-out 0.3s;
-      -moz-transition: all ease-in-out 0.3s;
-      -o-transition: all ease-in-out 0.3s;
+      transition: all ease-in-out 0.2s;
+      -moz-transition: all ease-in-out 0.2s;
+      -o-transition: all ease-in-out 0.2s;
 
       .grid-item {
         cursor: pointer;
         width: 260px;
         margin-bottom: 20px;
-        transition: all ease-in-out 0.3s;
-        -moz-transition: all ease-in-out 0.3s;
-        -o-transition: all ease-in-out 0.3s;
+        transition: all ease-in-out 0.2s;
+        -moz-transition: all ease-in-out 0.2s;
+        -o-transition: all ease-in-out 0.2s;
       }
 
       .grid-item:hover {
@@ -27,6 +27,17 @@
       }
     }
 
+    .loadMore {
+      width: 100%;
+      text-align: center;
+      padding: 20px 0;
+
+      span {
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
 
   }
 }
