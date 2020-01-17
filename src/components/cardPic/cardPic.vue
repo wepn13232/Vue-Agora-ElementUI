@@ -11,8 +11,7 @@
             <div class="cardContent">
                 <!--用户头像-->
                 <div class="topContent">
-                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-                               size="20"></el-avatar>
+                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                     <span class="userName">{{cardUser}}</span>
                 </div>
                 <!--用户内容-->

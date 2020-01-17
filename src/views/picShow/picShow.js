@@ -1,9 +1,5 @@
 import cardPic from "../../components/cardPic/cardPic";
 
-window.addEventListener('scroll', () => {
-    let top = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
-    console.log(top);
-})
 
 export default {
     name: "picShow",
@@ -57,9 +53,18 @@ export default {
             loadMoreText: '<　加载更多　>',
             defaultLoadPic: 4, //默认加载图片数
             reloadMoreFresh: true,
+            canLoad: true,
+            dialogVisible: false, //dialog弹窗
+            //弹窗data
+            dialogData: {
+                src: '',
+                user: '',
+                content: '',
+            }
         }
     },
     methods: {
+        //初始监听图片高度
         getHeight() {
             let isLoad = false;
             if (!isLoad) {
@@ -82,12 +87,14 @@ export default {
                 }, 500)
             }
         },
+        //初始化瀑布流
         resizeGrid() {
             $('.grid').masonry({
                 gutter: 22,
                 itemSelector: '.grid-item'
             });
         },
+        //加载更多图片
         loadMorePic() {
             this.loading = true;
             this.defaultLoadPic += 4;
@@ -95,14 +102,24 @@ export default {
             this.$nextTick(() => {
                 this.reloadMoreFresh = true;
                 this.getHeight();
-                //TODO 浏览轨迹
-                let h = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset;
-                h = 100;
             });
             if (this.defaultLoadPic == this.cardList.length) {
                 this.loadMoreText = '<　没有更多了哦～　>';
+                this.canLoad = false;
             }
-        }
+            setTimeout(() => {
+                document.body.scrollTop = document.documentElement.scrollTop = 200;
+            }, 600)
+        },
+        handleClose() {
+            this.dialogVisible = false;
+        },
+        openDialog(item) {
+            this.dialogVisible = true;
+            this.dialogData.src = item.src;
+            this.dialogData.user = item.user;
+            this.dialogData.content = item.content;
+        },
     },
     mounted() {
         this.getHeight();
