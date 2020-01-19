@@ -5,11 +5,11 @@ export default {
     inject: ['reload', 'reloadView'],
     data() {
         return {
-            userLoading: true,
+            userLoading: false,
             dialogVisible: false,
             loadingText: '用户查询中...',
             //用户信息
-            userInfo: {},
+            userInfo: this.$store.state.userData,
             isUserSelf: false,
             //直播间信息
             roomForm: {
@@ -26,34 +26,34 @@ export default {
         }
     },
     methods: {
-        getUserInfo() {
-            let _username = this.$route.query.username;
-            let _this = this;
-            //    调用查询用户信息
-            allUrls.allUserInfo('post', _username).then(res => {
-                return res.json();
-            }).then(data => {
-                if (+data.status === 200) {
-                    for (let i = 0; i < data.data.length; i++) {
-                        if (_username === data.data[i].name) {
-                            this.userInfo = data.data[i];
-                            _this.userLoading = false;
-                        } else {
-                            setTimeout(() => {
-                                this.loadingText = '可能没有这个用户哦，建议重新查询~';
-                            }, 4000)
-                        }
-                    }
-                } else {
-                    this.$message.error("用户信息查询失败");
-                }
-            }).then(() => {
-                this.isUser();
-            }).catch(err => {
-                this.$message.error(err);
-                console.log(err);
-            })
-        },
+        //getUserInfo() {
+        //    let _username = this.$route.query.username;
+        //    let _this = this;
+        //    //    调用查询用户信息
+        //    allUrls.allUserInfo('post', _username).then(res => {
+        //        return res.json();
+        //    }).then(data => {
+        //        if (+data.status === 200) {
+        //            for (let i = 0; i < data.data.length; i++) {
+        //                if (_username === data.data[i].name) {
+        //                    this.userInfo = data.data[i];
+        //                    _this.userLoading = false;
+        //                } else {
+        //                    setTimeout(() => {
+        //                        this.loadingText = '可能没有这个用户哦，建议重新查询~';
+        //                    }, 4000)
+        //                }
+        //            }
+        //        } else {
+        //            this.$message.error("用户信息查询失败");
+        //        }
+        //    }).then(() => {
+        //        this.isUser();
+        //    }).catch(err => {
+        //        this.$message.error(err);
+        //        console.log(err);
+        //    })
+        //},
         //    跳转至直播间编码申请
         toGetLiveNum() {
             this.$router.push('/liveNum/page1')
@@ -126,9 +126,9 @@ export default {
         //性别转译
         transSex(val) {
             switch (val) {
-                case 'male':
+                case '1':
                     return '男';
-                case 'female':
+                case '2':
                     return '女';
                 default :
                     return '暂未录入性别';
@@ -136,7 +136,7 @@ export default {
         }
     },
     mounted() {
-        this.getUserInfo();
+        //this.getUserInfo();
         this.reload()
     },
     watch: {
