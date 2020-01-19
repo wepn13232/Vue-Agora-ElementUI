@@ -25,7 +25,7 @@
             <div class="essayBefore">
                 <Divider class="recDivider">往期文章</Divider>
                 <ul>
-                    <li v-for="(lists,index) in essayInfo" :key="index" v-if="index < listsNum" >
+                    <li v-for="(lists,index) in essayInfo" :key="index" v-show="index < listsNum" >
                         <div class="container pb2 pt2" style="cursor:pointer">
                             <essay-card class="e-list-card" @click.native="toEssay(lists.id)">
                                 <div slot="card-pic" class="slot-pic">

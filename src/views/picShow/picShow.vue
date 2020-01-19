@@ -39,6 +39,11 @@
                         <div class="midContent">
                             <p>{{dialogData.content}}</p>
                         </div>
+                        <div class="clickArea">
+                            <img src="../../assets/img/loveGray.png" alt="" @click="clickSub()" class="clickIcon"
+                                 v-if="!dialogData.isSub">
+                            <img src="../../assets/img/loveRed.png" alt="" class="isSubIcon" v-else>
+                        </div>
                     </div>
                     <div class="clearfix"></div>
                 </div>

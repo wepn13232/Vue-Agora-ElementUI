@@ -1,7 +1,7 @@
 import qs from 'qs'
 
-let header2 = {'Content-Type': 'application/x-www-form-urlencoded'}
-let header = {'Content-Type': 'application/json'}
+let header2 = {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
+let header = {'Content-Type': 'application/json;charset=utf-8'}
 let baseUrl = 'https://www.fastmock.site/mock/329c8f16f62093ecfde33a5de5013930/yolo'
 
 //获取首页推荐
@@ -16,21 +16,17 @@ export function getIndexEssay(methods, data) {
         {method: methods, headers: header, body: qs.stringify(data)})
 }
 
-//用户接口
-export function allUserInfo(methods,data) {
-    return fetch(baseUrl + '/api/userInfo',
-        {method: methods, headers: header2, body: qs.stringify(data)})
+//登录接口
+export function doLogin(methods, data) {
+    let msg = data
+    return fetch('/api/dologin',
+        {method: methods, headers: header2, body: qs.stringify(msg)})
 }
 
-//获取主播信息接口
-export function getHostInfo(methods,data) {
-    return fetch(baseUrl + '/api/hostInfo',
-        {method: methods, headers: header, body: qs.stringify(data)})
-}
-
-//获取评分接口
-export function getScore(methods,data) {
-    return fetch(baseUrl + '/api/getScore',
-        {method: methods, headers: header, body: qs.stringify(data)})
+//注册
+export function doRegister(methods, data) {
+    let msg = data
+    return fetch('/api/doRegister',
+        {method: methods, headers: header2, body: qs.stringify(msg)})
 }
 

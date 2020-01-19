@@ -22,32 +22,25 @@ export default {
                     password: this.form.password
                 };
                 let _this = this;
-                allUrls.allUserInfo('post', userData).then(res => {
+                allUrls.doLogin('post', userData).then(res => {
                     return res.json();
                 }).then(data => {
                     if (+data.status === 200) {
-                        for (let i = 0; i < data.data.length; i++) {
-                            if (userData.username === data.data[i].username && userData.password === data.data[i].password) {
-                                sessionStorage.setItem('username', data.data[i].username);
-                                sessionStorage.setItem('name', data.data[i].name);
-                                sessionStorage.setItem('email', data.data[i].email);
-                                sessionStorage.setItem('sex', data.data[i].sex);
-                                sessionStorage.setItem('address', data.data[i].address);
-                                sessionStorage.setItem('liveNum', data.data[i].appid);
-                                sessionStorage.setItem('userSum', data.data[i].userSum);
-                                //保存至cookies-userInfo,先设置10分钟过期
-                                this.$cookies.set('userInfoCookies',data.data[i],60*10);
-                                this.$router.push('/')
-                                break;
-                            } else {
-                                _this.$refs.loginRef.innerHTML = "账号密码错误，请重试";
-                            }
-                        }
+                        //sessionStroge中不能直接存进对象，需Stringfy进去，取出来在parse成对象
+                        let _data = JSON.stringify(data.data)
+                        this.$store.state.userData = data.data;
+                        sessionStorage.setItem('userInfo', _data);
+                        //保存至cookies-userInfo,先设置10分钟过期
+                        this.$cookies.set('userInfoCookies', _data, 60 * 10);
+                        this.$router.push('/')
                     } else {
-                        this.$message.error("查询用户信息失败");
+                        console.log(data.desc)
+                        this.$message.error(data.desc);
+                        _this.$refs.loginRef.innerHTML = "账号密码错误，请重试";
                     }
                 }).catch(err => {
-                    console.log(err)
+                    console.log(err);
+                    this.$message.error("登录请求错误！");
                 })
             }
         },

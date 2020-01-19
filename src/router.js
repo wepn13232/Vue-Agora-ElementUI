@@ -210,6 +210,7 @@ const router = new Router({
 
 //拦截器
 router.beforeEach((to, from, next) => {
+    let userSessionData = JSON.parse(sessionStorage.getItem('userInfo'));
     //路由遍历的时候监控cookies是否还在
     let cookies = window.$cookies.get('userInfoCookies');
     if (!cookies){
@@ -218,7 +219,7 @@ router.beforeEach((to, from, next) => {
     toTop.toTop()
     //路由中写了requireAuth是需要登录验证的路由
     if (to.matched.some(record => record.meta.requireAuth)) {
-        let username = sessionStorage.getItem('username')
+        let username = userSessionData.username;
         //未登录，身份证为空
         if (username == '' || !username) {
             next({path: '/login'})
@@ -228,7 +229,7 @@ router.beforeEach((to, from, next) => {
     } else {
         //验证管理员路由
         if (to.matched.some(record => record.meta.requireAdminAuth)) {
-            let username = sessionStorage.getItem('username');
+            let username = userSessionData.username;
             //未登录，身份证为空
             if (username !== 'admin') {
                 next({path:'/'})

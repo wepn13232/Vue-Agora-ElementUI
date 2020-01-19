@@ -48,16 +48,17 @@ export default {
                 console.log(err)
             })
         },
-        //获取人物卡片信息
-        getTopListPerson() {
-            allUrls.allUserInfo("post").then(res => {
-                return res.json();
-            }).then(data => {
-                this.personInfo = data.data;
-            }).catch(err => {
-                console.log(err);
-            })
-        },
+        ////获取人物卡片信息
+        //getTopListPerson() {
+        //    //TODO 接口更改，信息变化
+        //    allUrls.allUserInfo("post").then(res => {
+        //        return res.json();
+        //    }).then(data => {
+        //        this.personInfo = data.data;
+        //    }).catch(err => {
+        //        console.log(err);
+        //    })
+        //},
         //点击推荐人物
         toPersonalCenter(val) {
             this.$router.push({path: '/personalCenter', query: {username: val}})
@@ -79,6 +80,6 @@ export default {
         this.reload();
         this.getIndexPic();
         this.getIndexEssay();
-        this.getTopListPerson();
+        //this.getTopListPerson();
     }
 }

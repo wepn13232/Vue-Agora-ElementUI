@@ -1,3 +1,4 @@
+
 export default {
     name: "headerS",
     data() {
@@ -5,10 +6,7 @@ export default {
             activeIndex: '1',
             searchInfo: '',
             selectType: 'username',
-            userInfo: {
-                username: '',
-                name: ''
-            }
+            userInfo: this.$store.state.userData,
         }
     },
     methods: {
@@ -51,16 +49,7 @@ export default {
             }
         },
     },
-    computed: {
-        username() {
-            //TODO localStorge应存对象，然后自拿字段
-            this.userInfo.username = sessionStorage.getItem('username');
-            this.userInfo.name = sessionStorage.getItem('name');
-        }
-    },
-    watch: {
-        username: function () {
+    mounted() {
 
-        }
     },
 }

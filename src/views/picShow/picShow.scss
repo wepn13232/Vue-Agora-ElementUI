@@ -81,6 +81,24 @@
             margin-top: 10px;
             padding: 0 0 0 20px;
           }
+
+          .clickArea {
+            width: 100%;
+
+            .clickIcon {
+              cursor: pointer;
+              width: 35px;
+              height: 35px;
+              margin: 10px 0 0 0;
+              float: right;
+            }
+            .isSubIcon{
+              width: 35px;
+              height: 35px;
+              margin: 10px 0 0 0;
+              float: right;
+            }
+          }
         }
       }
     }
