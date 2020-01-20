@@ -24,9 +24,16 @@ export function doLogin(methods, data) {
 }
 
 //注册
-export function doRegister(methods, data) {
+export function doRegister(data, methods) {
     let msg = data
     return fetch('/api/doRegister',
+        {method: methods, headers: header2, body: qs.stringify(msg)})
+}
+
+//查询用户信息
+export function getUserInfo(data, methods) {
+    let msg = data
+    return fetch('/api/getUserInfo',
         {method: methods, headers: header2, body: qs.stringify(msg)})
 }
 

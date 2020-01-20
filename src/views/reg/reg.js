@@ -1,3 +1,5 @@
+import * as requirUrls from '../../utils/allUrls'
+
 export default {
     name: "reg",
     data() {
@@ -5,11 +7,11 @@ export default {
             form: {
                 username: '',
                 password: '',
-                name:'',
+                name: '',
                 email: '',
                 sex: '',
                 address: '',
-                roomNum: ''
+                appid: '',
             },
             //表单验证
             rules: {
@@ -100,7 +102,7 @@ export default {
         },
         //    次级选择器-存入数据
         handleChange(val) {
-            console.log(this.form.address[0])
+            this.form.address = val[1];
         },
         //TODO 在执行注册之前，异步执行检测是否用户名重复，必须保证用户名唯一
         //点击注册
@@ -108,9 +110,30 @@ export default {
             this.$refs[regForm].validate((valid) => {
                 if (valid) {
                     //TODO 注册执行两个接口--添加用户信息--添加空间动态（要获取注册时间）
-                    this.$message.success('注册成功')
+                    requirUrls.doRegister({
+                        username: this.form.username,
+                        name: this.form.name,
+                        password: this.form.password,
+                        email: this.form.email,
+                        sex: this.form.sex,
+                        address: this.form.address
+                    }, 'post').then(r => {
+                        return r.json();
+                    }).then(res => {
+                        if (+res.status === 200) {
+                            this.$message.success("注册成功！");
+                            setTimeout(() => {
+                                this.$router.push('/login');
+                            }, 800)
+                        } else {
+                            this.$message.error(res.desc);
+                            console.log(res.desc);
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        this.$message.error("注册失败！");
+                    })
                 } else {
-                    // this.$message.error('注册失败');
                     return false;
                 }
             })
