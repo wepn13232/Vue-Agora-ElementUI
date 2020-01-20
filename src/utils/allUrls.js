@@ -18,22 +18,43 @@ export function getIndexEssay(methods, data) {
 
 //登录接口
 export function doLogin(methods, data) {
-    let msg = data
     return fetch('/api/dologin',
-        {method: methods, headers: header2, body: qs.stringify(msg)})
+        {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
 //注册
 export function doRegister(data, methods) {
-    let msg = data
     return fetch('/api/doRegister',
-        {method: methods, headers: header2, body: qs.stringify(msg)})
+        {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
 //查询用户信息
 export function getUserInfo(data, methods) {
-    let msg = data
     return fetch('/api/getUserInfo',
-        {method: methods, headers: header2, body: qs.stringify(msg)})
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//插入Appid接口（申请直播编码）
+export function setAppid(data, methods) {
+    return fetch('/api/insertAppId',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//编辑（更新）用户信息
+export function editUserInfo(data, methods) {
+    return fetch('/api/editUserInfo',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//查看空间动态信息
+export function getSapceInfo(data, methods) {
+    return fetch('/api/getSpaceInfo',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//插入空间动态信息
+export function insertSpaceInfo(data, methods) {
+    return fetch('/api/insertSpaceInfo',
+        {method: methods, headers: header2, body: qs.stringify(data)})
 }
 

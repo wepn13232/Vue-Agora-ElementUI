@@ -1,4 +1,4 @@
-import * as allUrls from '@/utils/allUrls'
+import * as allUrls from '../../../utils/allUrls'
 
 export default {
     name: "editPage",
@@ -108,31 +108,23 @@ export default {
         //判断是不是本人用户
         isUser() {
             let query_username = this.$route.query.username;
-            let _username = sessionStorage.getItem('username');
+            let _username = JSON.parse(sessionStorage.getItem('userInfo')).username;
             if (_username != query_username) {
                 this.$message.error("禁止修改别人的账号噢~");
-                this.$router.push({path: '/editPage', query: {username: _username}});
+                this.$router.push({path: '/personalCenter', query: {username: _username}});
                 return false;
             }
         },
         getUserInfo() {
             let _username = this.$route.query.username;
-            let _this = this;
             //    调用查询用户信息
-            allUrls.allUserInfo('post', _username).then(res => {
+            allUrls.getUserInfo({
+                username: _username
+            }, 'post').then(res => {
                 return res.json();
             }).then(data => {
                 if (+data.status === 200) {
-                    for (let i = 0; i < data.data.length; i++) {
-                        if (_username === data.data[i].username) {
-                            _this.userInfo = data.data[i];
-                            _this.userLoading = false;
-                        } else {
-                            setTimeout(() => {
-                                this.loadingText = '可能没有这个用户哦，建议重新查询~';
-                            }, 3000)
-                        }
-                    }
+                    this.userInfo = data.data[0];
                 } else {
                     this.$message.error("用户信息查询失败");
                 }
@@ -140,15 +132,33 @@ export default {
         },
         //返回上一页
         goBack() {
-            this.$router.push({path: '/personalCenter', query: {username: this.userInfo.name}})
+            this.$router.push({path: '/personalCenter', query: {username: this.userInfo.username}})
         },
         //确认修改
         confirmEdit() {
-            this.$message.success("修改成功");
+            allUrls.editUserInfo({
+                userSum: this.userInfo.userSum,
+                address: this.userInfo.address,
+                email: this.userInfo.email,
+                appid: this.userInfo.appid,
+                username: this.userInfo.username,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.$message.success("修改成功！");
+                    this.$router.go(-1);
+                } else {
+                    this.$message.error("修改失败！");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("接口错误！");
+            })
         },
         //    次级选择器-存入数据
-        handleChange() {
-            console.log(this.userInfo.address[1])
+        handleChange(val) {
+            this.userInfo.address = val[1];
         },
     },
     mounted() {

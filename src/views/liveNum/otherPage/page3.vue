@@ -19,6 +19,8 @@
 </template>
 
 <script>
+    import * as requireUrls from '../../../utils/allUrls'
+
     export default {
         name: "page3",
         data() {
@@ -33,12 +35,30 @@
         },
         methods: {
             goNext(form) {
+                let _userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
                 this.$refs[form].validate((valid) => {
                     if (valid) {
-                        //TODO 执行插入APPID，添加空间动态
-                        sessionStorage.setItem('liveNum', this.form.appid);
-                        this.$message.success("授权成功");
-                        this.$router.push({path:'/personalCenter',query:{username:sessionStorage.getItem('name')}});
+                        //TODO 执行添加空间动态
+                        requireUrls.setAppid({
+                            appid: this.form.appid,
+                            username: _userInfo.username,
+                        }, 'post').then(res => {
+                            return res.json();
+                        }).then(res => {
+                            if (+res.status === 200) {
+                                this.$message.success("授权成功");
+                                this.$router.push({
+                                    path: '/personalCenter',
+                                    query: {username: _userInfo.username}
+                                });
+                            } else {
+                                this.$message.error("授权失败");
+                            }
+                        }).catch(err => {
+                            console.log(err);
+                            this.$message.error("授权失败");
+                        })
+
                     } else {
                         return false;
                     }

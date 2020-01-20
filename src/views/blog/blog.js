@@ -1,28 +1,38 @@
+import * as requireUrls from '../../utils/allUrls'
+
 export default {
     name: "blog",
     inject: ['reloadView'],
     data() {
         return {
             username: '',
-            activities: [{
-                content: '活动按期开始',
-                timestamp: '2018-04-15'
-            }, {
-                content: '通过审核',
-                timestamp: '2018-04-13'
-            }, {
-                content: '创建成功',
-                timestamp: '2018-04-11'
-            }]
+            name: '',
+            activities: [], //空间动态信息
         }
     },
     methods: {
-        getUsername() {
-            this.username = this.$route.query.name;
+        //获取用户控件动态信息
+        getSpaceInfo() {
+            this.username = this.$route.query.username;
+            requireUrls.getSapceInfo({
+                username:this.username,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.activities = res.data;
+                    this.name = res.data[0].name;
+                } else {
+                    console.log(res.desc);
+                    this.$message.error("获取空间信息失败！");
+                }
+            }).catch(err => {
+                console.log(err);
+            })
         }
     },
     mounted() {
-        this.getUsername()
+        this.getSpaceInfo()
     },
     watch: {
         $route() {

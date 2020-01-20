@@ -1,4 +1,5 @@
 import * as requirUrls from '../../utils/allUrls'
+import da from "element-ui/src/locale/lang/da";
 
 export default {
     name: "reg",
@@ -109,7 +110,6 @@ export default {
         doReg(regForm) {
             this.$refs[regForm].validate((valid) => {
                 if (valid) {
-                    //TODO 注册执行两个接口--添加用户信息--添加空间动态（要获取注册时间）
                     requirUrls.doRegister({
                         username: this.form.username,
                         name: this.form.name,
@@ -132,13 +132,42 @@ export default {
                     }).catch(err => {
                         console.log(err);
                         this.$message.error("注册失败！");
-                    })
+                    });
+                    //执行空间信息动态插入注册信息
+                    this._insertSpaceInfo();
                 } else {
                     return false;
                 }
             })
+        },
+        //注册动态信息
+        _insertSpaceInfo() {
+            //获取时间
+            let date = new Date();
+            let y = date.getFullYear();
+            let m = date.getMonth()+1 < 10 ? "0" + (date.getMonth()+1) : date.getMonth()+1;
+            let d = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            let time = y + "-" + m + "-" + d;
+            requirUrls.insertSpaceInfo({
+                username: this.form.username,
+                name: this.form.name,
+                date: time,
+                content: "在本站注册了账号！~",
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    console.log('注册动态信息插入成功！');
+                } else {
+                    this.$message.error("注册动态信息插入失败！");
+                    console.log("注册动态信息插入失败！")
+                }
+            }).catch(err => {
+                console.log(err);
+            })
         }
     },
+    mounted(){},
     watch: {
         username() {
             this.form.username = this.form.username.replace(/[\W]/g, '');

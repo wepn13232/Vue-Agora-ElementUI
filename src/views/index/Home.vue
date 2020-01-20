@@ -78,7 +78,7 @@
                     <el-row :gutter="20">
                         <el-col :md="6" :sm="12" :xs="12" v-for="(item,index) in personInfo" v-if="index < 4"
                                 :key="index" class="personalCard">
-                            <person-card class="cardCom" @click.native="toPersonalCenter(item.name)">
+                            <person-card class="cardCom" @click.native="toPersonalCenter(item.username)">
                                 <div slot="name">
                                     <h3>{{item.name}}</h3>
                                 </div>

@@ -1,4 +1,5 @@
 import * as allUrls from '@/utils/allUrls'
+import fa from "element-ui/src/locale/lang/fa";
 
 export default {
     name: "personalCenter",
@@ -26,46 +27,46 @@ export default {
         }
     },
     methods: {
-        //getUserInfo() {
-        //    let _username = this.$route.query.username;
-        //    let _this = this;
-        //    //    调用查询用户信息
-        //    allUrls.allUserInfo('post', _username).then(res => {
-        //        return res.json();
-        //    }).then(data => {
-        //        if (+data.status === 200) {
-        //            for (let i = 0; i < data.data.length; i++) {
-        //                if (_username === data.data[i].name) {
-        //                    this.userInfo = data.data[i];
-        //                    _this.userLoading = false;
-        //                } else {
-        //                    setTimeout(() => {
-        //                        this.loadingText = '可能没有这个用户哦，建议重新查询~';
-        //                    }, 4000)
-        //                }
-        //            }
-        //        } else {
-        //            this.$message.error("用户信息查询失败");
-        //        }
-        //    }).then(() => {
-        //        this.isUser();
-        //    }).catch(err => {
-        //        this.$message.error(err);
-        //        console.log(err);
-        //    })
-        //},
+        getUserInfo() {
+            this.userLoading = true;
+            let _username = this.$route.query.username;
+            //    调用查询用户信息
+            allUrls.getUserInfo({
+                username: _username,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(data => {
+                return new Promise((resolve, reject) => {
+                    if (+data.status === 200 && data.data.length > 0) {
+                        this.userInfo = data.data[0];
+                        this.userLoading = false;
+                        resolve();
+                    } else {
+                        setTimeout(() => {
+                            this.loadingText = '可能没有这个用户哦，建议重新查询~';
+                        }, 3000);
+                        return false;
+                    }
+                }).then(() => {
+                    this.isUser();
+                })
+            }).catch(err => {
+                this.$message.error(err);
+                console.log(err);
+            })
+        },
         //    跳转至直播间编码申请
         toGetLiveNum() {
             this.$router.push('/liveNum/page1')
         },
         //    判断是否本人用户
         isUser() {
-            let _username = sessionStorage.getItem('username');
+            let session = sessionStorage.getItem('userInfo');
+            let _username = JSON.parse(session).username;
             this.isUserSelf = this.userInfo.username === _username;
             if (!this.isUserSelf) {
                 this.$set(this.userInfo, 'appid', '*******')
             }
-            console.log(this.isUserSelf)
         },
         //点击创建直播间按钮
         createLive() {
@@ -86,9 +87,9 @@ export default {
                 }
             })
         },
-        //点击博客跳转
+        //点击空间动态跳转
         toBlog() {
-            this.$router.push({path: '/blog', query: {name: this.userInfo.name}})
+            this.$router.push({path: '/blog', query: {username: this.userInfo.username}})
         },
         //点击跳转个人信息编辑
         toEdit() {
@@ -136,7 +137,7 @@ export default {
         }
     },
     mounted() {
-        //this.getUserInfo();
+        this.getUserInfo();
         this.reload()
     },
     watch: {
