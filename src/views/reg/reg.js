@@ -1,9 +1,20 @@
 import * as requirUrls from '../../utils/allUrls'
-import da from "element-ui/src/locale/lang/da";
 
 export default {
     name: "reg",
     data() {
+        //注册用户名自定义校验规则
+        const usernameCheck = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入用户名'));
+            } else {
+                if (value.length < 4) {
+                    callback(new Error('用户名长度不能小于4位'));
+                } else {
+                    this.checkSameUser(value, callback, []);
+                }
+            }
+        };
         return {
             form: {
                 username: '',
@@ -17,8 +28,8 @@ export default {
             //表单验证
             rules: {
                 username: [
-                    {required: true, message: '请输入用户名', trigger: 'blur'},
-                    {min: 4, max: 10, message: '名字长度在4~10位', trigger: 'blur'}
+                    //自定义表单验证规则
+                    {validator: usernameCheck, trigger: 'blur'}
                 ],
                 password: [
                     {required: true, message: '请输入密码', trigger: 'blur'},
@@ -105,7 +116,23 @@ export default {
         handleChange(val) {
             this.form.address = val[1];
         },
-        //TODO 在执行注册之前，异步执行检测是否用户名重复，必须保证用户名唯一
+        //检查是否有同个用户
+        checkSameUser(value, callback, errors) {
+            requirUrls.getUserInfo({
+                username: this.form.username,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200 && res.data.length > 0) {
+                    if (res.data[0].username == this.form.username) {
+                        errors.push("已存在相同用户！");
+                        callback(new Error(errors));
+                    }
+                } else {
+                    callback();
+                }
+            })
+        },
         //点击注册
         doReg(regForm) {
             this.$refs[regForm].validate((valid) => {
@@ -122,6 +149,8 @@ export default {
                     }).then(res => {
                         if (+res.status === 200) {
                             this.$message.success("注册成功！");
+                            //执行空间信息动态插入注册信息
+                            this._insertSpaceInfo();
                             setTimeout(() => {
                                 this.$router.push('/login');
                             }, 800)
@@ -133,8 +162,6 @@ export default {
                         console.log(err);
                         this.$message.error("注册失败！");
                     });
-                    //执行空间信息动态插入注册信息
-                    this._insertSpaceInfo();
                 } else {
                     return false;
                 }
@@ -145,7 +172,7 @@ export default {
             //获取时间
             let date = new Date();
             let y = date.getFullYear();
-            let m = date.getMonth()+1 < 10 ? "0" + (date.getMonth()+1) : date.getMonth()+1;
+            let m = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
             let d = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
             let time = y + "-" + m + "-" + d;
             requirUrls.insertSpaceInfo({
@@ -167,7 +194,8 @@ export default {
             })
         }
     },
-    mounted(){},
+    mounted() {
+    },
     watch: {
         username() {
             this.form.username = this.form.username.replace(/[\W]/g, '');

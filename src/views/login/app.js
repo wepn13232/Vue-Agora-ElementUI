@@ -16,10 +16,13 @@ export default {
             if (this.form.username == '' || this.form.password == '') {
                 this.$message.error('账号或密码不能为空！')
             } else {
+                //加密密码
+                let Base64 = require('js-base64').Base64;
+                let _password = Base64.encode(this.form.password);
                 //调取用户信息接口查询信息
                 let userData = {
                     username: this.form.username,
-                    password: this.form.password
+                    password: _password, //加密后的密码
                 };
                 let _this = this;
                 allUrls.doLogin('post', userData).then(res => {

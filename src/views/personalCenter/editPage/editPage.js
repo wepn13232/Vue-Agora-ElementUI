@@ -95,9 +95,9 @@ export default {
         //性别转译
         transSex(val) {
             switch (val) {
-                case 'male':
+                case '1':
                     return '男';
-                case 'female':
+                case '2':
                     return '女';
                 default :
                     return '暂未录入性别';

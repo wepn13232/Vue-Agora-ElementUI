@@ -58,3 +58,14 @@ export function insertSpaceInfo(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
+//获取照片墙
+export function getPicShows(data, methods) {
+    return fetch('/api/getPicShows',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+//添加照片（post照片）
+export function insertPic(data, methods) {
+    return fetch('/api/insertPic',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
