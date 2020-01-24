@@ -227,7 +227,7 @@ router.beforeEach((to, from, next) => {
         }
     } else {
         //验证管理员路由
-        if (to.matched.some(record => record.meta.requireAdminAuth)) {
+        if (to.matched.some(record => record.meta.requireAdminAuth)) {``
             //未登录，身份证为空
             if (!userSessionData || userSessionData.username !== 'admin') {
                 next({path: '/'})

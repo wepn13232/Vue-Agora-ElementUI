@@ -63,9 +63,18 @@ export function getPicShows(data, methods) {
     return fetch('/api/getPicShows',
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
+
+
 //添加照片（post照片）
 export function insertPic(data, methods) {
     return fetch('/api/insertPic',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+
+//根据用户昵称查询用户信息
+export function getUserInfoByName(data, methods) {
+    return fetch('/api/getUserInfoByName',
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 

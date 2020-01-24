@@ -43,7 +43,7 @@ export default {
         //搜索
         toSearch() {
             if (this.selectType == 'username') {
-                this.$router.push({path: '/personalCenter', query: {username: this.searchInfo}})
+                this.$router.push({path: '/personalCenter', query: {name: this.searchInfo}})
             } else {
                 this.$router.push({path: '/essayList', query: {essayName: this.searchInfo}})
             }

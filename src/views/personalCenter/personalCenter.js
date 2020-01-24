@@ -1,4 +1,4 @@
-import * as allUrls from '@/utils/allUrls'
+import * as allUrls from '../../utils/allUrls'
 import fa from "element-ui/src/locale/lang/fa";
 
 export default {
@@ -29,31 +29,58 @@ export default {
     methods: {
         getUserInfo() {
             this.userLoading = true;
-            let _username = this.$route.query.username;
-            //    调用查询用户信息
-            allUrls.getUserInfo({
-                username: _username,
-            }, 'post').then(res => {
-                return res.json();
-            }).then(data => {
-                return new Promise((resolve, reject) => {
-                    if (+data.status === 200 && data.data.length > 0) {
-                        this.userInfo = data.data[0];
-                        this.userLoading = false;
-                        resolve();
-                    } else {
-                        setTimeout(() => {
-                            this.loadingText = '可能没有这个用户哦，建议重新查询~';
-                        }, 3000);
-                        return false;
-                    }
-                }).then(() => {
-                    this.isUser();
+            let userIP = this.$route.query;
+            if (userIP.username) {
+                //    调用查询用户信息
+                allUrls.getUserInfo({
+                    username: userIP.username,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(data => {
+                    return new Promise((resolve, reject) => {
+                        if (+data.status === 200 && data.data.length > 0) {
+                            this.userInfo = data.data[0];
+                            this.userLoading = false;
+                            resolve();
+                        } else {
+                            setTimeout(() => {
+                                this.loadingText = '可能没有这个用户哦，建议重新查询~';
+                            }, 3000);
+                            return false;
+                        }
+                    }).then(() => {
+                        this.isUser();
+                    })
+                }).catch(err => {
+                    this.$message.error(err);
+                    console.log(err);
                 })
-            }).catch(err => {
-                this.$message.error(err);
-                console.log(err);
-            })
+            } else if (userIP.name) {
+                //    根据用户昵称查询用户信息
+                allUrls.getUserInfoByName({
+                    name: userIP.name,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(data => {
+                    return new Promise((resolve, reject) => {
+                        if (+data.status === 200) {
+                            this.userInfo = data.data;
+                            this.userLoading = false;
+                            resolve();
+                        } else {
+                            setTimeout(() => {
+                                this.loadingText = '可能没有这个用户哦，建议重新查询~';
+                            }, 3000);
+                            return false;
+                        }
+                    }).then(() => {
+                        this.isUser();
+                    })
+                }).catch(err => {
+                    this.$message.error(err);
+                    console.log(err);
+                })
+            }
         },
         //    跳转至直播间编码申请
         toGetLiveNum() {

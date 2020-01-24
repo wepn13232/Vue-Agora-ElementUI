@@ -16,7 +16,7 @@
                                   clearable></el-input>
                     </el-form-item>
                     <el-form-item label="昵称" prop="name">
-                        <el-input type="text" v-model="form.name" class="input-width"
+                        <el-input type="text" v-model="form.name" class="input-width" @input="replaceSpace"
                                   clearable></el-input>
                     </el-form-item>
                     <el-form-item label="邮箱" prop="email">

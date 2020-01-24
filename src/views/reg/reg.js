@@ -15,6 +15,15 @@ export default {
                 }
             }
         };
+        const nameCheck = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error("请输入昵称"))
+            } else if (value.length < 2 || value.length > 8) {
+                callback(new Error("用户昵称长度只能在2~8位"));
+            } else {
+                this.checkSameName(value, callback, []);
+            }
+        };
         return {
             form: {
                 username: '',
@@ -28,6 +37,7 @@ export default {
             //表单验证
             rules: {
                 username: [
+                    {required:true},
                     //自定义表单验证规则
                     {validator: usernameCheck, trigger: 'blur'}
                 ],
@@ -36,8 +46,8 @@ export default {
                     {min: 6, max: 11, message: '密码长度在6~11位', trigger: 'blur'}
                 ],
                 name: [
-                    {required: true, message: '请输入昵称', trigger: 'blur'},
-                    {min: 2, max: 8, message: '昵称长度在2~8位', trigger: 'blur'}
+                    {required:true},
+                    {validator: nameCheck, trigger: 'blur'}
                 ],
                 email: [
                     {required: true, message: '请输入邮箱号', trigger: 'blur'},
@@ -133,6 +143,23 @@ export default {
                 }
             })
         },
+        //检查是否有相同用户昵称
+        checkSameName(value, callback, errors) {
+            requirUrls.getUserInfoByName({
+                name:this.form.name
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    if (res.data.name === this.form.name) {
+                        errors.push("已存在相同昵称！");
+                        callback(new Error(errors));
+                    }
+                } else {
+                    callback()
+                }
+            })
+        },
         //点击注册
         doReg(regForm) {
             this.$refs[regForm].validate((valid) => {
@@ -192,7 +219,11 @@ export default {
             }).catch(err => {
                 console.log(err);
             })
-        }
+        },
+        //替换空格
+        replaceSpace(){
+            this.form.name =  this.form.name.replace(/\s+/g,"");
+        },
     },
     mounted() {
     },
