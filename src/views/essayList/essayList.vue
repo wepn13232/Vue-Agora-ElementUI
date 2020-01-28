@@ -5,6 +5,11 @@
             <!--  所有文章-->
             <div class="essayBefore">
                 <Divider class="recDivider">所有文章</Divider>
+                <!--    添加文章按钮-->
+                <div class="container">
+                    <el-button type="primary" class="fr" @click="toAddEssay">发表文章</el-button>
+                    <div class="clearFix"></div>
+                </div>
                 <ul>
                     <li v-for="(lists,index) in essayInfo" :key="index" v-show="index < listsNum">
                         <div class="container pb2 pt2" style="cursor:pointer">
@@ -13,7 +18,7 @@
                                     <img :src="lists.url" alt="essay-pic">
                                 </div>
                                 <div slot="title">{{lists.title}}</div>
-                                <!--<div slot="desc" v-html="lists.content"></div>-->
+                                <div slot="desc" v-html="lists.oTitle"></div>
                                 <div slot="author">作者：{{lists.username}}</div>
                             </essay-card>
                         </div>

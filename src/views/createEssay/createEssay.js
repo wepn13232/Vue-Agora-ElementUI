@@ -13,6 +13,7 @@ export default {
                 title: '',
                 pic: '',
                 essayType: '',
+                OTitle:'',
             },
             contenText: '',
             options: [
@@ -57,6 +58,7 @@ export default {
                             content: content,
                             essayType: this.essayForm.essayType,
                             url: this.essayForm.pic,
+                            OTitle:this.essayForm.OTitle,
                         }, 'post').then(res => {
                             return res.json();
                         }).then(res => {

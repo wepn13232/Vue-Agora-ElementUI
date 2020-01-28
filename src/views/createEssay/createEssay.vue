@@ -19,6 +19,9 @@
                     <el-form-item label="文章标题" prop="title">
                         <el-input v-model="essayForm.title"></el-input>
                     </el-form-item>
+                    <el-form-item label="附言" prop="OTitle">
+                        <el-input v-model="essayForm.OTitle"></el-input>
+                    </el-form-item>
                     <el-form-item label="文章内容">
                         <div id="websiteEditorElem" style="height: 550px"></div>
                     </el-form-item>
