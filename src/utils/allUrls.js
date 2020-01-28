@@ -78,3 +78,15 @@ export function getUserInfoByName(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
+//获取文章信息（可模糊查询）
+export function getEssay(data, methods) {
+    return fetch('/api/getEssay',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//添加文章
+export function insertEssay(data, methods) {
+    return fetch('/api/insertEssay',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
