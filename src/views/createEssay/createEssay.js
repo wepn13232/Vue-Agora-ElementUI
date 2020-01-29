@@ -79,7 +79,7 @@ export default {
                             username: this.username,
                             name: this.name,
                             date: time,
-                            content: '在本站发布了一篇文章~！',
+                            content: '在本站发布了一篇文章~！---'+this.essayForm.title,
                         }, 'post').then(res => {
                             return res.json();
                         }).then(res => {

@@ -54,7 +54,7 @@
                                     <img :src="item.url" alt="essay-pic">
                                 </div>
                                 <div slot="title">{{item.title}}</div>
-                                <div slot="desc" v-html="item.content"></div>
+                                <div slot="desc" v-html="item.oTitle"></div>
                             </essay-card>
                         </el-col>
                     </el-row>

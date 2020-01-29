@@ -38,29 +38,35 @@ export default {
             return Math.random() > .5 ? -1 : 1;
         },
         //获取文章信息
-        getEssay() {
-                allUrls.getEssay({}, 'post').then(res => {
-                    return res.json();
-                }).then(data => {
-                    if (+data.status === 200) {
-                        //往期文章
-                        this.essayInfo = data.data;
-                        this.loadingEssay = false;
-                    } else {
-                        this.$message.error("获取文章信息错误！");
-                        return false;
-                    }
-                }).catch(err => {
-                    console.log(err);
+        getEssay(val) {
+            allUrls.getEssay({
+                title: val,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(data => {
+                if (+data.status === 200) {
+                    //往期文章
+                    this.essayInfo = data.data;
+                    this.loadingEssay = false;
+                } else {
                     this.$message.error("获取文章信息错误！");
                     return false;
-                });
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("获取文章信息错误！");
+                return false;
+            });
         },
     },
     mounted() {
         //this.reload();
-        //this.essayName = this.$route.query.essayName;
-        this.getEssay();
+        this.essayName = this.$route.query.essayName;
+        if (this.essayName) {
+            this.getEssay(this.essayName);
+        } else {
+            this.getEssay();
+        }
     },
     watch: {
         $route() {

@@ -16,6 +16,10 @@ export default {
         }
     },
     methods: {
+        //随机数组方法
+        randomMath(a, b) {
+            return Math.random() > .5 ? -1 : 1;
+        },
         //获取首页推荐（图片）、
         getIndexPic() {
             this.loading1 = true
@@ -36,23 +40,24 @@ export default {
         },
         //获取首页文章推荐
         getIndexEssay() {
-            allUrls.getIndexEssay('post').then(res => {
+            allUrls.getEssay({}, 'post').then(res => {
                 return res.json();
             }).then(data => {
                 if (+data.status === 200) {
-                    this.essayInfo = data.data
+                    this.essayInfo = data.data.sort(this.randomMath)
                 } else {
                     this.$message.error("获取文章数据失败")
                 }
             }).catch(err => {
-                console.log(err)
+                console.log(err);
+                this.$message.error("获取文章信息出错！");
             })
         },
         //获取人物卡片信息
         getTopListPerson() {
             allUrls.getUserInfo({
-            //    此处username可不传，查全部
-            },"post").then(res => {
+                //    此处username可不传，查全部
+            }, "post").then(res => {
                 return res.json();
             }).then(data => {
                 this.personInfo = data.data;

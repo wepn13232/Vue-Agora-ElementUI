@@ -35,20 +35,25 @@ export default {
         },
         //获取文章信息
         getEssayInfo(val) {
-            allUrls.getIndexEssay('post', val).then(res => {
-                return res.json();
-            }).then(data => {
-                if (+data.status === 200) {
-                    let res = data.data.filter((res) => {
-                        return res.id == val;
-                    });
-                    this.essayInfo = res[0];
-                } else {
-                    this.$message.error("获取文章信息失败");
-                }
+            return new Promise((resolve, reject) => {
+                allUrls.getEssay({
+                    id: val,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(data => {
+                    if (+data.status === 200) {
+                        this.essayInfo = data.data[0];
+                        resolve();
+                    } else {
+                        this.$message.error("获取文章信息失败");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("获取文章信息出错！");
+                })
             }).then(() => {
                 //获取用户评分
-                this.getUserScore(this.essayInfo.user);
+                //this.getUserScore(this.essayInfo.user);
             })
         },
         //长时间浏览提示打分
