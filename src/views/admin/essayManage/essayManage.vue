@@ -2,7 +2,7 @@
     <div class="essayManage">
         <div class="searchEssay">
             <el-input placeholder="请输入文章标题" v-model="input">
-                <el-button slot="append">搜索</el-button>
+                <el-button slot="append" @click="searchEssay">搜索</el-button>
             </el-input>
         </div>
         <div class="essayForm">
@@ -25,7 +25,7 @@
                     width="550">
                 </el-table-column>
                 <el-table-column
-                    prop="user"
+                    prop="name"
                     label="发表用户"
                     width="180">
                 </el-table-column>

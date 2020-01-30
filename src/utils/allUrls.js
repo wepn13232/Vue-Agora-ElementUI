@@ -90,3 +90,16 @@ export function insertEssay(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
+
+//用户打分
+export function setScore(data, methods) {
+    return fetch('/api/setScore',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//获取评分等级
+export function getScore(data, methods) {
+    return fetch('/api/getScore',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+

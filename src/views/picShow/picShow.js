@@ -4,6 +4,7 @@ import * as requireUrls from '../../utils/allUrls'
 export default {
     name: "picShow",
     components: {cardPic},
+    inject: ['reload'],
     data() {
         return {
             userInfo: '', //用户信息
@@ -177,5 +178,6 @@ export default {
     mounted() {
         this.getUserInfo();
         this.getPics();
+        this.reload();
     },
 }

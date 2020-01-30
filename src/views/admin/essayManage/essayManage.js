@@ -12,19 +12,19 @@ export default {
     methods: {
         deleteRow(val) {
             console.log(val.id);
-            this.$confirm('是否删除该文章？','提示',{
-                type:'warning',
+            this.$confirm('是否删除该文章？', '提示', {
+                type: 'warning',
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
-                center:true
-            }).then(()=>{
+                center: true
+            }).then(() => {
                 this.$message.success("删除成功!");
-            }).catch(()=>{
+            }).catch(() => {
 
             })
         },
         getEssayData() {
-            allUrls.getIndexEssay('post').then(res => {
+            allUrls.getEssay({}, 'post').then(res => {
                 return res.json();
             }).then(data => {
                 if (+data.status === 200) {
@@ -37,7 +37,26 @@ export default {
                 this.$message.error(err);
                 console.log(err);
             })
-        }
+        },
+        //搜索文章
+        searchEssay() {
+            this.loadEssayForm = true;
+            allUrls.getEssay({
+                title: this.input,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.tableData = res.data;
+                    this.loadEssayForm = false;
+                } else {
+                    this.$message.error("获取文章信息失败！");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("获取文章信息出错！");
+            })
+        },
     },
     mounted() {
         this.getEssayData()

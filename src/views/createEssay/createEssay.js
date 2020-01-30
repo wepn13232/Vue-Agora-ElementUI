@@ -34,7 +34,7 @@ export default {
                 pic: [{required: true, message: "请填写封面图片地址", trigger: 'blur'}],
                 essayType: [{required: true, message: "请选择文章类型", trigger: 'change'}],
                 title: [{required: true, message: "请填写文章标题", trigger: 'blur'},
-                    {min: 4, max: 15, message: "标题限制在4~15个字", trigger: 'blur'}],
+                    {min: 4, max: 20, message: "标题限制在4~20个字", trigger: 'blur'}],
 
             },
         }
