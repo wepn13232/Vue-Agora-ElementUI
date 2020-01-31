@@ -2,7 +2,7 @@ import * as allUrls from '../../utils/allUrls.js'
 
 export default {
     name: "essayInfo",
-    inject:['reload'],
+    inject: ['reload'],
     data() {
         return {
             essayId: '',
@@ -10,6 +10,8 @@ export default {
             value: 0,  //打分文章推荐星级
             isRateValue: 0,  //文章等级分数
             dialogVisible: false,
+            isSetScore: false, //判断用户是否已打分
+            userInfo: '', //用户信息
         }
     },
     methods: {
@@ -58,11 +60,15 @@ export default {
             }).then(() => {
                 //获取用户评分
                 this.getUserScore();
+                //获取用户是否已评分
+                this._setScoreOrNot();
             })
         },
         //长时间浏览提示打分
         openDialog() {
-            this.dialogVisible = true;
+            if (!this.isSetScore) {
+                this.dialogVisible = true;
+            }
         },
         //确认打分
         confirmScore() {
@@ -74,8 +80,8 @@ export default {
                 allUrls.setScore({
                     username: this.essayInfo.username,
                     score: this.value,
-                    setedUser:_user.username,
-                    essayID:this.essayInfo.id,
+                    setedUser: _user.username,
+                    essayID: this.essayInfo.id,
                 }, 'post').then(res => {
                     return res.json();
                 }).then(res => {
@@ -93,8 +99,31 @@ export default {
                 this.$message.error("不可以打0分喔");
             }
         },
+        //获取用户是否已打分
+        _setScoreOrNot() {
+            if (this.userInfo) {
+                allUrls.setScoreOrNot({
+                    setedUser: this.userInfo.username,
+                    essayID: this.essayInfo.id,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(res => {
+                    if (+res.status === 200) {
+                        this.isSetScore = true;
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("获取用户是否已打分出错！");
+                })
+            }
+        },
+        //获取用户信息
+        getUserInfo() {
+            this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+        },
     },
     mounted() {
+        this.getUserInfo();
         this.reload();
         this.essayId = this.$route.query.id;
         this.getEssayInfo(this.essayId);

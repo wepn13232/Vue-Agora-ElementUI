@@ -103,3 +103,9 @@ export function getScore(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
+//获取用户是否打分
+export function setScoreOrNot(data, methods) {
+    return fetch('/api/setScoreOrNot',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
