@@ -45,11 +45,7 @@ export default {
             barrage: [],
             //个人信息
             userInfo: {
-                username: '',
-                userType: '',
-                liveNumber: '',
-                userSum: '',
-                name: ''
+                userType: ''
             },
             //主播信息
             hostInfo: '',
@@ -60,15 +56,18 @@ export default {
     methods: {
         //获取用户信息、主播个人信息、在判断开播设置
         getUserInfo() {
+            let _userinfo = JSON.parse(sessionStorage.getItem('userInfo'));
+            if (_userinfo) {
+                this.userInfo = _userinfo;
+            }
             return new Promise(resolve => {
-                this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
                 allUrls.getHostInfo({
                     username: this.$route.query.hostName
                 }, 'post').then(res => {
                     return res.json();
                 }).then(res => {
                     if (+res.status === 200) {
-                        this.hostInfo = res.data;
+                        this.hostInfo = res.data[0];
                         resolve();
                     } else {
                         this.$message.error("获取主播信息失败！");
@@ -110,7 +109,7 @@ export default {
             //直播互动，建议模式为live,若为通信则为rtc
             rtc.client = AgoraRTC.createClient({mode: "live", codec: "h264"});
             //初始化
-            rtc.client.init(this.userInfo.liveNumber, function () {
+            rtc.client.init(this.userInfo.appid, function () {
                 console.log("客户端初始化完成");
                 //设置角色=>"host"为主播,"audience"为观众
                 rtc.client.setClientRole("host");
@@ -228,7 +227,7 @@ export default {
                 }
                 console.log("离开频道成功");
                 _this.$message.info('下播成功~');
-                _this.$router.push({path: '/personalCenter', query: {username: _this.userInfo.name}})
+                _this.$router.push({path: '/personalCenter', query: {name: _this.userInfo.name}})
             }, function (err) {
                 console.log("离开频道失败" + err);
             })

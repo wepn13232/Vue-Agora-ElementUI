@@ -1,3 +1,5 @@
+import * as allUrls from '../../utils/allUrls'
+
 export default {
     name: "liveHall",
     data() {
@@ -5,10 +7,11 @@ export default {
             //默认显示12个主播
             personNum: 6,
             test: 20,
-            showMoreTitle: '点击加载更多'
+            showMoreTitle: '点击加载更多',
+            hostInfo: '', //直播大厅主播信息
         }
     },
-    inject:['reload'],
+    inject: ['reload'],
     methods: {
         //点击查看更多，一次性加6个
         morePerson() {
@@ -17,11 +20,27 @@ export default {
                 this.showMoreTitle = '已经没有更多啦！'
             }
         },
-        toLive() {
-            this.$router.push({path: '/liveRoom', query: {userType: 'audience'}})
-        }
+        toLive(val) {
+            this.$router.push({path: '/liveRoom', query: {userType: 'audience',hostName:val}})
+        },
+        //获取主播信息
+        getHostInfo() {
+            allUrls.getHostInfo({}, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.hostInfo = res.data;
+                } else {
+                    this.$message.error("获取主播信息失败！");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("获取主播信息出错！");
+            })
+        },
     },
-    mounted(){
+    mounted() {
         this.reload();
+        this.getHostInfo();
     }
 }
