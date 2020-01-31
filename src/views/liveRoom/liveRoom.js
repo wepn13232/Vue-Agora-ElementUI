@@ -1,8 +1,7 @@
 import AgoraRTC from 'agora-rtc-sdk'
 import AgoraRTM from 'agora-rtm-sdk'
-import fa from "element-ui/src/locale/lang/fa";
 import roomTabs from "@/components/roomTabs/roomTabs.vue";
-import * as allUrls from '@/utils/allUrls'
+import * as allUrls from '../../utils/allUrls'
 
 //设置直播参数
 var rtc = {
@@ -52,38 +51,58 @@ export default {
                 userSum: '',
                 name: ''
             },
-            //房间信息
-            roomInfo: {
-                channelName: '',
-                channelSum: '',
-                username: ''
-            }
+            //主播信息
+            hostInfo: '',
+            //主播个人信息简介
+            hostPersonalSum: '',
         }
     },
     methods: {
-        //获取用户信息
+        //获取用户信息、主播个人信息、在判断开播设置
         getUserInfo() {
-            //正常情况是从直播信息表里面拿到用户名（或者从url中）
-            this.userInfo.username = sessionStorage.getItem('username');
-            this.userInfo.name = sessionStorage.getItem('name');
-            this.userInfo.liveNumber = sessionStorage.getItem('liveNum');
-            let _this = this;
-            //拿到用户信息名之后，调用用户信息表接口，拿取用户信息（个人简介）
-            this.$nextTick(() => {
-                allUrls.allUserInfo('post', _this.userInfo.username).then(res => {
+            return new Promise(resolve => {
+                this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+                allUrls.getHostInfo({
+                    username: this.$route.query.hostName
+                }, 'post').then(res => {
                     return res.json();
-                }).then(data => {
-                    if (+data.status === 200) {
-                        for (let i = 0; i < data.data.length; i++) {
-                            if (data.data[i].username === _this.userInfo.username) {
-                                _this.userInfo.userSum = data.data[i].userSum;
-                            }
-                        }
+                }).then(res => {
+                    if (+res.status === 200) {
+                        this.hostInfo = res.data;
+                        resolve();
+                    } else {
+                        this.$message.error("获取主播信息失败！");
+                        return false;
                     }
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("获取主播信息出错！");
+                    return false;
                 })
-            });
-            this.roomInfo.channelName = sessionStorage.getItem('channelName');
-            this.roomInfo.channelSum = sessionStorage.getItem('channelSum');
+            }).then(() => {
+                //获取主播简介
+                this.getHostSum();
+                // 判断用户类型，开播
+                this.getUserType();
+            })
+        },
+        //获取主播个人简介
+        getHostSum() {
+            allUrls.getUserInfo({
+                username: this.$route.query.hostName
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.hostPersonalSum = res.data[0].userSum;
+                } else {
+                    this.$message.error("获取用户个人简介失败！");
+                    return false;
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("获取主播个人简介出错！");
+            })
         },
         //============主播创建直播客户端=============
         createHostLive() {
@@ -219,13 +238,12 @@ export default {
             let _userType = this.$route.query.userType;
             if (_userType == 'host') {
                 this.userInfo.userType = 'host';
-                if (!this.userInfo.liveNumber) {
+                if (!this.userInfo.appid) {
                     this.$message.warning("你暂未申请直播授权码，还不可以直播哦");
                     this.$router.go(-1);
                     return false;
                 } else {
-                    let channelTitle = sessionStorage.getItem('channelName');
-                    if (!channelTitle) {
+                    if (!this.hostInfo.title) {
                         this.$message.warning("你还没填写直播间信息，请填写再开播哦");
                         this.$router.go(-1)
                     } else {
@@ -321,7 +339,6 @@ export default {
     },
     mounted() {
         this.getUserInfo();
-        this.getUserType();
         this.displayInertval = setInterval(() => {
             this.addDisplay();
         }, 10000);

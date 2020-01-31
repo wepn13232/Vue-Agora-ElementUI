@@ -1,5 +1,4 @@
 import * as allUrls from '../../utils/allUrls'
-import fa from "element-ui/src/locale/lang/fa";
 
 export default {
     name: "personalCenter",
@@ -97,8 +96,12 @@ export default {
         },
         //点击创建直播间按钮
         createLive() {
-            this.dialogVisible = true;
-            this.roomForm.name = this.userInfo.name;
+            if (this.userInfo.liveStatus == '1') {
+                this.dialogVisible = true;
+                this.roomForm.name = this.userInfo.name;
+            } else {
+                this.$message.error("你的账号被禁止直播，请联系管理员");
+            }
         },
         //创建直播间
         toCreateLiveRoom(roomForm) {
@@ -106,9 +109,24 @@ export default {
                 if (valid) {
                     //替换空格
                     this.roomForm.channelSum = this.roomForm.channelSum.replace(/\n/g, '<br/>')
-                    sessionStorage.setItem('channelName', this.roomForm.channelName);
-                    sessionStorage.setItem('channelSum', this.roomForm.channelSum);
-                    this.$router.push({path: '/liveRoom', query: {userType: 'host'}})
+                    allUrls.insertHost({
+                        username: this.userInfo.username,
+                        name: this.userInfo.name,
+                        appid: this.userInfo.appid,
+                        title: this.roomForm.channelName,
+                        roomSum: this.roomForm.channelSum
+                    }, 'post').then(res => {
+                        return res.json();
+                    }).then(res => {
+                        if (+res.status === 200) {
+                            this.$router.push({path: '/liveRoom', query: {userType: 'host',hostName:this.userInfo.username}})
+                        } else {
+                            this.$message.error("开播失败！");
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        this.$message.error("开播出现错误！");
+                    })
                 } else {
                     return false;
                 }

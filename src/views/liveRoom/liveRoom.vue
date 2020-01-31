@@ -10,8 +10,8 @@
                 </div>
                 <!--房间标题-->
                 <div class="roomTitle">
-                    <h4 class="room-title">{{roomInfo.channelName}}</h4>
-                    <span class="room-user">主播：{{userInfo.name}}</span>
+                    <h4 class="room-title">{{hostInfo.title}}</h4>
+                    <span class="room-user">主播：{{hostInfo.name}}</span>
                     <el-button v-if="userInfo.userType=='host'" type="danger" @click="cutLive" size="small"
                                class="float-right">下播
                     </el-button>
@@ -69,9 +69,9 @@
             <!--直播简介-->
             <div class="liveInfo">
                 <room-tabs>
-                    <div slot="channelSum" v-html="roomInfo.channelSum"></div>
-                    <div slot="channelSum" v-if="!roomInfo.channelSum">这个主播太懒了，还没有写直播简介呢~(*╹▽╹*)</div>
-                    <div slot="userSum">{{userInfo.userSum || '暂无简介，这个人很神秘呢~'}}</div>
+                    <div slot="channelSum" v-html="hostInfo.roomSum"></div>
+                    <div slot="channelSum" v-if="!hostInfo.roomSum">这个主播太懒了，还没有写直播简介呢~(*╹▽╹*)</div>
+                    <div slot="userSum">{{hostPersonalSum || '暂无简介，这个人很神秘呢~'}}</div>
                 </room-tabs>
             </div>
         </div>
