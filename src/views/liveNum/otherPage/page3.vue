@@ -38,27 +38,49 @@
                 let _userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
                 this.$refs[form].validate((valid) => {
                     if (valid) {
-                        //TODO 执行添加空间动态
-                        requireUrls.setAppid({
-                            appid: this.form.appid,
-                            username: _userInfo.username,
-                        }, 'post').then(res => {
-                            return res.json();
-                        }).then(res => {
-                            if (+res.status === 200) {
-                                this.$message.success("授权成功");
-                                this.$router.push({
-                                    path: '/personalCenter',
-                                    query: {username: _userInfo.username}
-                                });
-                            } else {
+                        return new Promise(resolve => {
+                            requireUrls.setAppid({
+                                appid: this.form.appid,
+                                username: _userInfo.username,
+                            }, 'post').then(res => {
+                                return res.json();
+                            }).then(res => {
+                                if (+res.status === 200) {
+                                    resolve();
+                                    this.$message.success("授权成功");
+                                } else {
+                                    this.$message.error("授权失败");
+                                    return false;
+                                }
+                            }).catch(err => {
+                                console.log(err);
                                 this.$message.error("授权失败");
-                            }
-                        }).catch(err => {
-                            console.log(err);
-                            this.$message.error("授权失败");
+                                return false;
+                            })
+                        }).then(() => {
+                            requireUrls.insertHost({
+                                username: _userInfo.username,
+                                name: _userInfo.name,
+                                appid:this.form.appid,
+                                title: _userInfo.name + '的直播间',
+                                roomSum: ''
+                            }, 'post').then(res => {
+                                return res.json();
+                            }).then(res => {
+                                if (+res.status === 200) {
+                                    console.log("创建默认直播间成功！");
+                                    this.$router.push({
+                                        path: '/personalCenter',
+                                        query: {username: _userInfo.username}
+                                    });
+                                } else {
+                                    this.$message.error("创建默认直播间失败！");
+                                }
+                            }).catch(err => {
+                                console.log(err);
+                                this.$message.error("创建默认直播间出错!");
+                            })
                         })
-
                     } else {
                         return false;
                     }

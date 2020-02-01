@@ -21,8 +21,10 @@ import essayManage from "@/views/admin/essayManage/essayManage.vue";
 import liveManage from "@/views/admin/liveManage/liveManage.vue";
 import createEssay from "@/views/createEssay/createEssay.vue";
 import picShow from "./views/picShow/picShow.vue";
+import {Message} from "element-ui";
 
 Vue.use(Router);
+//Vue.use(Message);
 
 
 const router = new Router({
@@ -221,6 +223,7 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requireAuth)) {
         //未登录，身份证为空
         if (!userSessionData) {
+            Message.info("未登录账号或账号信息过期，请重新登录！");
             next({path: '/login'})
         } else {
             next()

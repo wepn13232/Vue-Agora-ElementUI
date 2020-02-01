@@ -109,7 +109,7 @@ export function setScoreOrNot(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
-//开播添加主播信息
+//添加主播信息
 export function insertHost(data, methods) {
     return fetch('/api/insertHost',
         {method: methods, headers: header2, body: qs.stringify(data)})
@@ -118,6 +118,12 @@ export function insertHost(data, methods) {
 //获取主播信息
 export function getHostInfo(data, methods) {
     return fetch('/api/getHostInfo',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//开播更新主播表信息
+export function updateHostInfo(data, methods) {
+    return fetch('/api/updateHostInfo',
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 

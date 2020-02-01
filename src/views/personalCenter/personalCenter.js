@@ -109,23 +109,24 @@ export default {
                 if (valid) {
                     //替换空格
                     this.roomForm.channelSum = this.roomForm.channelSum.replace(/\n/g, '<br/>')
-                    allUrls.insertHost({
-                        username: this.userInfo.username,
-                        name: this.userInfo.name,
-                        appid: this.userInfo.appid,
+                    allUrls.updateHostInfo({
                         title: this.roomForm.channelName,
-                        roomSum: this.roomForm.channelSum
+                        roomSum: this.roomForm.channelSum,
+                        username: this.userInfo.username,
                     }, 'post').then(res => {
                         return res.json();
                     }).then(res => {
                         if (+res.status === 200) {
-                            this.$router.push({path: '/liveRoom', query: {userType: 'host',hostName:this.userInfo.username}})
+                            this.$router.push({
+                                path: '/liveRoom',
+                                query: {userType: 'host', hostName: this.userInfo.username}
+                            })
                         } else {
-                            this.$message.error("开播失败！");
+                            this.$message.error("更新主播表失败,开播失败!");
                         }
                     }).catch(err => {
                         console.log(err);
-                        this.$message.error("开播出现错误！");
+                        this.$message.error("更新主播表出错，开播失败！")
                     })
                 } else {
                     return false;
