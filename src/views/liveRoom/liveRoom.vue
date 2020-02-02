@@ -13,7 +13,7 @@
                     <h4 class="room-title">{{hostInfo.title}}</h4>
                     <div class="room-user">
                         主播：{{hostInfo.name}}
-                        <el-tag type="info" size="small" effect="dark" v-if="!isLive">未开播</el-tag>
+                        <el-tag type="info" size="small" effect="dark" v-if="isLive === 0">未开播</el-tag>
                     </div>
                     <el-button v-if="userInfo.userType=='host'" type="danger" @click="cutLive" size="small"
                                class="float-right">下播
@@ -60,7 +60,8 @@
                     <!--聊天输入框-->
                     <div class="chatInput">
                         <el-input v-if="userInfo.username" placeholder="开始聊天吧~" maxlength="25" show-word-limit
-                                  @keyup.enter.native="sendMsg" v-model="chatInfo" class="input-with-select" ref="input" :disabled="sendInterval">
+                                  @keyup.enter.native="sendMsg" v-model="chatInfo" class="input-with-select" ref="input"
+                                  :disabled="sendInterval">
                             <el-button slot="append" @click="sendMsg">发送</el-button>
                         </el-input>
                         <el-input v-else placeholder="请先登录噢~" class="input-with-select" disabled>

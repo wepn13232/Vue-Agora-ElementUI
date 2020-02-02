@@ -13,6 +13,7 @@ var rtc = {
     params: {}
 };
 //设置个人参数(默认)
+//TODO 该处的channel应该是唯一标识，避免加入冲突
 var option = {
     appID: "ec7820719525489e80fa257f7b4c1062",
     channel: "TextChannelName",
@@ -51,7 +52,7 @@ export default {
             hostInfo: '',
             //主播个人信息简介
             hostPersonalSum: '',
-            isLive: false, //判断是否已开播
+            isLive: 0, //判断是否已开播
         }
     },
     methods: {
@@ -340,7 +341,7 @@ export default {
                 return res.json();
             }).then(res => {
                 if (+res.status === 200) {
-                    this.isLive = res.data.live;
+                    this.isLive = res.data.isLive;
                 } else {
                     this.$message.error(res.desc);
                 }

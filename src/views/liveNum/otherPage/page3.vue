@@ -63,7 +63,7 @@
                                 name: _userInfo.name,
                                 appid:this.form.appid,
                                 title: _userInfo.name + '的直播间',
-                                roomSum: ''
+                                roomSum: '',
                             }, 'post').then(res => {
                                 return res.json();
                             }).then(res => {
