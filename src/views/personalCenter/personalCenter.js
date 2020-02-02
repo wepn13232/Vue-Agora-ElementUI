@@ -127,6 +127,7 @@ export default {
                     allUrls.updateHostInfo({
                         title: this.roomForm.channelName,
                         roomSum: this.roomForm.channelSum,
+                        isLive: 1, //1代表开播，0没开播
                         username: this.userInfo.username,
                     }, 'post').then(res => {
                         return res.json();

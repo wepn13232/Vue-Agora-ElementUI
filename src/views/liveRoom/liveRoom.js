@@ -13,7 +13,6 @@ var rtc = {
     params: {}
 };
 //设置个人参数(默认)
-//TODO 该处的channel应该是唯一标识，避免加入冲突
 var option = {
     appID: "ec7820719525489e80fa257f7b4c1062",
     channel: "TextChannelName",
@@ -70,6 +69,7 @@ export default {
                 }).then(res => {
                     if (+res.status === 200) {
                         this.hostInfo = res.data[0];
+                        option.channel = (res.data[0].id).toString();
                         resolve();
                     } else {
                         this.$message.error("获取主播信息失败！");
@@ -229,8 +229,22 @@ export default {
                     stream.stop();
                     removeView(id);
                 }
-                console.log("离开频道成功");
-                _this.$message.info('下播成功~');
+                allUrls.updateHostInfo({
+                    isLive: 0, //0为下播，1为开播
+                    username: _this.hostInfo.username
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(res => {
+                    if (+res.status === 200) {
+                        console.log("离开频道成功");
+                        _this.$message.info('下播成功~');
+                    } else {
+                        _this.$message.error("未能正常下播，请联系管理员");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    _this.$message.error("未能正常下播，请联系管理员");
+                })
                 _this.$router.push({path: '/personalCenter', query: {name: _this.userInfo.name}})
             }, function (err) {
                 console.log("离开频道失败" + err);
@@ -241,27 +255,44 @@ export default {
             let _userType = this.$route.query.userType;
             if (_userType == 'host') {
                 this.userInfo.userType = 'host';
-                if (!this.userInfo.appid) {
-                    this.$message.warning("你暂未申请直播授权码，还不可以直播哦");
-                    this.$router.go(-1);
-                    return false;
-                } else {
-                    if (!this.hostInfo.title) {
-                        this.$message.warning("你还没填写直播间信息，请填写再开播哦");
-                        this.$router.go(-1)
+                return new Promise(resolve => {
+                    //获取主播appid
+                    allUrls.getAppid({
+                        username: this.hostInfo.username,
+                    }, 'post').then(res => {
+                        return res.json();
+                    }).then(res => {
+                        if (+res.status === 200) {
+                            this.hostInfo.appid = res.data.appid;
+                            resolve();
+                        } else {
+                            this.$message.error("获取appid失败！");
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        this.$message.error("获取appid出现错误");
+                    })
+                }).then(() => {
+                    if (!this.userInfo.appid) {
+                        this.$message.warning("你暂未申请直播授权码，还不可以直播哦");
+                        this.$router.go(-1);
+                        return false;
                     } else {
-                        // 主播创建直播间
-                        this.createHostLive();
-                        this.loginInChat();
-
+                        if (!this.hostInfo.title) {
+                            this.$message.warning("你还没填写直播间信息，请填写再开播哦");
+                            this.$router.go(-1)
+                        } else {
+                            // 主播创建直播间
+                            this.createHostLive();
+                            this.loginInChat();
+                        }
                     }
-                }
+                });
             } else {
                 this.userInfo.userType = 'audience';
                 //    观众方式加入直播间
                 this.createAudLive();
                 this.loginInChat()
-
             }
         },
         //登录聊天频道

@@ -139,3 +139,10 @@ export function getLiveStatus(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
+
+//admin获取所有主播信息
+export function adminGetHostInfo(data, methods) {
+    return fetch('/api/adminGetHostInfo',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+

@@ -8,7 +8,7 @@ export default {
     data() {
         return {
             userInfo: '', //用户信息
-            showTips: true, //文字提示
+            showTips: false, //文字提示
             cardList: [],
             interval: '', //检测图片加载循环
             loading: true,
@@ -176,6 +176,9 @@ export default {
         },
     },
     mounted() {
+        setTimeout(()=>{
+            this.showTips = true;
+        },1000)
         this.getUserInfo();
         this.getPics();
         this.reload();
