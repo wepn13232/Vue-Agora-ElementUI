@@ -51,6 +51,7 @@ export default {
             hostInfo: '',
             //主播个人信息简介
             hostPersonalSum: '',
+            isLive: false, //判断是否已开播
         }
     },
     methods: {
@@ -83,6 +84,8 @@ export default {
                 this.getHostSum();
                 // 判断用户类型，开播
                 this.getUserType();
+                //获取直播状态
+                this.getIsLiveStatus();
             })
         },
         //获取主播个人简介
@@ -329,7 +332,23 @@ export default {
         clearChatinfo() {
             this.chatScreenLive.clean();
         },
-
+        //获取是否开播状态
+        getIsLiveStatus() {
+            allUrls.getLiveStatus({
+                username: this.hostInfo.username,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.isLive = res.data.live;
+                } else {
+                    this.$message.error(res.desc);
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("获取直播状态出错！");
+            })
+        },
     },
     beforeDestroy() {
         this.leaveLive();

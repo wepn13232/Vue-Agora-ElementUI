@@ -127,3 +127,15 @@ export function updateHostInfo(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
+//获取appid
+export function getAppid(data, methods) {
+    return fetch('/api/getAppid',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//获取直播开播状态
+export function getLiveStatus(data, methods) {
+    return fetch('/api/getIsLive',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+

@@ -36,7 +36,7 @@ export default {
                 }, 'post').then(res => {
                     return res.json();
                 }).then(data => {
-                    return new Promise((resolve, reject) => {
+                    return new Promise((resolve) => {
                         if (+data.status === 200 && data.data.length > 0) {
                             this.userInfo = data.data[0];
                             this.userLoading = false;
@@ -61,7 +61,7 @@ export default {
                 }, 'post').then(res => {
                     return res.json();
                 }).then(data => {
-                    return new Promise((resolve, reject) => {
+                    return new Promise((resolve) => {
                         if (+data.status === 200) {
                             this.userInfo = data.data;
                             this.userLoading = false;
@@ -92,6 +92,21 @@ export default {
             this.isUserSelf = this.userInfo.username === _username;
             if (!this.isUserSelf) {
                 this.$set(this.userInfo, 'appid', '*******')
+            } else {
+                allUrls.getAppid({
+                    username: this.userInfo.username,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(res => {
+                    if (+res.status === 200) {
+                        this.$set(this.userInfo, 'appid', res.data.appid);
+                    } else {
+                        this.$message.error("获取appid失败！");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("获取appid出错！");
+                })
             }
         },
         //点击创建直播间按钮
