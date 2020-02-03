@@ -46,7 +46,7 @@
                         <div class="midContent">
                             <p>{{dialogData.content}}</p>
                         </div>
-                        <div class="clickArea">
+                        <div class="clickArea" v-if="userInfo">
                             <img src="../../assets/img/loveGray.png" alt="" @click="clickSub()" class="clickIcon"
                                  v-if="!dialogData.isSub">
                             <img src="../../assets/img/loveRed.png" alt="" class="isSubIcon" v-else>

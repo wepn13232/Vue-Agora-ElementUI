@@ -146,3 +146,9 @@ export function adminGetHostInfo(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
+//点赞
+export function sub(data, methods) {
+    return fetch('/api/sub',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+

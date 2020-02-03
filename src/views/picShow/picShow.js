@@ -102,9 +102,22 @@ export default {
             this.dialogData = item;
         },
         clickSub() {
-            this.dialogData.isSub = true;
-            console.log(this.dialogData.isSub);
-            //    TODO 这里应该操作 执行接口 对具体的进行点赞
+            requireUrls.sub({
+                subUser: this.userInfo.username,
+                picId: this.dialogData.id,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.$set(this.dialogData, "isSub", true);
+                    this.$message.success("点赞成功！");
+                } else {
+                    this.$message.error("点赞失败！");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("点赞出现错误！");
+            })
         },
         //打开Post照片弹窗
         openPostDialog() {
@@ -176,9 +189,9 @@ export default {
         },
     },
     mounted() {
-        setTimeout(()=>{
+        setTimeout(() => {
             this.showTips = true;
-        },1000)
+        }, 1000)
         this.getUserInfo();
         this.getPics();
         this.reload();
