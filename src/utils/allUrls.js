@@ -152,3 +152,15 @@ export function sub(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
+//获取用户是否点赞
+export function subOrNot(data, methods) {
+    return fetch('/api/subOrNot',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//admin获取主播信息接口
+export function adminGetHost(data, methods) {
+    return fetch('/api/adminGetHost',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+

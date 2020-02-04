@@ -33,7 +33,12 @@
                     prop="operate"
                     label="操作">
                     <template slot-scope="scope">
-                        <el-button type="danger" plain @click="deleteRow(scope.row)">删除</el-button>
+                        <el-button type="danger" plain @click="deleteRow(scope.row)" v-if="+scope.row.liveStatus === 1">
+                            禁播
+                        </el-button>
+                        <el-button type="success" plain @click="reLive(scope.row)" v-else>
+                            恢复
+                        </el-button>
                     </template>
                 </el-table-column>
             </el-table>

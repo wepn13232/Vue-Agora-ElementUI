@@ -10,6 +10,7 @@ export default {
         }
     },
     methods: {
+        //禁播
         deleteRow(val) {
             console.log(val.id);
             this.$confirm('是否删除该主播？', '提示', {
@@ -25,7 +26,7 @@ export default {
         },
         //获取主播信息
         getHostInfo() {
-            allUrls.adminGetHostInfo({}, 'post').then(res => {
+            allUrls.adminGetHost({}, 'post').then(res => {
                 return res.json();
             }).then(data => {
                 if (+data.status === 200) {
@@ -38,7 +39,11 @@ export default {
                 this.$message.error(err);
                 console.log(err);
             })
-        }
+        },
+        //恢复直播
+        reLive(val){
+
+        },
     },
     mounted() {
         this.getHostInfo();

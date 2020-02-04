@@ -107,6 +107,7 @@
               height: 35px;
               margin: 10px 0 0 0;
               float: right;
+              animation: subAnimation 0.7s;
             }
           }
         }
@@ -122,6 +123,28 @@
         width: 100px;
         height: 100px;
       }
+    }
+  }
+
+  //  点赞动画
+  @keyframes subAnimation {
+    0% {
+      transform: scale(1);
+      -o-transform: scale(1);
+      -moz-transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+      -o-transform: scale(1.2);
+      -moz-transform: scale(1.2);
+      -webkit-transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+      -o-transform: scale(1);
+      -moz-transform: scale(1);
+      -webkit-transform: scale(1);
     }
   }
 }

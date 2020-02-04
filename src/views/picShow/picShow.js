@@ -97,10 +97,31 @@ export default {
         handleClose() {
             this.dialogVisible = false;
         },
+        //点击打开大窗
         openDialog(item) {
             this.dialogVisible = true;
             this.dialogData = item;
+            if (this.userInfo) {
+                this.getSubOrNot(item.id);
+            }
         },
+        //判断用户是否已点赞
+        getSubOrNot(val) {
+            requireUrls.subOrNot({
+                subUser: this.userInfo.username,
+                picId: val,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.$set(this.dialogData, "isSub", true);
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("获取用户是否点赞出现错误");
+            })
+        },
+        //点赞
         clickSub() {
             requireUrls.sub({
                 subUser: this.userInfo.username,
