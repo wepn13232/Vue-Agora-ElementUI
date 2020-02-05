@@ -18,11 +18,26 @@ export default {
                 cancelButtonText: '取消',
                 center: true
             }).then(() => {
-                this.$message.success("删除成功!");
+                allUrls.deleteEssay({
+                    id: val.id,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(res => {
+                    if (+res.status === 200) {
+                        this.$message.success("删除成功！");
+                        this.getEssayData();
+                    } else {
+                        this.$message.error("删除失败！");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("删除出现错误！");
+                })
             }).catch(() => {
 
             })
         },
+        //获取文章列表
         getEssayData() {
             allUrls.getEssay({}, 'post').then(res => {
                 return res.json();
