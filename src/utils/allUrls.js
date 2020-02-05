@@ -164,3 +164,15 @@ export function adminGetHost(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
+//删除文章
+export function deleteEssay(data, methods) {
+    return fetch('/api/deleteEssay',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//禁播、恢复直播
+export function banLive(data, methods) {
+    return fetch('/api/banLive',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+

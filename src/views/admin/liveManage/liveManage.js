@@ -13,13 +13,28 @@ export default {
         //禁播
         deleteRow(val) {
             console.log(val.id);
-            this.$confirm('是否删除该主播？', '提示', {
+            this.$confirm('是否禁播该主播？', '提示', {
                 type: 'warning',
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 center: true
             }).then(() => {
-                this.$message.success("删除成功!");
+                allUrls.banLive({
+                    liveStatus: '0',
+                    username: val.username,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(res => {
+                    if (+res.status === 200) {
+                        this.$message.info("已封禁该主播");
+                        this.getHostInfo();
+                    } else {
+                        this.$message.error("封禁失败");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("封禁出现错误！");
+                })
             }).catch(() => {
 
             })
@@ -41,8 +56,23 @@ export default {
             })
         },
         //恢复直播
-        reLive(val){
-
+        reLive(val) {
+            allUrls.banLive({
+                liveStatus: '1',
+                username: val.username,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.$message.success("恢复成功");
+                    this.getHostInfo();
+                } else {
+                    this.$message.error("恢复失败");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("恢复出现错误！");
+            })
         },
     },
     mounted() {
