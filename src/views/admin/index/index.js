@@ -41,17 +41,26 @@ export default {
             ],
             anotherData: [],
             anotherNum: [],
-            essayData:[]
+            essayData: [
+                {value: 1, name: '旅游类'},
+                {value: 1, name: '攻略类'},
+                {value: 1, name: '地点推荐类'},
+                {value: 1, name: '摄影类'},
+            ],
+            numOfSex: [
+                {value: 1, name: '女'},
+                {value: 1, name: '男'},
+            ]
         }
     },
     methods: {
-        //TODO 获取文章类型占比，获取账号男女比例占比，获取地区占比
         charts1() {
             //初始化实例
             let chart1 = this.$echarts.init(document.getElementById('chart1'));
             let chart2 = this.$echarts.init(document.getElementById('chart2'));
             let chart3 = this.$echarts.init(document.getElementById('chart3'));
-            // 指定图表的配置项和数据
+
+            // 文章类型比例
             var option = {
                 title: {
                     text: '本站文章分类占比',
@@ -71,13 +80,8 @@ export default {
                         name: '文章占比',
                         type: 'pie',
                         radius: '55%',
-                        center: ['50%', '60%'],
-                        data: [
-                            {value: 335, name: '旅游类'},
-                            {value: 310, name: '攻略类'},
-                            {value: 234, name: '地点推荐类'},
-                            {value: 135, name: '摄影类'},
-                        ],
+                        center: ['50%', '50%'],
+                        data: this.essayData,
                         itemStyle: {
                             emphasis: {
                                 shadowBlur: 10,
@@ -89,75 +93,46 @@ export default {
                 ]
             };
 
-            //圈圈图
+            //男女比例
             var option2 = {
-                backgroundColor: '#2c343c',
-
                 title: {
-                    text: '男女比例占比',
-                    left: 'center',
-                    top: 20,
-                    textStyle: {
-                        color: '#ccc'
-                    }
+                    text: '本站男女比例占比',
+                    x: 'center'
                 },
-
                 tooltip: {
                     trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    formatter: '{a} <br/>{b}: {c} ({d}%)'
                 },
-
-                visualMap: {
-                    show: false,
-                    min: 80,
-                    max: 600,
-                    inRange: {
-                        colorLightness: [0, 1]
-                    }
+                legend: {
+                    orient: 'vertical',
+                    left: 10,
+                    data: ['男', '女']
                 },
                 series: [
                     {
                         name: '男女比例',
                         type: 'pie',
-                        radius: '55%',
-                        center: ['50%', '50%'],
-                        data: [
-                            {value: 335, name: '男'},
-                            {value: 310, name: '女'},
-                        ].sort(function (a, b) {
-                            return a.value - b.value;
-                        }),
-                        roseType: 'radius',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
                         label: {
                             normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
                                 textStyle: {
-                                    color: 'rgba(255, 255, 255, 0.3)'
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
                                 }
                             }
                         },
                         labelLine: {
                             normal: {
-                                lineStyle: {
-                                    color: 'rgba(255, 255, 255, 0.3)'
-                                },
-                                smooth: 0.2,
-                                length: 10,
-                                length2: 20
+                                show: false
                             }
                         },
-                        itemStyle: {
-                            normal: {
-                                color: '#c23531',
-                                shadowBlur: 200,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                        },
-
-                        animationType: 'scale',
-                        animationEasing: 'elasticOut',
-                        animationDelay: function (idx) {
-                            return Math.random() * 200;
-                        }
+                        data: this.numOfSex
                     }
                 ]
             };
@@ -254,11 +229,48 @@ export default {
                 }
             }
         },
+        //获取图表数据
+        _getEchartData() {
+            return new Promise(resolve => {
+                allUrls.getNumOfSex({}, 'post').then(res => {
+                    return res.json();
+                }).then(res => {
+                    if (+res.status === 200) {
+                        this.numOfSex[1].value = (+res.data.male); //获取男数量
+                        this.numOfSex[0].value = (+res.data.female); //获取女数量
+                    } else {
+                        this.$message.error("获取男女人数失败！");
+                    }
+                }).then(() => {
+                    allUrls.getEssayType({}, 'post').then(res => {
+                        return res.json();
+                    }).then(res => {
+                        if (+res.status === 200) {
+                            this.essayData[0].value = res.data.typeTravel;
+                            this.essayData[1].value = res.data.typeStrategy;
+                            this.essayData[2].value = res.data.typeLocation;
+                            this.essayData[3].value = res.data.typePhotoG;
+                        } else {
+                            this.$message.error("获取文章信息失败！");
+                        }
+                    }).then(() => {
+                        //    TODO执行查询地址统计
+                        resolve();
+                    })
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("获取图表信息出错！");
+                    return false;
+                })
+            }).then(() => {
+                this.charts1();
+            })
+        },
     },
     mounted() {
+        this._getEchartData();
         this.$emit('getDefaultActive', this.defaultActive)
         this.changeData();
         this.changeType();
-        this.charts1();
     },
 }

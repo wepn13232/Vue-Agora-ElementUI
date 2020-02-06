@@ -176,3 +176,15 @@ export function banLive(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
+//获取男女比例人数
+export function getNumOfSex(data, methods) {
+    return fetch('/api/getNumOfSex',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+
+//获取文章类型
+export function getEssayType(data, methods) {
+    return fetch('/api/getEssayType',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
