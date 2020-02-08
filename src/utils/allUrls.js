@@ -188,3 +188,10 @@ export function getEssayType(data, methods) {
     return fetch('/api/getEssayType',
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
+
+
+//获取文章类型
+export function getAddressNum(data, methods) {
+    return fetch('/api/getAddressNum',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}

@@ -5,40 +5,7 @@ export default {
     data() {
         return {
             defaultActive: '1',
-            addressData: [
-                {
-                    address: 'tianhe',
-                    num: 113
-                },
-                {
-                    address: 'haizhu',
-                    num: 168
-                },
-                {
-                    address: 'panyu',
-                    num: 63
-                },
-                {
-                    address: 'kaifaqu',
-                    num: 93
-                },
-                {
-                    address: 'xiashan',
-                    num: 77
-                },
-                {
-                    address: 'conghua',
-                    num: 109
-                },
-                {
-                    address: 'zengcheng',
-                    num: 30
-                },
-                {
-                    address: 'yuexiu',
-                    num: 188
-                },
-            ],
+            addressData: [],
             anotherData: [],
             anotherNum: [],
             essayData: [
@@ -254,8 +221,19 @@ export default {
                             this.$message.error("获取文章信息失败！");
                         }
                     }).then(() => {
-                        //    TODO执行查询地址统计
-                        resolve();
+                        allUrls.getAddressNum({}, 'post').then(res => {
+                            return res.json();
+                        }).then(res => {
+                            if (+res.status === 200) {
+                                this.addressData = res.data;
+                                resolve();
+                            } else {
+                                this.$message.error("获取地址占比失败！");
+                            }
+                        }).catch(err => {
+                            console.log(err);
+                            this.$message.error("获取地址占比出错！");
+                        })
                     })
                 }).catch(err => {
                     console.log(err);
@@ -263,6 +241,8 @@ export default {
                     return false;
                 })
             }).then(() => {
+                this.changeData();
+                this.changeType();
                 this.charts1();
             })
         },
@@ -270,7 +250,5 @@ export default {
     mounted() {
         this._getEchartData();
         this.$emit('getDefaultActive', this.defaultActive)
-        this.changeData();
-        this.changeType();
     },
 }
