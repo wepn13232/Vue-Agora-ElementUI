@@ -10,8 +10,8 @@ export default {
         return {
             loadingEssay: true,
             essayName: '',
-            listsNum: 3,
-            test: 8,
+            listsNum: 4,
+            test: 0,
             showMoreTitle: '点击加载更多',
             recEssayInfo: '',
             essayInfo: '',
@@ -47,6 +47,10 @@ export default {
                 if (+data.status === 200) {
                     //往期文章
                     this.essayInfo = data.data;
+                    this.text = +data.data.length;
+                    if (this.listsNum >= this.test) {
+                        this.showMoreTitle = '已经没有更多了哦！'
+                    }
                     this.loadingEssay = false;
                 } else {
                     this.$message.error("获取文章信息错误！");

@@ -6,12 +6,13 @@ export default {
     data() {
         return {
             essayId: '',
-            essayInfo: {},
+            essayInfo: {}, //文章信息
             value: 0,  //打分文章推荐星级
             isRateValue: 0,  //文章等级分数
             dialogVisible: false,
             isSetScore: false, //判断用户是否已打分
             userInfo: '', //用户信息
+            isUser: false,
         }
     },
     methods: {
@@ -62,6 +63,8 @@ export default {
                 this.getUserScore();
                 //获取用户是否已评分
                 this._setScoreOrNot();
+                //判断是否用户本人
+                this.showOptions();
             })
         },
         //长时间浏览提示打分
@@ -120,6 +123,32 @@ export default {
         //获取用户信息
         getUserInfo() {
             this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+        },
+        //作者删除文章
+        clickCommand(val) {
+            if (val == 'a') {
+                allUrls.deleteEssay({
+                    id: this.$route.query.id
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(res => {
+                    if (+res.status === 200) {
+                        this.$message.success("删除成功");
+                        this.$router.push('/essayList');
+                    } else {
+                        this.$message.error("删除失败");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("删除出现错误");
+                })
+            }
+        },
+        //判断是否作者本人
+        showOptions() {
+            if (this.userInfo){
+                this.isUser = this.userInfo.username == this.essayInfo.username;
+            }
         },
     },
     mounted() {

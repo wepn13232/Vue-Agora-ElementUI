@@ -189,9 +189,20 @@ export function getEssayType(data, methods) {
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
 
-
-//获取文章类型
+//获取地区人数
 export function getAddressNum(data, methods) {
     return fetch('/api/getAddressNum',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//取消点赞
+export function cancelSub(data, methods) {
+    return fetch('/api/cancelSub',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//获取照片点赞人数
+export function getSubCount(data, methods) {
+    return fetch('/api/getSubCount',
         {method: methods, headers: header2, body: qs.stringify(data)})
 }

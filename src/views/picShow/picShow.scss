@@ -93,21 +93,27 @@
 
           .clickArea {
             width: 100%;
+            display: flex;
+            justify-content: flex-end;
 
             .clickIcon {
               cursor: pointer;
               width: 35px;
               height: 35px;
               margin: 10px 0 0 0;
-              float: right;
             }
 
             .isSubIcon {
+              cursor: pointer;
               width: 35px;
               height: 35px;
               margin: 10px 0 0 0;
-              float: right;
               animation: subAnimation 0.7s;
+            }
+
+            .likeCount {
+              padding-top: 20px;
+              padding-left: 3px;
             }
           }
         }
