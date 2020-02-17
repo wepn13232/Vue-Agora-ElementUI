@@ -11,6 +11,14 @@
                         <!--发布时间-->
                         <div class="essay-time">
                             <span class="fw">{{essayInfo.date}}</span>
+                            <el-dropdown @command="clickCommand" v-if="isUser">
+                                <div class="moreOptions">
+                                    <img src="../../../public/img/icons/more.png" alt="more" class="moreOptionsImg">
+                                </div>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item command="a">删除</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
                         </div>
                         <!--标题-->
                         <div class="essay-title">

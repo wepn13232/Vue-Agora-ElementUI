@@ -49,7 +49,8 @@
                         <div class="clickArea" v-if="userInfo">
                             <img src="../../assets/img/loveGray.png" alt="" @click="clickSub()" class="clickIcon"
                                  v-if="!dialogData.isSub">
-                            <img src="../../assets/img/loveRed.png" alt="" class="isSubIcon" v-else>
+                            <img src="../../assets/img/loveRed.png" alt="" class="isSubIcon" v-else @click="_cancelSub()">
+                            <p class="likeCount">有{{likeCount}}人点赞</p>
                         </div>
                     </div>
                     <div class="clearfix"></div>

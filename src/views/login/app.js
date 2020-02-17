@@ -55,5 +55,5 @@ export default {
         toHome() {
             this.$router.push("/")
         }
-    }
+    },
 }

@@ -22,6 +22,7 @@ import liveManage from "@/views/admin/liveManage/liveManage.vue";
 import createEssay from "@/views/createEssay/createEssay.vue";
 import picShow from "./views/picShow/picShow.vue";
 import {Message} from "element-ui";
+import Store from './store'
 
 Vue.use(Router);
 //Vue.use(Message);
@@ -217,6 +218,7 @@ router.beforeEach((to, from, next) => {
     let cookies = window.$cookies.get('userInfoCookies');
     if (!cookies) {
         sessionStorage.clear();
+        Store.state.userData = '';
     }
     toTop.toTop()
     //路由中写了requireAuth是需要登录验证的路由
@@ -230,7 +232,8 @@ router.beforeEach((to, from, next) => {
         }
     } else {
         //验证管理员路由
-        if (to.matched.some(record => record.meta.requireAdminAuth)) {``
+        if (to.matched.some(record => record.meta.requireAdminAuth)) {
+            ``
             //未登录，身份证为空
             if (!userSessionData || userSessionData.username !== 'admin') {
                 next({path: '/'})

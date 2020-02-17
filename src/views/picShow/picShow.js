@@ -27,7 +27,9 @@ export default {
             },
             rules: {
                 src: {required: true, message: "请填写一张在线图片地址", trigger: 'blur'}
-            }
+            },
+            //照片点赞人数
+            likeCount: 0,
         }
     },
     methods: {
@@ -103,6 +105,7 @@ export default {
             this.dialogData = item;
             if (this.userInfo) {
                 this.getSubOrNot(item.id);
+                this._getSubCount(item.id);
             }
         },
         //判断用户是否已点赞
@@ -131,13 +134,34 @@ export default {
             }).then(res => {
                 if (+res.status === 200) {
                     this.$set(this.dialogData, "isSub", true);
-                    this.$message.success("点赞成功！");
+                    //重新获取点赞人数
+                    this._getSubCount(this.dialogData.id);
                 } else {
                     this.$message.error("点赞失败！");
                 }
             }).catch(err => {
                 console.log(err);
                 this.$message.error("点赞出现错误！");
+            })
+        },
+        //取消点赞
+        _cancelSub() {
+            requireUrls.cancelSub({
+                subUser: this.userInfo.username,
+                picId: this.dialogData.id,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.$set(this.dialogData, "isSub", false);
+                    //重新获取点赞人数
+                    this._getSubCount(this.dialogData.id);
+                } else {
+                    this.$message.error("取消点赞失败");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("取消点赞出现错误");
             })
         },
         //打开Post照片弹窗
@@ -206,6 +230,22 @@ export default {
             }).catch(err => {
                 console.log(err);
                 this.$message.error("添加照片空间动态出错！")
+            })
+        },
+        //获取照片点赞的人数
+        _getSubCount(id) {
+            requireUrls.getSubCount({
+                picId: id,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status == 200) {
+                    this.likeCount = res.data.subCount;
+                } else {
+                    this.$message.error("获取点赞人数失败");
+                }
+            }).catch(err => {
+                this.$message.error("获取点赞人数出错");
             })
         },
     },

@@ -24,6 +24,7 @@
                     </el-form-item>
                 </el-form>
             </div>
+            <p class="author">@Copyright<span class="author_n"> 林启元毕业设计</span></p>
         </div>
     </div>
 </template>
