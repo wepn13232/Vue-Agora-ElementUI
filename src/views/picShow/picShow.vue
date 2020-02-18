@@ -38,9 +38,20 @@
                     <div class="rightContent">
                         <!--用户信息-->
                         <div class="header">
-                            <el-avatar
-                                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-                            <span class="username">{{dialogData.name}}</span>
+                            <div class="userIconInfo">
+                                <el-avatar
+                                    src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                                <span class="username">{{dialogData.name}}</span>
+                            </div>
+                            <!--操作选项-->
+                                <el-dropdown @command="clickCommand" v-if="isUser">
+                                    <div class="moreOptions">
+                                        <img src="../../../public/img/icons/more_black.png" alt="more" class="moreOptionsImg">
+                                    </div>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item command="a">删除</el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
                         </div>
                         <!--用户内容-->
                         <div class="midContent">

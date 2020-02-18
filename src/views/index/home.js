@@ -9,7 +9,7 @@ export default {
     components: {essayCard, personCard},
     data() {
         return {
-            indexPic: {},
+            indexPic: '',
             personInfo: [],
             essayInfo: {},
             loading1: false
@@ -23,7 +23,7 @@ export default {
         //获取首页推荐（图片）、
         getIndexPic() {
             this.loading1 = true
-            allUrls.getIndexPicRec('post').then(res => {
+            allUrls.getPicShows({},'post').then(res => {
                 return res.json()
             }).then(data => {
                 if (+data.status === 200) {

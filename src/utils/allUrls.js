@@ -206,3 +206,21 @@ export function getSubCount(data, methods) {
     return fetch('/api/getSubCount',
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
+
+//照片墙删除照片
+export function deletePic(data, methods) {
+    return fetch('/api/deletePic',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//评论
+export function insertComment(data, methods) {
+    return fetch('/api/insertComment',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//查看评论
+export function getComment(data, methods) {
+    return fetch('/api/getComment',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
