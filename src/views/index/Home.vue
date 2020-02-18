@@ -29,7 +29,7 @@
                             <el-col :md="6" :sm="12" v-for="(item, index) in indexPic" :key="index" style="margin-top: 2%">
                                     <el-image
                                         style="height: 200px"
-                                        :src="item.picUrl"
+                                        :src="item.src"
                                         fit="cover" lazy></el-image>
                             </el-col>
                         </el-row>

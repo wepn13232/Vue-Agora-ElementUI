@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             userInfo: '', //用户信息
+            isUser: false, //是否是用户本人
             showTips: false, //文字提示
             cardList: [],
             interval: '', //检测图片加载循环
@@ -40,6 +41,9 @@ export default {
                 if (+res.status === 200) {
                     this.cardList = res.data;
                     this.getHeight();
+                    if (res.data.length <= this.defaultLoadPic ){
+                        this.loadMoreText = '<　没有更多了哦~　>'
+                    }
                 } else {
                     this.$message.error("获取图片出现错误");
                 }
@@ -88,7 +92,7 @@ export default {
                 this.reloadMoreFresh = true;
                 this.getHeight();
             });
-            if (this.defaultLoadPic == this.cardList.length) {
+            if (this.defaultLoadPic >= this.cardList.length) {
                 this.loadMoreText = '<　没有更多了哦～　>';
                 this.canLoad = false;
             }
@@ -99,13 +103,14 @@ export default {
         handleClose() {
             this.dialogVisible = false;
         },
-        //点击打开大窗
+        //点击打开照片具体
         openDialog(item) {
             this.dialogVisible = true;
             this.dialogData = item;
             if (this.userInfo) {
                 this.getSubOrNot(item.id);
                 this._getSubCount(item.id);
+                this.isUserCheck(item.username);
             }
         },
         //判断用户是否已点赞
@@ -247,6 +252,35 @@ export default {
             }).catch(err => {
                 this.$message.error("获取点赞人数出错");
             })
+        },
+        //删除照片
+        _deletePic() {
+            requireUrls.deletePic({
+                id: this.dialogData.id,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.$message.success("删除成功");
+                    this.dialogVisible = false;
+                    this.getPics();
+                } else {
+                    this.$message.error("删除失败！");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("删除照片出现错误！");
+            })
+        },
+        //判断是否用户本人或管理员
+        isUserCheck(val) {
+            this.isUser = this.userInfo.username === val || 'admin';
+        },
+        //照片弹窗选项选择（删除）
+        clickCommand(val) {
+            if (val == 'a') {
+                this._deletePic();
+            }
         },
     },
     mounted() {

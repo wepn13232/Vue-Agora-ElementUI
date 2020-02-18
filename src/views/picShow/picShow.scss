@@ -77,10 +77,25 @@
 
           .header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
 
-            .username {
-              padding-left: 10px;
+            .userIconInfo {
+              display: flex;
+              align-items: center;
+
+              .username {
+                padding-left: 10px;
+              }
+            }
+
+            .moreOptionsImg {
+              cursor: pointer;
+              width: 30px;
+              height: 30px;
+              background-size: cover;
+              background-position: center center;
+
             }
           }
 
