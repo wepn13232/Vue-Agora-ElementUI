@@ -6,12 +6,13 @@
 
   .essayCard {
     background-color: #ffffff;
+    border-radius: 4px;
     width: 90%;
     margin: 0 auto;
     //  banner
     .cardBanner {
       width: 100%;
-      //background-image: url("../../assets/img/banner1.jpg");
+      border-radius: 4px 4px 0 0;
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -79,6 +80,55 @@
       }
     }
   }
+
+  .commentArea {
+    background-color: #ffffff;
+    border-radius: 4px;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px 20px;
+
+    .postBtn {
+      float: right;
+    }
+
+    .comments {
+      padding: 10px 20px;
+
+
+      .userComment {
+        .userPic {
+          float: left;
+        }
+
+        .userInfo {
+          float: left;
+          margin: 5px 0 0 10px;
+
+          .username {
+            font-weight: 500;
+            font-size: 17px;
+            padding-bottom: 5px;
+          }
+        }
+
+        .dateTime {
+          margin-top: 8px;
+          float: right;
+        }
+      }
+
+      .loadMoreComment {
+        width: 100%;
+        text-align: center;
+
+        .load {
+          font-size: 17px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
 
 .fw {
@@ -93,3 +143,5 @@
 .dialogText {
   margin-top: 10px;
 }
+
+

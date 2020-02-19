@@ -41,7 +41,7 @@ export default {
                 if (+res.status === 200) {
                     this.cardList = res.data;
                     this.getHeight();
-                    if (res.data.length <= this.defaultLoadPic ){
+                    if (res.data.length <= this.defaultLoadPic) {
                         this.loadMoreText = '<　没有更多了哦~　>'
                     }
                 } else {
@@ -274,7 +274,9 @@ export default {
         },
         //判断是否用户本人或管理员
         isUserCheck(val) {
-            this.isUser = this.userInfo.username === val || 'admin';
+            if (this.userInfo.username === val || this.userInfo.username === 'admin') {
+                this.isUser = true;
+            }
         },
         //照片弹窗选项选择（删除）
         clickCommand(val) {

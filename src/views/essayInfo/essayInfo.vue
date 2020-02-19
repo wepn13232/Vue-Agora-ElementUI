@@ -48,6 +48,31 @@
             </div>
         </div>
 
+        <!--评论区-->
+        <div class="commentArea">
+            <el-button @click="commentDialog = true" size="small" class="postBtn" v-if="userInfo">发表评论</el-button>
+            <div class="clearfix"></div>
+            <el-divider content-position="left">评论区</el-divider>
+            <div class="comments">
+                <div class="userComment" v-for="(lists,i) in commentLists" :key="i" v-show="i<4">
+                    <div class="userPic">
+                        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                                   :size="60"></el-avatar>
+                    </div>
+                    <div class="userInfo">
+                        <div class="username">{{lists.name}}</div>
+                        <div class="commentContent">
+                            {{lists.comment}}
+                        </div>
+                    </div>
+                    <div class="dateTime">{{lists.date}}</div>
+                    <div class="clearfix"></div>
+                    <el-divider></el-divider>
+                </div>
+                <div class="loadMoreComment"><span class="load" @click="loadMoreComments">{{commentLoadText}}</span></div>
+            </div>
+        </div>
+
         <!--    提示打分对话框-->
         <el-dialog
             center
@@ -70,7 +95,19 @@
   </span>
         </el-dialog>
 
-
+        <!--发表评论弹窗-->
+        <el-dialog
+            title="发表评论"
+            :visible.sync="commentDialog"
+            width="50%"
+            custom-class="commentDialog"
+        >
+            <el-input type="textarea" :row="3" placeholder="请输入你的评论" maxlength="25" show-word-limit v-model="comment"></el-input>
+            <span slot="footer" class="dialog-footer">
+                 <el-button @click="commentDialog = false">取 消</el-button>
+                 <el-button type="primary" @click="postComment">发 表</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -78,4 +115,13 @@
 
 <style scoped lang="scss">
     @import "essayInfo.scss";
+</style>
+<style lang="scss">
+    .essayInfo {
+        .commentDialog {
+            .el-dialog__body {
+                padding: 10px 20px !important;
+            }
+        }
+    }
 </style>
