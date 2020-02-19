@@ -1,4 +1,5 @@
 import * as allUrls from '../../utils/allUrls.js'
+import * as commonFunc from '../../utils/commonFunc'
 
 export default {
     name: "essayInfo",
@@ -11,8 +12,13 @@ export default {
             isRateValue: 0,  //文章等级分数
             dialogVisible: false,
             isSetScore: false, //判断用户是否已打分
-            userInfo: '', //用户信息
+            userInfo: JSON.parse(sessionStorage.getItem('userInfo')), //用户信息
             isUser: false,
+            commentDialog: false, //发布评论弹窗
+            comment: '', //评论内容
+            commentLists: '', //评论列表
+            defaultCommentLoad: 4,
+            commentLoadText: '加载更多',
         }
     },
     methods: {
@@ -120,10 +126,6 @@ export default {
                 })
             }
         },
-        //获取用户信息
-        getUserInfo() {
-            this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-        },
         //作者删除文章
         clickCommand(val) {
             if (val == 'a') {
@@ -146,17 +148,75 @@ export default {
         },
         //判断是否作者本人
         showOptions() {
-            if (this.userInfo){
+            if (this.userInfo) {
                 this.isUser = this.userInfo.username == this.essayInfo.username;
+            }
+        },
+        //发表评论
+        postComment() {
+            if (this.comment) {
+                //    获取时间
+                let time = commonFunc.getTime();
+                allUrls.insertComment({
+                    username: this.userInfo.username,
+                    name: this.userInfo.name,
+                    comment: this.comment,
+                    date: time,
+                    essayId: this.$route.query.id,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(res => {
+                    if (+res.status === 200) {
+                        this.$message.success("评论成功");
+                        this.commentDialog = false;
+                        this.comment = '';
+                        this.getComments();
+                    } else {
+                        this.$message.error("评论失败");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("评论出现错误");
+                })
+            } else {
+                this.$message.warning("请输入评论内容");
+            }
+        },
+        //获取评论列表
+        getComments() {
+            allUrls.getComment({
+                essayId: this.$route.query.id,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    console.log('获取评论列表成功');
+                    this.commentLists = res.data;
+                    if (res.data.length <= this.defaultCommentLoad) {
+                        this.commentLoadText = '没有更多评论啦！';
+                    }
+                } else {
+                    this.$message.error("获取评论列表失败");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("获取评论列表出错");
+            })
+        },
+        //加载更多评论
+        loadMoreComments() {
+            this.defaultCommentLoad += 4;
+            if (this.commentLists.length <= this.defaultCommentLoad) {
+                this.commentLoadText = '没有更多评论啦！';
             }
         },
     },
     mounted() {
-        this.getUserInfo();
         this.reload();
         this.essayId = this.$route.query.id;
         this.getEssayInfo(this.essayId);
         this.$toTop.toTop();
+        this.getComments();
         //浏览一分钟后提示打分
         setTimeout(() => {
             this.openDialog()
