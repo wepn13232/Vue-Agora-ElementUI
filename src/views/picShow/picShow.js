@@ -250,6 +250,7 @@ export default {
                     this.$message.error("获取点赞人数失败");
                 }
             }).catch(err => {
+                console.log(err);
                 this.$message.error("获取点赞人数出错");
             })
         },
@@ -274,9 +275,7 @@ export default {
         },
         //判断是否用户本人或管理员
         isUserCheck(val) {
-            if (this.userInfo.username === val || this.userInfo.username === 'admin') {
-                this.isUser = true;
-            }
+            this.isUser = this.userInfo.username === val || this.userInfo.username === 'admin';
         },
         //照片弹窗选项选择（删除）
         clickCommand(val) {

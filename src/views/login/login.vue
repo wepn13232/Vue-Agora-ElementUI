@@ -12,6 +12,7 @@
                     </el-form-item>
                     <el-form-item label="密码">
                         <el-input type="password" v-model="form.password" @input="replaceSpace()" class="input-width"
+                                  @keyup.enter.native="doLogin"
                                   clearable></el-input>
                     </el-form-item>
 

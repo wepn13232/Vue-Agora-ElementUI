@@ -10,7 +10,7 @@
             </div>
             <!--瀑布流-->
             <div class="grid" v-if="reloadMoreFresh">
-                <div class="grid-item" v-for="(item,index) in cardList" :key="index" v-if="index<defaultLoadPic">
+                <div class="grid-item" v-for="(item,index) in cardList" :key="index" v-show="index<defaultLoadPic">
                     <!--瀑布流卡片-->
                     <card-pic :cardSrc="item.src" :cardUser="item.name" :cardContent="item.content"
                               @click.native="openDialog(item)"></card-pic>
