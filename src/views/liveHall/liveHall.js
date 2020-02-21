@@ -40,7 +40,6 @@ export default {
         },
     },
     mounted() {
-        this.reload();
         this.getHostInfo();
     }
 }

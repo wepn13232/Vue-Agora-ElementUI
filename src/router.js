@@ -219,10 +219,12 @@ router.beforeEach((to, from, next) => {
     if (!cookies) {
         sessionStorage.clear();
         Store.state.userData = '';
+        userSessionData = '';
     }
     toTop.toTop()
     //路由中写了requireAuth是需要登录验证的路由
     if (to.matched.some(record => record.meta.requireAuth)) {
+        console.log(userSessionData)
         //未登录，身份证为空
         if (!userSessionData) {
             Message.info("未登录账号或账号信息过期，请重新登录！");

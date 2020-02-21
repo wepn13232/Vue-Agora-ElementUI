@@ -1,4 +1,5 @@
 import * as requirUrls from '../../utils/allUrls'
+import * as commonFunc from '../../utils/commonFunc'
 
 export default {
     name: "reg",
@@ -196,12 +197,7 @@ export default {
         },
         //注册动态信息
         _insertSpaceInfo() {
-            //获取时间
-            let date = new Date();
-            let y = date.getFullYear();
-            let m = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-            let d = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-            let time = y + "-" + m + "-" + d;
+            let time = commonFunc.getTime();
             requirUrls.insertSpaceInfo({
                 username: this.form.username,
                 name: this.form.name,

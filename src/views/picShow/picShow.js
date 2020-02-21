@@ -1,5 +1,6 @@
 import cardPic from "../../components/cardPic/cardPic";
 import * as requireUrls from '../../utils/allUrls'
+import * as commonFunc from '../../utils/commonFunc'
 
 export default {
     name: "picShow",
@@ -213,12 +214,7 @@ export default {
         },
         //添加空间动态信息
         insertSpaceInfo() {
-            //获取时间
-            let date = new Date();
-            let y = date.getFullYear();
-            let m = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-            let d = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-            let time = y + "-" + m + "-" + d;
+            let time = commonFunc.getTime();
             requireUrls.insertSpaceInfo({
                 username: this.userInfo.username,
                 name: this.userInfo.name,
@@ -290,6 +286,5 @@ export default {
         }, 1000)
         this.getUserInfo();
         this.getPics();
-        this.reload();
     },
 }

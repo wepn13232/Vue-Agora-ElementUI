@@ -200,7 +200,6 @@ export default {
     },
     mounted() {
         this.getUserInfo();
-        this.reload()
     },
     watch: {
         $route() {

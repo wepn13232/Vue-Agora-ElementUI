@@ -50,6 +50,5 @@ export default {
         },
     },
     mounted() {
-
     },
 }

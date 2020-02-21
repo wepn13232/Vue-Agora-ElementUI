@@ -44,13 +44,6 @@
                 this.userInfo = this.$cookies.get('userInfoCookies');
                 if (this.userInfo) {
                     sessionStorage.setItem('userInfo', JSON.stringify(this.userInfo));
-                    //sessionStorage.setItem('username', this.userInfo.username);
-                    //sessionStorage.setItem('name', this.userInfo.name);
-                    //sessionStorage.setItem('email', this.userInfo.email);
-                    //sessionStorage.setItem('sex', this.userInfo.sex);
-                    //sessionStorage.setItem('address', this.userInfo.address);
-                    //sessionStorage.setItem('liveNum', this.userInfo.appid);
-                    //sessionStorage.setItem('userSum', this.userInfo.userSum);
                     this.$store.state.userData = this.userInfo;
                 } else {
                     sessionStorage.clear();
@@ -59,6 +52,18 @@
         },
         mounted() {
             this.getUserInfoCookies();
+        },
+        computed:{
+            userCheck(){
+                return this.$store.state.userData;
+            }
+        },
+        watch:{
+            userCheck(val){
+                if (!val){
+                    this.reload();
+                }
+            }
         }
     }
 
