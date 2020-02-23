@@ -62,6 +62,10 @@ export default {
                     ]
                 },
             ],
+            showTips: true,
+            dialogVisible: false,
+            picUrl: '', //头像在线地址
+            hasPicUrl:false,
         }
     },
     filters: {
@@ -102,7 +106,7 @@ export default {
                 default :
                     return '暂未录入性别';
             }
-        }
+        },
     },
     methods: {
         //判断是不是本人用户
@@ -160,6 +164,10 @@ export default {
         handleChange(val) {
             this.userInfo.address = val[1];
         },
+        //切换头像
+        _openDialog() {
+            this.dialogVisible = true;
+        }
     },
     mounted() {
         this.isUser();

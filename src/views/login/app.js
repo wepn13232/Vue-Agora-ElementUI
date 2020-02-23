@@ -34,7 +34,7 @@ export default {
                         this.$store.state.userData = data.data;
                         sessionStorage.setItem('userInfo', _data);
                         //保存至cookies-userInfo,先设置10分钟过期
-                        this.$cookies.set('userInfoCookies', _data, 5);
+                        this.$cookies.set('userInfoCookies', _data, 60*30);
                         this.$router.push('/')
                     } else {
                         console.log(data.desc)

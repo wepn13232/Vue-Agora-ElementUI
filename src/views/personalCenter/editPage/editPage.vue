@@ -4,8 +4,10 @@
         <div class="banner">
             <!--个人头像-->
             <div class="avatar">
-                <el-avatar :size="80"
-                           src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                <el-tooltip class="item" effect="light" content="点击头像更换图片" placement="top" v-model="showTips">
+                    <el-avatar :size="80" class="avatorPic" @click.native="_openDialog"
+                               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                </el-tooltip>
                 <h5>{{userInfo.name}}</h5>
             </div>
         </div>
@@ -18,7 +20,7 @@
                         <span>个人信息简述</span>
                     </div>
                     <div class="infoSum-content">
-                            <el-input type="textarea" v-model="userInfo.userSum"></el-input>
+                        <el-input type="textarea" v-model="userInfo.userSum"></el-input>
                     </div>
                 </div>
                 <!--其余详细信息-->
@@ -66,6 +68,23 @@
                 <el-button @click="goBack">返回</el-button>
             </div>
         </div>
+
+        <!--更换头像对话框-->
+        <el-dialog
+            title="更换头像"
+            :visible.sync="dialogVisible"
+            width="30%"
+            custom-class="changePic"
+        >
+            <div class="changePic">
+                <el-input type="text" v-model="picUrl" placeholder="http://"></el-input>
+                <img :src="picUrl" alt="logoPic" class="logoPic" v-if="picUrl">
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+             </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -73,4 +92,15 @@
 
 <style lang="scss" scoped>
     @import "editPage";
+</style>
+<style lang="scss">
+    .changePic {
+        text-align: center;
+        .logoPic {
+            margin-top: 10px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+    }
 </style>
