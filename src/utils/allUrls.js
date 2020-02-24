@@ -224,3 +224,9 @@ export function getComment(data, methods) {
     return fetch('/api/getComment',
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
+
+//删除评论
+export function deleteComment(data, methods) {
+    return fetch('/api/deleteComment',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}

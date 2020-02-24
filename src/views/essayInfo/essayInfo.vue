@@ -66,6 +66,12 @@
                         </div>
                     </div>
                     <div class="dateTime">{{lists.date}}</div>
+                    <el-dropdown @command="deleteComment" class="commentOptions" v-if="isUser">
+                        <img src=".././../../public/img/icons/more_black.png" alt="morePic" class="dropdownPic">
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item :command="beforeCommand ('a',lists.id)">删除</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
                     <div class="clearfix"></div>
                     <el-divider></el-divider>
                 </div>

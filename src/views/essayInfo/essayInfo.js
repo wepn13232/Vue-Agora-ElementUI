@@ -149,7 +149,7 @@ export default {
         //判断是否作者本人
         showOptions() {
             if (this.userInfo) {
-                this.isUser = this.userInfo.username == this.essayInfo.username;
+                this.isUser = this.userInfo.username == this.essayInfo.username || this.userInfo.username == 'admin';
             }
         },
         //发表评论
@@ -210,6 +210,34 @@ export default {
                 this.commentLoadText = '没有更多评论啦！';
             }
         },
+        beforeCommand(command, id) {
+            return {
+                'command': command,
+                'id': id
+            }
+        },
+        //删除评论
+        deleteComment(command) {
+            if (command.command == 'a') {
+                console.log(command.id);
+                allUrls.deleteComment({
+                    essayId: this.$route.query.id,
+                    id: command.id,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(res => {
+                    if (+res.status === 200) {
+                        this.$message.success('删除成功');
+                        this.getComments();
+                    } else {
+                        this.$message.error("删除失败");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("删除出现错误");
+                })
+            }
+        }
     },
     mounted() {
         this.essayId = this.$route.query.id;
