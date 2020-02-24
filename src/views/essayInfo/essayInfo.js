@@ -212,7 +212,6 @@ export default {
         },
     },
     mounted() {
-        this.reload();
         this.essayId = this.$route.query.id;
         this.getEssayInfo(this.essayId);
         this.$toTop.toTop();

@@ -98,7 +98,7 @@ export default {
                 }, 'post').then(res => {
                     return res.json();
                 }).then(res => {
-                    if (+res.status === 200) {
+                    if (+res.status === 200 || +res.status === 201) {
                         this.$set(this.userInfo, 'appid', res.data.appid);
                     } else {
                         this.$message.error("获取appid失败！");
@@ -200,7 +200,6 @@ export default {
     },
     mounted() {
         this.getUserInfo();
-        this.reload()
     },
     watch: {
         $route() {

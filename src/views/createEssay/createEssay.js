@@ -1,6 +1,6 @@
 import E from 'wangeditor'
 import * as requireUrls from '../../utils/allUrls'
-import fa from "element-ui/src/locale/lang/fa";
+import * as commonFunc from '../../utils/commonFunc'
 
 var content = '';
 export default {
@@ -41,15 +41,10 @@ export default {
     },
     methods: {
         submitForm(val) {
-            //获取时间
-            let date = new Date();
-            let y = date.getFullYear();
-            let m = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-            let d = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-            let time = y + "-" + m + "-" + d;
+            let time = commonFunc.getTime();
             this.$refs[val].validate((valid) => {
                 if (valid) {
-                    return new Promise((resolve, reject) => {
+                    return new Promise((resolve) => {
                         requireUrls.insertEssay({
                             title: this.essayForm.title,
                             username: this.username,

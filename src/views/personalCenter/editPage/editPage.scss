@@ -1,4 +1,4 @@
-.editPage{
+.editPage {
   background-color: #f4f6f9;
   //banner头部
   .banner {
@@ -12,6 +12,21 @@
       width: 100%;
       text-align: center;
       color: #ffffff;
+
+      .avatorPic {
+        cursor: pointer;
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+      }
+
+      .avatorPic:hover {
+        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -o-transform: scale(1.1);
+      }
 
       h5 {
         font-weight: 400;
@@ -46,7 +61,8 @@
       width: 100%;
       margin-top: 10vh;
       font-size: 1.1rem;
-      .blog{
+
+      .blog {
         cursor: pointer;
         color: #60b6ff;
         transition: all 0.2s ease;
@@ -54,7 +70,8 @@
         -o-transition: all 0.2s ease;
         -moz-transition: all 0.2s ease;
       }
-      .blog:hover{
+
+      .blog:hover {
         color: #5381ff;
       }
     }
@@ -62,28 +79,35 @@
 }
 
 //块下划线
- .bt-line{
-   border-bottom: rgba(84, 84, 84, 0.56) 1px solid;
- }
-.mb2{
+.bt-line {
+  border-bottom: rgba(84, 84, 84, 0.56) 1px solid;
+}
+
+.mb2 {
   margin-bottom: 2vh;
 }
-.pb2{
+
+.pb2 {
   padding-bottom: 2vh;
 }
-.pb3{
+
+.pb3 {
   padding-bottom: 3vh;
 }
-.pt3{
+
+.pt3 {
   padding-top: 3vh;
 }
-.spanTitle{
+
+.spanTitle {
   font-weight: 600;
 }
-.ml1{
+
+.ml1 {
   margin-left: 1vw;
 }
-.inputWidth{
+
+.inputWidth {
   width: 70%;
 }
 
