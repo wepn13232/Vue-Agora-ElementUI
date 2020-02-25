@@ -14,7 +14,6 @@ export default {
             isSetScore: false, //判断用户是否已打分
             userInfo: JSON.parse(sessionStorage.getItem('userInfo')), //用户信息
             isUserForEssay: false, //判断是否用户本人
-            isUserForComment: false,
             commentDialog: false, //发布评论弹窗
             comment: '', //评论内容
             commentLists: '', //评论列表
@@ -174,11 +173,6 @@ export default {
                 this.isUserForEssay = this.userInfo.username == this.essayInfo.username || this.userInfo.username == 'admin';
             }
         },
-        showOptions2() {
-            if (this.userInfo) {
-                this.isUserForComment = this.userInfo.username == this.commentLists.username || this.userInfo.username == 'admin';
-            }
-        },
         //发表评论
         postComment() {
             if (this.comment) {
@@ -219,7 +213,6 @@ export default {
                 if (+res.status === 200) {
                     console.log('获取评论列表成功');
                     this.commentLists = res.data;
-                    this.showOptions2();
                     if (res.data.length <= this.defaultCommentLoad) {
                         this.commentLoadText = '没有更多评论啦！';
                     }
