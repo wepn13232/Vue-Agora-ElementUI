@@ -1,5 +1,4 @@
 <template>
-    <!--TODO 具体内容弹窗需要添加最大高度，其余显示图片刚好大小-->
     <div class="picShow" v-loading="loading">
         <div class="container">
             <div class="postPic">
@@ -10,7 +9,7 @@
             </div>
             <!--瀑布流-->
             <div class="grid" v-if="reloadMoreFresh">
-                <div class="grid-item" v-for="(item,index) in cardList" :key="index" v-show="index<defaultLoadPic">
+                <div class="grid-item" v-for="(item,index) in cardList" :key="index" v-if="index<defaultLoadPic">
                     <!--瀑布流卡片-->
                     <card-pic :cardSrc="item.src" :cardUser="item.name" :cardContent="item.content"
                               @click.native="openDialog(item)"></card-pic>

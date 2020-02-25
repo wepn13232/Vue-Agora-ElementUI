@@ -11,12 +11,24 @@
                         <!--发布时间-->
                         <div class="essay-time">
                             <span class="fw">{{essayInfo.date}}</span>
-                            <el-dropdown @command="clickCommand" v-if="isUser">
+                            <el-dropdown v-if="isUserForEssay">
                                 <div class="moreOptions">
                                     <img src="../../../public/img/icons/more.png" alt="more" class="moreOptionsImg">
                                 </div>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item command="a">删除</el-dropdown-item>
+                                    <el-popover
+                                        placement="top"
+                                        width="160"
+                                        v-model="essayVisible">
+                                        <p>确定删除吗？</p>
+                                        <div style="text-align: right; margin: 0">
+                                            <el-button size="mini" type="text" @click="essayVisible = false">取消
+                                            </el-button>
+                                            <el-button type="primary" size="mini" @click="confirmDeleteEssay">确定
+                                            </el-button>
+                                        </div>
+                                        <el-dropdown-item slot="reference">删除</el-dropdown-item>
+                                    </el-popover>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </div>
@@ -66,16 +78,28 @@
                         </div>
                     </div>
                     <div class="dateTime">{{lists.date}}</div>
-                    <el-dropdown @command="deleteComment" class="commentOptions" v-if="isUser">
+                    <el-dropdown class="commentOptions" v-if="isUserForComment">
                         <img src=".././../../public/img/icons/more_black.png" alt="morePic" class="dropdownPic">
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item :command="beforeCommand ('a',lists.id)">删除</el-dropdown-item>
+                            <el-popover
+                                placement="top"
+                                width="160"
+                                v-model="visible">
+                                <p>确定删除吗？</p>
+                                <div style="text-align: right; margin: 0">
+                                    <el-button size="mini" type="text" @click="visible = false">取消</el-button>
+                                    <el-button type="primary" size="mini" @click="confirmDeleteComment(lists.id)">确定
+                                    </el-button>
+                                </div>
+                                <el-dropdown-item slot="reference">删除</el-dropdown-item>
+                            </el-popover>
                         </el-dropdown-menu>
                     </el-dropdown>
                     <div class="clearfix"></div>
                     <el-divider></el-divider>
                 </div>
-                <div class="loadMoreComment"><span class="load" @click="loadMoreComments">{{commentLoadText}}</span></div>
+                <div class="loadMoreComment"><span class="load" @click="loadMoreComments">{{commentLoadText}}</span>
+                </div>
             </div>
         </div>
 
@@ -108,7 +132,8 @@
             width="50%"
             custom-class="commentDialog"
         >
-            <el-input type="textarea" :row="3" placeholder="请输入你的评论" maxlength="25" show-word-limit v-model="comment"></el-input>
+            <el-input type="textarea" :row="3" placeholder="请输入你的评论" maxlength="25" show-word-limit
+                      v-model="comment"></el-input>
             <span slot="footer" class="dialog-footer">
                  <el-button @click="commentDialog = false">取 消</el-button>
                  <el-button type="primary" @click="postComment">发 表</el-button>
