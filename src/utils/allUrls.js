@@ -224,3 +224,21 @@ export function getComment(data, methods) {
     return fetch('/api/getComment',
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
+
+//删除评论
+export function deleteComment(data, methods) {
+    return fetch('/api/deleteComment',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//更新用户分数
+export function updateUserScore(data, methods) {
+    return fetch('/api/updateUserScore',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
+
+//根据用户分数 获取数据
+export function getUserByScore(data, methods) {
+    return fetch('/api/getUserByScore',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}

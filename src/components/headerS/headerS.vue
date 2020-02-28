@@ -20,7 +20,7 @@
                         <a class="nav-link" @click="toPicShow">照片墙</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" @click="toLocationRec">文章推荐</a>
+                        <a class="nav-link" @click="toLocationRec">所有文章</a>
                     </li>
                     <li class="nav-item" v-if="userInfo.username == 'admin'">
                         <a class="nav-link" @click="toAdminIndex">管理员页</a>

@@ -112,6 +112,20 @@
           }
         }
 
+        .commentOptions {
+          cursor: pointer;
+          width: 30px;
+          height: 25px;
+          float: right;
+          margin-top: 5px;
+          margin-right: 5px;
+
+          .dropdownPic {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
         .dateTime {
           margin-top: 8px;
           float: right;

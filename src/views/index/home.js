@@ -17,13 +17,13 @@ export default {
     },
     methods: {
         //随机数组方法
-        randomMath(a, b) {
+        randomMath() {
             return Math.random() > .5 ? -1 : 1;
         },
-        //获取首页推荐（图片）、
+        //获取首页推荐（图片）
         getIndexPic() {
             this.loading1 = true
-            allUrls.getPicShows({},'post').then(res => {
+            allUrls.getPicShows({}, 'post').then(res => {
                 return res.json()
             }).then(data => {
                 if (+data.status === 200) {
@@ -55,7 +55,7 @@ export default {
         },
         //获取人物卡片信息
         getTopListPerson() {
-            allUrls.getUserInfo({
+            allUrls.getUserByScore({
                 //    此处username可不传，查全部
             }, "post").then(res => {
                 return res.json();
@@ -63,6 +63,7 @@ export default {
                 this.personInfo = data.data;
             }).catch(err => {
                 console.log(err);
+                this.$message.error("获取推荐人物出错！");
             })
         },
         //点击推荐人物

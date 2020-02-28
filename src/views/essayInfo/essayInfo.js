@@ -13,42 +13,64 @@ export default {
             dialogVisible: false,
             isSetScore: false, //判断用户是否已打分
             userInfo: JSON.parse(sessionStorage.getItem('userInfo')), //用户信息
-            isUser: false,
+            isUserForEssay: false, //判断是否用户本人
             commentDialog: false, //发布评论弹窗
             comment: '', //评论内容
             commentLists: '', //评论列表
             defaultCommentLoad: 4,
             commentLoadText: '加载更多',
+            visible: false,
+            essayVisible: false,
         }
     },
     methods: {
         //获取用户评分等级
         getUserScore() {
-            allUrls.getScore({
-                username: this.essayInfo.username,
-            }, 'post').then(res => {
-                return res.json();
-            }).then(data => {
-                if (+data.status === 200) {
-                    //获取有多少个评分
-                    let scoreLength = data.data.length;
-                    let sum = 0;
-                    for (let i in data.data) {
-                        sum = sum + (+data.data[i].score);
+            return new Promise(resolve => {
+                allUrls.getScore({
+                    username: this.essayInfo.username,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(data => {
+                    if (+data.status === 200) {
+                        //获取有多少个评分
+                        let scoreLength = data.data.length;
+                        let sum = 0;
+                        for (let i in data.data) {
+                            sum = sum + (+data.data[i].score);
+                        }
+                        let _score = (sum / scoreLength).toFixed(1);
+                        this.isRateValue = +_score || 0;
+                        resolve();
+                    } else {
+                        this.$message.error("获取用户评分失败！");
                     }
-                    let _score = (sum / scoreLength).toFixed(1);
-                    this.isRateValue = +_score || 0;
-                } else {
-                    this.$message.error("获取用户评分失败！");
-                }
-            }).catch(err => {
-                console.log(err);
-                this.$message.error("获取用户评分出错！");
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("获取用户评分出错！");
+                })
+            }).then(() => {
+                //    执行更新用户分数
+                allUrls.updateUserScore({
+                    userScore: this.isRateValue,
+                    username: this.essayInfo.username,
+                }, 'post').then(res => {
+                    return res.json();
+                }).then(res => {
+                    if (+res.status === 200) {
+                        console.log('用户分数已更新');
+                    } else {
+                        this.$message.error("用户分数更新失败！");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error("用户分数更新出现错误！");
+                })
             })
         },
         //获取文章信息
         getEssayInfo(val) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 allUrls.getEssay({
                     id: val,
                 }, 'post').then(res => {
@@ -96,6 +118,7 @@ export default {
                 }).then(res => {
                     if (+res.status === 200) {
                         this.$message.success("打分成功，感谢您的打分~！");
+                        this.getUserScore();
                     } else {
                         this.$message.error("打分失败！");
                     }
@@ -127,29 +150,27 @@ export default {
             }
         },
         //作者删除文章
-        clickCommand(val) {
-            if (val == 'a') {
-                allUrls.deleteEssay({
-                    id: this.$route.query.id
-                }, 'post').then(res => {
-                    return res.json();
-                }).then(res => {
-                    if (+res.status === 200) {
-                        this.$message.success("删除成功");
-                        this.$router.push('/essayList');
-                    } else {
-                        this.$message.error("删除失败");
-                    }
-                }).catch(err => {
-                    console.log(err);
-                    this.$message.error("删除出现错误");
-                })
-            }
+        confirmDeleteEssay() {
+            allUrls.deleteEssay({
+                id: this.$route.query.id
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.$message.success("删除成功");
+                    this.$router.push('/essayList');
+                } else {
+                    this.$message.error("删除失败");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("删除出现错误");
+            })
         },
         //判断是否作者本人
         showOptions() {
             if (this.userInfo) {
-                this.isUser = this.userInfo.username == this.essayInfo.username;
+                this.isUserForEssay = this.userInfo.username == this.essayInfo.username || this.userInfo.username == 'admin';
             }
         },
         //发表评论
@@ -210,6 +231,25 @@ export default {
                 this.commentLoadText = '没有更多评论啦！';
             }
         },
+        //删除评论
+        confirmDeleteComment(id) {
+            allUrls.deleteComment({
+                essayId: this.$route.query.id,
+                id: id,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200) {
+                    this.$message.success('删除成功');
+                    this.getComments();
+                } else {
+                    this.$message.error("删除失败");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("删除出现错误");
+            })
+        }
     },
     mounted() {
         this.essayId = this.$route.query.id;

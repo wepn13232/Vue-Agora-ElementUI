@@ -42,7 +42,7 @@ export default {
                 if (+res.status === 200) {
                     this.cardList = res.data;
                     this.getHeight();
-                    if (res.data.length <= this.defaultLoadPic) {
+                    if (res.data.length < this.defaultLoadPic) {
                         this.loadMoreText = '<　没有更多了哦~　>'
                     }
                 } else {
@@ -72,6 +72,10 @@ export default {
                 if (isLoad) {
                     console.log('全部加载完');
                     clearInterval(this.interval);
+                    this.$once('hook:beforeDestroy', () => {
+                        clearInterval(this.interval);
+                    })
+                    this.interval = '';
                     this.resizeGrid();
                     this.loading = false;
                 }
@@ -200,6 +204,14 @@ export default {
                             this.$message.success("Post成功！");
                             this.insertSpaceInfo();
                             this.postPicDialog = false;
+                            this.postForm.content = '';
+                            this.postForm.src = '';
+                            this.getPics();
+                            this.reloadMoreFresh = false;
+                            this.$nextTick(() => {
+                                this.reloadMoreFresh = true;
+                                //this.getHeight();
+                            });
                         } else {
                             this.$message.error("Post照片失败了~！");
                         }
@@ -286,5 +298,9 @@ export default {
         }, 1000)
         this.getUserInfo();
         this.getPics();
+    },
+    beforeDestroy(){
+      clearInterval(this.interval);
+      this.interval = '';
     },
 }
