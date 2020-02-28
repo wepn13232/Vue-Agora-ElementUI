@@ -19,7 +19,7 @@
                 <!--首页推荐-标题-->
                 <div class="rec-title">
                     <span class="fb">-</span>
-                    首页推荐
+                    照片墙
                     <span class="fb">-</span>
                 </div>
                 <!--    首页推荐-内容-->

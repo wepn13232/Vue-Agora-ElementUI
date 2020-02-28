@@ -20,7 +20,7 @@ export default {
         randomMath() {
             return Math.random() > .5 ? -1 : 1;
         },
-        //获取首页推荐（图片）、
+        //获取首页推荐（图片）
         getIndexPic() {
             this.loading1 = true
             allUrls.getPicShows({}, 'post').then(res => {
