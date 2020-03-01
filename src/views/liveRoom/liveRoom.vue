@@ -13,7 +13,7 @@
                     <h4 class="room-title">{{hostInfo.title}}</h4>
                     <div class="room-user">
                         主播：{{hostInfo.name}}
-                        <el-tag type="info" size="small" effect="dark" v-if="isLive === 0">未开播</el-tag>
+                        <el-tag type="info" size="small" effect="dark" v-if="hostInfo.isLive === 0">未开播</el-tag>
                     </div>
                     <el-button v-if="userInfo.userType=='host'" type="danger" @click="cutLive" size="small"
                                class="float-right">下播

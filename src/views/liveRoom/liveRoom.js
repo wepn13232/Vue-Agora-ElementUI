@@ -364,23 +364,6 @@ export default {
         clearChatinfo() {
             this.chatScreenLive.clean();
         },
-        //获取是否开播状态
-        getIsLiveStatus() {
-            allUrls.getLiveStatus({
-                username: this.hostInfo.username,
-            }, 'post').then(res => {
-                return res.json();
-            }).then(res => {
-                if (+res.status === 200) {
-                    this.isLive = res.data.isLive;
-                } else {
-                    this.$message.error(res.desc);
-                }
-            }).catch(err => {
-                console.log(err);
-                this.$message.error("获取直播状态出错！");
-            })
-        },
     },
     beforeDestroy() {
         this.leaveLive();
