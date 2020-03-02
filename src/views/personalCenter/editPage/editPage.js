@@ -146,6 +146,7 @@ export default {
                 email: this.userInfo.email,
                 appid: this.userInfo.appid,
                 username: this.userInfo.username,
+                picUrl:this.picUrl,
             }, 'post').then(res => {
                 return res.json();
             }).then(res => {

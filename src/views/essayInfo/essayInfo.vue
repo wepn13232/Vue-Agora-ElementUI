@@ -68,7 +68,7 @@
             <div class="comments">
                 <div class="userComment" v-for="(lists,i) in commentLists" :key="i" v-show="i<4">
                     <div class="userPic">
-                        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                        <el-avatar :src="lists.picUrl"
                                    :size="60"></el-avatar>
                     </div>
                     <div class="userInfo">

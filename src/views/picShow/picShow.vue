@@ -11,7 +11,7 @@
             <div class="grid" v-if="reloadMoreFresh">
                 <div class="grid-item" v-for="(item,index) in cardList" :key="index" v-if="index<defaultLoadPic">
                     <!--瀑布流卡片-->
-                    <card-pic :cardSrc="item.src" :cardUser="item.name" :cardContent="item.content"
+                    <card-pic :cardSrc="item.src" :cardUser="item.name" :cardContent="item.content" :userLogo="item.picUrl"
                               @click.native="openDialog(item)"></card-pic>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                         <div class="header">
                             <div class="userIconInfo">
                                 <el-avatar
-                                    src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                                    :src="dialogData.picUrl"></el-avatar>
                                 <span class="username">{{dialogData.name}}</span>
                             </div>
                             <!--操作选项-->

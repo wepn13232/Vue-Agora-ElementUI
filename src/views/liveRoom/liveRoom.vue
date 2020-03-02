@@ -6,7 +6,7 @@
                 <!--用户头像-->
                 <div class="userAvatar">
                     <el-avatar @click.native="toPersonCenter" :size="70" style="cursor:pointer;"
-                               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                               :src="hostInfo.picUrl"></el-avatar>
                 </div>
                 <!--房间标题-->
                 <div class="roomTitle">
