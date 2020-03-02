@@ -51,6 +51,7 @@ export default {
         replaceSpace() {
             this.form.username = this.form.username.replace(/\s+/g, "");
             this.form.password = this.form.password.replace(/\s+/g, "");
+            this.form.password = this.form.password.replace(/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im, "");
         },
         toHome() {
             this.$router.push("/")

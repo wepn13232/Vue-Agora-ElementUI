@@ -220,6 +220,10 @@ export default {
         replaceSpace(){
             this.form.name =  this.form.name.replace(/\s+/g,"");
         },
+        //替换非法字符
+        replaceIllegal(){
+            this.form.password = this.form.password.replace(/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,'');
+        }
     },
     mounted() {
     },

@@ -12,7 +12,7 @@
                                   placeholder="只限英文和数字"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
-                        <el-input type="password" v-model="form.password" class="input-width"
+                        <el-input type="password" v-model="form.password" class="input-width" @input="replaceIllegal"
                                   clearable></el-input>
                     </el-form-item>
                     <el-form-item label="昵称" prop="name">
