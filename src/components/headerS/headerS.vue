@@ -45,8 +45,7 @@
                     <!--已登录-->
                     <el-dropdown @command="handleCommand" style="cursor:pointer;">
                         <div class="block userBlock" style="margin-left: 3vw;padding-top: 3px;margin-right: 2vw">
-                            <el-avatar :size="31"
-                                       src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                            <el-avatar :size="31" :src="userInfo.picUrl"></el-avatar>
                             <span style="color: #ffffff;padding-top: 5px;padding-left: 5px">{{userInfo.name}}</span>
                         </div>
 
