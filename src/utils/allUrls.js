@@ -242,3 +242,9 @@ export function getUserByScore(data, methods) {
     return fetch('/api/getUserByScore',
         {method: methods, headers: header2, body: qs.stringify(data)})
 }
+
+//管理员模糊查询主播
+export function getHostFuzzy(data, methods) {
+    return fetch('/api/getHostFuzzy',
+        {method: methods, headers: header2, body: qs.stringify(data)})
+}
