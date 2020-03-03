@@ -55,6 +55,9 @@ export default {
         },
         toHome() {
             this.$router.push("/")
+        },
+        toReset(){
+            this.$router.push('/resetPas')
         }
     },
     mounted(){

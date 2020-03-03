@@ -35,9 +35,16 @@
                             :options="options"
                             @change="handleChange"></el-cascader>
                     </el-form-item>
-                    <el-form-item label="直播授权码" prop="roomNum">
-                        <el-input v-model="form.roomNum" class="input-width"
-                                  disabled placeholder="默认无，可在个人中心申请"></el-input>
+                    <el-form-item label="安全问题" prop="questionTitle">
+                        <el-select v-model="form.questionTitle" placeholder="请选择安全问题">
+                            <el-option label="我的小学" value="1"></el-option>
+                            <el-option label="我的故乡" value="2"></el-option>
+                            <el-option label="我的大学" value="3"></el-option>
+                            <el-option label="我第一次工作城市" value="4"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="答案" prop="questionContent">
+                        <el-input type="text" v-model="form.questionContent" class="input-width"></el-input>
                     </el-form-item>
 
                     <el-form-item class="btn_group">
@@ -54,4 +61,13 @@
 
 <style lang="scss" scoped>
     @import "reg";
+</style>
+<style lang="scss">
+    .register {
+        .el-select {
+            .el-input {
+                width: 150px !important;
+            }
+        }
+    }
 </style>
