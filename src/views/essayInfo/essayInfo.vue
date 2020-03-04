@@ -79,7 +79,7 @@
                     </div>
                     <div class="dateTime">{{lists.date}}</div>
                     <el-dropdown class="commentOptions"
-                                 v-if="lists.username ==userInfo.username || userInfo.username == 'admin' ">
+                                 v-if="userInfo && (lists.username ==userInfo.username || userInfo.username == 'admin' )">
                         <img src=".././../../public/img/icons/more_black.png" alt="morePic" class="dropdownPic">
                         <el-dropdown-menu slot="dropdown">
                             <el-popover
