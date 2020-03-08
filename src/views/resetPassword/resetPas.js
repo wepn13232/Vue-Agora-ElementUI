@@ -89,7 +89,8 @@ export default {
 			this.$refs['resetForm'].validate(val => {
 				if (val) {
 					allUrls.resetPassword({
-						password: this.resetForm.password
+						password: this.resetForm.password,
+						username:this.confirmForm.username
 					}, 'post').then(res => {
 						return res.json();
 					}).then(res => {
