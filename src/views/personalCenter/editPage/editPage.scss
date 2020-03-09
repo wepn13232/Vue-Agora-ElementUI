@@ -38,10 +38,15 @@
   .info {
     width: 100%;
 
+    .changePas {
+      float: right;
+      margin-top: 2vh;
+    }
+
     //个人简述
     .infoSum {
       width: 100%;
-      padding-top: 10vh;
+      padding-top: 5vh;
 
       .infoSum-title {
         width: 100%;

@@ -36,7 +36,7 @@ export default {
 				questionContent: {required: true, message: "请填写答案", trigger: 'blur'}
 			},
 			formRules2: {
-				password: {required: true, message: "请填写密码", trigger: 'blur'},
+				password: [{required: true, message: "请填写密码", trigger: 'blur'},{min:6,max:11,message: "密码长度在6~11位"}],
 				pasAgain: {required: true, validator: passwordValidate, trigger: 'blur'}
 			},
 			isConfirm: false

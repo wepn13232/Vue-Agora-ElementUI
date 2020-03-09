@@ -14,6 +14,8 @@
         <!--个人具体信息-->
         <div class="info pb3">
             <div class="container">
+                <el-button class="changePas" @click="toChangePas">修改密码</el-button>
+                <div class="clearfix"></div>
                 <!--个人信息简述-->
                 <div class="infoSum">
                     <div class="infoSum-title">
