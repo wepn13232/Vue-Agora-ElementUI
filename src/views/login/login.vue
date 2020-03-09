@@ -10,11 +10,13 @@
                         <el-input v-model="form.username" class="input-width" @input="replaceSpace()"
                                   clearable></el-input>
                     </el-form-item>
-                    <el-form-item label="密码">
+                    <el-form-item label="密码" class="pasInput">
                         <el-input type="password" v-model="form.password" @input="replaceSpace()" class="input-width"
                                   @keyup.enter.native="doLogin"
                                   clearable></el-input>
                     </el-form-item>
+
+                        <div class="forgetPas"><span class="span" @click="toReset">忘记密码？</span></div>
 
                     <el-form-item>
                         <el-button type="primary" @click="doLogin">登录</el-button>

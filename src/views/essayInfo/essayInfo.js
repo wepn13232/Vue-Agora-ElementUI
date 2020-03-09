@@ -184,7 +184,6 @@ export default {
 					comment: this.comment,
 					date: time,
 					essayId: this.$route.query.id,
-					picUrl: this.userInfo.picUrl,
 				}, 'post').then(res => {
 					return res.json();
 				}).then(res => {

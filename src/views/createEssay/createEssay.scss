@@ -1,5 +1,6 @@
 .createEssay {
   background-color: #f4f6f9;
+
   .containerSelf {
     width: 85%;
     margin: 0 auto;
@@ -7,6 +8,18 @@
     padding-bottom: 5vh;
 
     .editorForm {
+      .loadPic {
+        margin-top: 20px;
+        width: 400px;
+        height: 250px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
       .btn-group {
         width: 100%;
         display: flex;

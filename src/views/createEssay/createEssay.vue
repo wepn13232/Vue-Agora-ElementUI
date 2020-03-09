@@ -5,6 +5,9 @@
                 <el-form label-position="top" :model="essayForm" :rules="rules" ref="essayForm">
                     <el-form-item label="文章封面图" prop="pic">
                         <el-input v-model="essayForm.pic" placeholder="http://"></el-input>
+                        <div class="loadPic" v-if="essayForm.pic">
+                            <img :src="essayForm.pic" alt="loadPic">
+                        </div>
                     </el-form-item>
                     <el-form-item label="文章类型" prop="essayType">
                         <el-select v-model="essayForm.essayType" placeholder="请选择">

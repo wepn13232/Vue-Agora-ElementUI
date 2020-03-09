@@ -168,6 +168,9 @@ export default {
         //切换头像
         _openDialog() {
             this.dialogVisible = true;
+        },
+        toChangePas(){
+            this.$router.push('/resetPas')
         }
     },
     mounted() {

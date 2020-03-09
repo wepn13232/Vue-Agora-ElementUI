@@ -2,7 +2,7 @@
     <div class="liveManage">
         <div class="searchLive">
             <el-input placeholder="请输入用户名查询" v-model="input">
-                <el-button slot="append">搜索</el-button>
+                <el-button slot="append" @click="searchHost">搜索</el-button>
             </el-input>
         </div>
         <div class="liveForm">
@@ -20,7 +20,7 @@
                     width="80">
                 </el-table-column>
                 <el-table-column
-                    prop="username"
+                    prop="name"
                     label="用户"
                     width="180">
                 </el-table-column>
