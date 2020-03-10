@@ -1,29 +1,56 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/index/Home.vue'
-import login from './views/login/login.vue'
-import reg from '@/views/reg/reg.vue'
-import essayInfo from "@/views/essayInfo/essayInfo.vue";
-import personalCenter from "@/views/personalCenter/personalCenter.vue";
-import essayList from "@/views/essayList/essayList.vue";
-import * as toTop from '@/utils/toTop'
-import liveNum from "@/views/liveNum/liveNum.vue";
-import page1 from "@/views/liveNum/otherPage/page1"
-import page2 from "@/views/liveNum/otherPage/page2"
-import page3 from "@/views/liveNum/otherPage/page3"
-import liveHall from "@/views/liveHall/liveHall.vue";
-import liveRoom from "@/views/liveRoom/liveRoom.vue";
-import blog from "@/views/blog/blog.vue";
-import editPage from "@/views/personalCenter/editPage/editPage.vue";
-import adminApp from "@/views/admin/App.vue";
-import adminIndex from "@/views/admin/index/index.vue";
-import essayManage from "@/views/admin/essayManage/essayManage.vue";
-import liveManage from "@/views/admin/liveManage/liveManage.vue";
-import createEssay from "@/views/createEssay/createEssay.vue";
-import picShow from "./views/picShow/picShow.vue";
+import Vue from 'vue';
+import Router from 'vue-router';
+import * as toTop from '@/utils/toTop';
 import {Message} from "element-ui";
-import Store from './store'
-import resetPas from "./views/resetPassword/resetPas.vue";
+import Store from './store';
+
+
+const essayInfo = () => import(/* webpackChunkName: "group-foo" */ '@/views/essayInfo/essayInfo.vue');
+const login = () => import(/* webpackChunkName: "group-foo" */ './views/login/login.vue');
+const reg = () => import(/* webpackChunkName: "group-foo" */ '@/views/reg/reg.vue');
+const Home = () => import(/* webpackChunkName: "group-foo" */ './views/index/Home.vue');
+const personalCenter = () => import(/* webpackChunkName: "group-foo" */ '@/views/personalCenter/personalCenter.vue');
+const essayList = () => import(/* webpackChunkName: "group-foo" */ '@/views/essayList/essayList.vue');
+const liveNum = () => import(/* webpackChunkName: "group-foo" */ '@/views/liveNum/liveNum.vue');
+const page1 = () => import(/* webpackChunkName: "group-foo" */ '@/views/liveNum/otherPage/page1');
+const page2 = () => import(/* webpackChunkName: "group-foo" */ '@/views/liveNum/otherPage/page2');
+const page3 = () => import(/* webpackChunkName: "group-foo" */ '@/views/liveNum/otherPage/page3');
+const liveHall = () => import(/* webpackChunkName: "group-foo" */ '@/views/liveHall/liveHall.vue');
+const liveRoom = () => import(/* webpackChunkName: "group-foo" */ '@/views/liveRoom/liveRoom.vue');
+const blog = () => import(/* webpackChunkName: "group-foo" */ '@/views/blog/blog.vue');
+const editPage = () => import(/* webpackChunkName: "group-foo" */ '@/views/personalCenter/editPage/editPage.vue');
+const adminApp = () => import(/* webpackChunkName: "group-foo" */ '@/views/admin/App.vue');
+const adminIndex = () => import(/* webpackChunkName: "group-foo" */ '@/views/admin/index/index.vue');
+const essayManage = () => import(/* webpackChunkName: "group-foo" */ '@/views/admin/essayManage/essayManage.vue');
+const liveManage = () => import(/* webpackChunkName: "group-foo" */ '@/views/admin/liveManage/liveManage.vue');
+const createEssay = () => import(/* webpackChunkName: "group-foo" */ '@/views/createEssay/createEssay.vue');
+const picShow = () => import(/* webpackChunkName: "group-foo" */ './views/picShow/picShow.vue');
+const resetPas = () => import(/* webpackChunkName: "group-foo" */ './views/resetPassword/resetPas.vue');
+
+// import Home from './views/index/Home.vue'
+// import login from './views/login/login.vue'
+// import reg from '@/views/reg/reg.vue'
+// import essayInfo from "@/views/essayInfo/essayInfo.vue";
+// import personalCenter from "@/views/personalCenter/personalCenter.vue";
+// import essayList from "@/views/essayList/essayList.vue";
+// import liveNum from "@/views/liveNum/liveNum.vue";
+// import page1 from "@/views/liveNum/otherPage/page1"
+// import page2 from "@/views/liveNum/otherPage/page2"
+// import page3 from "@/views/liveNum/otherPage/page3"
+// import liveHall from "@/views/liveHall/liveHall.vue";
+// import liveRoom from "@/views/liveRoom/liveRoom.vue";
+// import blog from "@/views/blog/blog.vue";
+// import editPage from "@/views/personalCenter/editPage/editPage.vue";
+// import adminApp from "@/views/admin/App.vue";
+// import adminIndex from "@/views/admin/index/index.vue";
+// import essayManage from "@/views/admin/essayManage/essayManage.vue";
+// import liveManage from "@/views/admin/liveManage/liveManage.vue";
+// import createEssay from "@/views/createEssay/createEssay.vue";
+// import picShow from "./views/picShow/picShow.vue";
+// import resetPas from "./views/resetPassword/resetPas.vue";
+
+
+
 
 Vue.use(Router);
 //Vue.use(Message);
