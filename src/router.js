@@ -53,7 +53,6 @@ const resetPas = () => import(/* webpackChunkName: "group-foo" */ './views/reset
 
 
 Vue.use(Router);
-//Vue.use(Message);
 
 
 const router = new Router({

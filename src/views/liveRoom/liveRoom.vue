@@ -10,13 +10,14 @@
                 </div>
                 <!--房间标题-->
                 <div class="roomTitle">
-                    <h4 class="room-title">{{hostInfo.title}}</h4>
-                    <div class="room-user">
-                        主播：{{hostInfo.name}}
-                        <el-tag type="info" size="small" effect="dark" v-if="isLive === 0">未开播</el-tag>
+                    <div>
+                        <h4 class="room-title">{{hostInfo.title}}</h4>
+                        <div class="room-user">
+                            主播：{{hostInfo.name}}
+                            <el-tag type="info" size="small" effect="dark" v-if="isLive === 0">未开播</el-tag>
+                        </div>
                     </div>
-                    <el-button v-if="userInfo.userType=='host'" type="danger" @click="cutLive" size="small"
-                               class="float-right">下播
+                    <el-button v-if="userInfo.userType=='host'" type="danger" @click="cutLive" size="small">下播
                     </el-button>
                 </div>
                 <div class="clearFix"></div>

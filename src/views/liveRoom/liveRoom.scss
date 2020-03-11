@@ -19,6 +19,8 @@
       .roomTitle {
         padding-left: 2vw;
         width: 100%;
+        display: flex;
+        justify-content: space-between;
 
         .room-title {
           padding-bottom: 1vh;
