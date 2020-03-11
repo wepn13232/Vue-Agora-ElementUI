@@ -85,7 +85,7 @@
                             <el-popover
                                 placement="top"
                                 width="160"
-                                v-model="visible">
+                                v-model="lists.visible">
                                 <p>确定删除吗？</p>
                                 <div style="text-align: right; margin: 0">
                                     <el-button size="mini" type="text" @click="visible = false">取消</el-button>
