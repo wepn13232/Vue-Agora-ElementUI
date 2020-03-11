@@ -17,8 +17,7 @@
                             <el-tag type="info" size="small" effect="dark" v-if="isLive === 0">未开播</el-tag>
                         </div>
                     </div>
-                    <el-button v-if="userInfo.userType=='host'" type="danger" @click="cutLive" size="small">下播
-                    </el-button>
+                    <el-button v-if="userInfo.userType=='host'"  type="danger" @click="cutLive" size="small" style="height: 35px">下播</el-button>
                 </div>
                 <div class="clearFix"></div>
             </div>
