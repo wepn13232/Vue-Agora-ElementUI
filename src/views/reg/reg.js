@@ -40,7 +40,7 @@ export default {
 			//表单验证
 			rules: {
 				username: [
-					{required: true,message:"请输入用户名"},
+					{required: true, message: "请输入用户名"},
 					//自定义表单验证规则
 					{validator: usernameCheck, trigger: 'blur'}
 				],
@@ -49,7 +49,7 @@ export default {
 					{min: 6, max: 11, message: '密码长度在6~11位', trigger: 'blur'}
 				],
 				name: [
-					{required: true,message:"请输入昵称"},
+					{required: true, message: "请输入昵称"},
 					{validator: nameCheck, trigger: 'blur'}
 				],
 				email: [
@@ -175,7 +175,9 @@ export default {
 						password: this.form.password,
 						email: this.form.email,
 						sex: this.form.sex,
-						address: this.form.address
+						address: this.form.address,
+						questionT: this.form.questionTitle,
+						questionC: this.form.questionContent
 					}, 'post').then(r => {
 						return r.json();
 					}).then(res => {
