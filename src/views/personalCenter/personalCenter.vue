@@ -6,6 +6,7 @@
             <div class="avatar">
                 <el-avatar :size="80" :src="userInfo.picUrl"></el-avatar>
                 <h5>{{userInfo.name}}</h5>
+                <el-tag effect="dark" type="info" class="isLiveTag" v-if="isLive" @click="toLiveRoom">直播中...</el-tag>
             </div>
         </div>
 

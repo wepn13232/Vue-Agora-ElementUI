@@ -64,7 +64,8 @@ export default {
             ],
             showTips: true,
             dialogVisible: false,
-            picUrl: '', //头像在线地址
+            picUrl: '', //头像
+            changeUrl:'',//需要更改的照片
             hasPicUrl:false,
         }
     },
@@ -117,6 +118,8 @@ export default {
                 this.$message.error("禁止修改别人的账号噢~");
                 this.$router.push({path: '/personalCenter', query: {username: _username}});
                 return false;
+            }else{
+                this.getUserInfo();
             }
         },
         getUserInfo() {
@@ -132,6 +135,27 @@ export default {
                 } else {
                     this.$message.error("用户信息查询失败");
                 }
+            }).catch(err=>{
+                console.log(err);
+                this.$message.error("获取用户信息失败！");
+            });
+            this.getAppid();
+        },
+        //获取Appid
+        getAppid(){
+            allUrls.getAppid({
+                username: this.$route.query.username,
+            }, 'post').then(res => {
+                return res.json();
+            }).then(res => {
+                if (+res.status === 200 || +res.status === 201) {
+                    this.$set(this.userInfo, 'appid', res.data.appid);
+                } else {
+                    this.$message.error("获取appid失败！");
+                }
+            }).catch(err => {
+                console.log(err);
+                this.$message.error("获取appid出错！");
             })
         },
         //返回上一页
@@ -146,7 +170,7 @@ export default {
                 email: this.userInfo.email,
                 appid: this.userInfo.appid,
                 username: this.userInfo.username,
-                picUrl:this.picUrl,
+                picUrl:this.changeUrl,
             }, 'post').then(res => {
                 return res.json();
             }).then(res => {
@@ -175,7 +199,7 @@ export default {
     },
     mounted() {
         this.isUser();
-        this.getUserInfo();
+        // this.getUserInfo();
 
     },
     watch: {

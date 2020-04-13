@@ -79,8 +79,8 @@
             custom-class="changePic"
         >
             <div class="changePic">
-                <el-input type="text" v-model="picUrl" placeholder="http://"></el-input>
-                <img :src="picUrl" alt="logoPic" class="logoPic" v-if="picUrl">
+                <el-input type="text" v-model="changeUrl" placeholder="http://"></el-input>
+                <img :src="changeUrl" alt="logoPic" class="logoPic" v-if="changeUrl">
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>

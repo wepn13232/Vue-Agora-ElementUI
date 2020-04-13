@@ -64,7 +64,6 @@
 								appid: this.form.appid,
 								title: _userInfo.name + '的直播间',
 								roomSum: '',
-								picUrl: _userInfo.picUrl,
 							}, 'post').then(res => {
 								return res.json();
 							}).then(res => {

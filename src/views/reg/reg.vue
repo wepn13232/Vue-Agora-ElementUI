@@ -1,6 +1,6 @@
 <template>
     <div class="register">
-        <div class="registerCard container">
+        <div class="registerCard">
             <div class="registerLogo">
                 YOLO社区
             </div>

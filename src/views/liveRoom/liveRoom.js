@@ -264,6 +264,7 @@ export default {
                     }).then(res => {
                         if (+res.status === 200) {
                             this.hostInfo.appid = res.data.appid;
+                            this.userInfo.appid = res.data.appid;
                             resolve();
                         } else {
                             this.$message.error("获取appid失败！");

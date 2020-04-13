@@ -22,7 +22,8 @@ export default {
 				channelName: [
 					{required: true, message: "请填写直播间标题", trigger: 'blur'},
 					{min: 1, max: 18, message: "标题长度只能在1~18位", trigger: 'blur'}],
-			}
+			},
+			isLive: false, //开播状态
 		}
 	},
 	methods: {
@@ -49,6 +50,7 @@ export default {
 						}
 					}).then(() => {
 						this.isUser();
+						this.getIsLive(); //判断用户是否有直播
 					})
 				}).catch(err => {
 					this.$message.error(err);
@@ -73,7 +75,8 @@ export default {
 							return false;
 						}
 					}).then(() => {
-						this.isUser();
+						this.isUser(); //判断用户是否本人
+						this.getIsLive(); //判断用户是否有直播
 					})
 				}).catch(err => {
 					this.$message.error(err);
@@ -169,7 +172,28 @@ export default {
 		//点击跳转个人信息编辑
 		toEdit() {
 			this.$router.push({path: '/editPage', query: {username: this.userInfo.username}})
-		}
+		},
+		//获取开播状态
+		getIsLive() {
+			allUrls.getLiveStatus({
+				username: this.userInfo.username,
+			}, 'post').then(res => {
+				return res.json();
+			}).then(res => {
+				if (+res.status === 200 && res.data && +res.data.isLive === 1) {
+					this.isLive = true;
+				} else {
+					this.isLive = false;
+				}
+			}).catch(err => {
+				console.log(err);
+				this.$message.error("获取开播状态接口错误！");
+			})
+		},
+		//跳转至直播间
+		toLiveRoom() {
+			this.$router.push({path:'/liveRoom',query:{userType:'audience',hostName:this.userInfo.username}})
+		},
 	},
 	filters: {
 		//地区转译
