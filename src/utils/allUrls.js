@@ -255,7 +255,7 @@ export function userConfirm(data, methods) {
 		{method: methods, headers: header2, body: qs.stringify(data)})
 }
 
-//重置面膜
+//重置密码
 export function resetPassword(data, methods) {
     return fetch('/api/resetPassword',
         {method: methods, headers: header2, body: qs.stringify(data)})
