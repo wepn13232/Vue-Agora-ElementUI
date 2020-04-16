@@ -39,7 +39,7 @@
 						<div class="essayFooter">
 							<!--作者-->
 							<div class="author">
-								<span class="fw">作者：{{essayInfo.username}}</span>
+								<span class="fw">作者：{{essayInfo.name}}</span>
 							</div>
 							<!--星级显示-->
 							<el-rate

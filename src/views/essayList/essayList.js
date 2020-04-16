@@ -28,7 +28,7 @@ export default {
         },
         // 加载更多
         loadMore() {
-            this.listsNum += 3
+            this.listsNum += 3;
             if (this.listsNum >= this.test) {
                 this.showMoreTitle = '已经没有更多了哦！'
             }
@@ -47,9 +47,9 @@ export default {
                 if (+data.status === 200) {
                     //往期文章
                     this.essayInfo = data.data;
-                    this.text = +data.data.length;
+                    this.test = +data.data.length;
                     if (this.listsNum >= this.test) {
-                        this.showMoreTitle = '已经没有更多了哦！'
+                        this.showMoreTitle = '已经没有更多了哦！';
                     }
                     this.loadingEssay = false;
                 } else {
