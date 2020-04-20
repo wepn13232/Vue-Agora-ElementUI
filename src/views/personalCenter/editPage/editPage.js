@@ -4,7 +4,7 @@ export default {
     name: "editPage",
     inject: ['reloadView'],
     data() {
-        return {
+        return{
             //用户信息
             userInfo: {},
             //    次级选择器
@@ -181,7 +181,7 @@ export default {
                     sessionStorage.clear();
                     this.$router.push('/login')
                 } else {
-                    this.$message.error("修改失败！");
+                    this.$message.error("修改失败！请确认头像地址是否过长或其他原因。");
                 }
             }).catch(err => {
                 console.log(err);
@@ -199,6 +199,11 @@ export default {
         //修改密码
         toChangePas(){
             this.$router.push('/resetPas')
+        },
+        //取消修改头像
+        cancelChange(){
+            this.changeUrl = '';
+            this.dialogVisible = false;
         }
     },
     mounted() {
