@@ -70,6 +70,7 @@ export default {
                     if (+res.status === 200) {
                         this.hostInfo = res.data[0];
                         option.channel = (res.data[0].id).toString();
+                        option.appID = res.data[0].appid;
                         resolve();
                     } else {
                         this.$message.error("获取主播信息失败！");

@@ -133,7 +133,7 @@ export default {
 		},
 		//获取用户是否已打分
 		_setScoreOrNot() {
-			if (this.userInfo) {
+			if (this.userInfo && !this.isUserForEssay) {
 				allUrls.setScoreOrNot({
 					setedUser: this.userInfo.username,
 					essayID: this.essayInfo.id,

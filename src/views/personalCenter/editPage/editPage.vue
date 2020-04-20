@@ -6,7 +6,7 @@
             <div class="avatar">
                 <el-tooltip class="item" effect="light" content="点击头像更换图片" placement="top" v-model="showTips">
                     <el-avatar :size="80" class="avatorPic" @click.native="_openDialog"
-                               :src="picUrl || userInfo.picUrl"></el-avatar>
+                               :src="changeUrl || userInfo.picUrl"></el-avatar>
                 </el-tooltip>
                 <h5>{{userInfo.name}}</h5>
             </div>
@@ -83,7 +83,7 @@
                 <img :src="changeUrl" alt="logoPic" class="logoPic" v-if="changeUrl">
             </div>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button @click="cancelChange">取 消</el-button>
                 <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
              </span>
         </el-dialog>

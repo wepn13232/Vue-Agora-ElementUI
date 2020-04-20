@@ -6,7 +6,7 @@ export default {
         return {
             //默认显示12个主播
             personNum: 6,
-            test: 20,
+            test: 0,
             showMoreTitle: '点击加载更多',
             hostInfo: '', //直播大厅主播信息
         }
@@ -30,6 +30,10 @@ export default {
             }).then(res => {
                 if (+res.status === 200) {
                     this.hostInfo = res.data;
+                    this.test = res.data.length;
+                    if (this.personNum >= this.test){
+                        this.showMoreTitle = '已经没有更多啦！'
+                    }
                 } else {
                     this.$message.error("获取主播信息失败！");
                 }

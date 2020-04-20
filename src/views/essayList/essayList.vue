@@ -19,7 +19,7 @@
                                 </div>
                                 <div slot="title">{{lists.title}}</div>
                                 <div slot="desc" v-html="lists.oTitle"></div>
-                                <div slot="author">作者：{{lists.username}}</div>
+                                <div slot="author">作者：{{lists.name}}</div>
                             </essay-card>
                         </div>
                     </li>

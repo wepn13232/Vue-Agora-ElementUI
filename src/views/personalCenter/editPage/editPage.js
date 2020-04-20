@@ -4,7 +4,7 @@ export default {
     name: "editPage",
     inject: ['reloadView'],
     data() {
-        return {
+        return{
             //用户信息
             userInfo: {},
             //    次级选择器
@@ -170,15 +170,18 @@ export default {
                 email: this.userInfo.email,
                 appid: this.userInfo.appid,
                 username: this.userInfo.username,
-                picUrl:this.changeUrl,
+                picUrl:this.changeUrl || this.userInfo.picUrl,
             }, 'post').then(res => {
                 return res.json();
             }).then(res => {
                 if (+res.status === 200) {
-                    this.$message.success("修改成功！");
-                    this.$router.go(-1);
+                    this.$message.success("修改成功！需重新登录。");
+                    this.userInfo.username = '';
+                    this.$cookies.remove('userInfoCookies');
+                    sessionStorage.clear();
+                    this.$router.push('/login')
                 } else {
-                    this.$message.error("修改失败！");
+                    this.$message.error("修改失败！请确认头像地址是否过长或其他原因。");
                 }
             }).catch(err => {
                 console.log(err);
@@ -193,8 +196,14 @@ export default {
         _openDialog() {
             this.dialogVisible = true;
         },
+        //修改密码
         toChangePas(){
             this.$router.push('/resetPas')
+        },
+        //取消修改头像
+        cancelChange(){
+            this.changeUrl = '';
+            this.dialogVisible = false;
         }
     },
     mounted() {
